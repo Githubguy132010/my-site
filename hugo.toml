@@ -1,4 +1,49 @@
 baseURL = 'https://Githubguy132010.github.io/'
 languageCode = 'en-us'
-title = 'My Site'
+title = 'Githubguy132010'
 theme = 'PaperMod'
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/who-i-am/"
+    weight = 20
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/posts/"
+    weight = 30
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"    # Changed from GitHub URL
+    weight = 40
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "/contact/"    # Changed from GitHub URL
+    weight = 50
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  
+  [params.profileMode]
+    enabled = true
+    title = "Thomas Brugman"
+    subtitle = "Linux Enthusiast & Hobby Developer"
+    imageUrl = "images/profile.jpg"    # Let op: zonder leading slash
+    imageWidth = 200
+    imageHeight = 200
+    imageTitle = "my profile photo"
+    buttons = [
+      { name = "Projects", url = "/projects" },
+      { name = "Blog", url = "/posts" },
+      { name = "GitHub", url = "https://github.com/Githubguy132010" }
+    ]

@@ -1,0 +1,111 @@
+
+.nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50px;
+    margin: 20px auto;
+    padding: 0 20px;
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Adjust the hover states for menu items */
+#menu a:hover {
+    color: var(--primary);
+    transition: color 0.2s ease;
+}
+
+/* Adjust logo area */
+.logo {
+    padding: 0 10px;
+}
+
+/* Make sure dark mode still works properly */
+.dark .nav {
+    background: rgba(29, 30, 32, 0.8);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth theme transition */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Animate background colors */
+.post-content,
+.entry-content,
+article,
+.main,
+.nav {
+    transition: background-color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Animate text colors */
+h1, h2, h3, h4, h5, h6,
+p, span, a, li {
+    transition: color 0.3s ease;
+}
+
+/* Smooth icon transition for theme toggle */
+#theme-toggle svg {
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover svg {
+    transform: rotate(15deg);
+}
+
+/* Improve dark mode transition */
+.dark {
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .nav {
+        border-radius: 25px;
+        margin: 10px auto;
+        top: 10px;
+    }
+}
+
+/* Profile styling */
+.profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile img {
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.profile img:hover {
+    transform: scale(1.05);
+}
+
+.profile .buttons {
+    gap: 1rem;
+    margin: 30px 0;
+}
+
+.profile .button {
+    background: var(--primary);
+    color: var(--theme);
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.profile .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

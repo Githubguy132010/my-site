@@ -1,0 +1,31 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "My Site"
+theme = "PaperMod"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "about"
+    name = "Over mij"
+    url = "/about/who-i-am/"
+    weight = 20
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/posts/"
+    weight = 30
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projecten"
+    url = "https://github.com/Githubguy132010?tab=repositories"
+    weight = 40
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "https://github.com/Githubguy132010"
+    weight = 50

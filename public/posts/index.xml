@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on My Site</title>
+    <title>Githubguy132010</title>
     <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on My Site</description>
+    <description>Recent content on Githubguy132010</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Dec 2024 18:11:49 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Who I am</title>
-      <link>http://localhost:1313/posts/who-i-am/</link>
-      <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
-      <guid>http://localhost:1313/posts/who-i-am/</guid>
-      <description>&lt;h2 id=&#34;who-am-i&#34;&gt;Who am I?&lt;/h2&gt;
-&lt;p&gt;I am Thomas, a Linux enthousiast &amp;amp; hobby developer. I live in Gouda (Netherlands) have some experience with Bash and YAML. I also use VSCode as my IDE and WSL (Windows Subsystem for Linux) for development. I mostly create hobby projects for my own needs and automate them with Github Actions. For example, I built an config file for an immutable Arch Linux system called BlendOS. You can check it out &lt;a href=&#34;https://www.blendos.co&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
