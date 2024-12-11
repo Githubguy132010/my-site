@@ -17,6 +17,9 @@ I regularly contribute to open source projects and create tools for my own workf
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/projects/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.e0c97bcc217a9a8796a44cbcd2fdeb59738221ec978f9057e2d0f496d6181b7e.css" integrity="sha256-4Ml7zCF6moeWpEy80v3rWXOCIeyXj5BX4tD0ltYYG34=" rel="preload stylesheet" as="style">
+
+<link rel="stylesheet" href="http://localhost:1313/css/loader.css">
+<link rel="stylesheet" href="http://localhost:1313/css/background.css">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -66,6 +69,9 @@ I regularly contribute to open source projects and create tools for my own workf
 </head>
 
 <body class="list" id="top">
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -160,6 +166,8 @@ I regularly contribute to open source projects and create tools for my own workf
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
+
+<script src="http://localhost:1313/js/loader.js"></script>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
@@ -220,6 +228,10 @@ I regularly contribute to open source projects and create tools for my own workf
     })
 
 </script>
+
+<script src="/js/loader.js"></script>
+</body>
+</html>
 </body>
 
 </html>
