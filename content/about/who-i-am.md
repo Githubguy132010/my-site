@@ -14,6 +14,6 @@ A Linux enthusiast and hobby developer from the Netherlands with a passion for a
 - 🤖 GitHub Actions Automation
 - 🖥️ WSL Development
 
-Currently working on [BlendOS](https://www.blendos.co), an immutable Arch Linux system.
+Currently working on a [BlendOS](https://www.blendos.co) config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.
 
 [Check out my projects →](/projects)

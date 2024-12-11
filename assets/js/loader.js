@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
     const mainContent = document.querySelector('.main');
     
-    const MINIMUM_LOAD_TIME = 1000; // 1 second in milliseconds
+    const MINIMUM_LOAD_TIME = 500; // 1 second in milliseconds
     const startTime = Date.now();
     
     window.addEventListener('load', () => {
