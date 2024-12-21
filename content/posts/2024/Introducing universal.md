@@ -1,7 +1,6 @@
-# Introducing Universal
-
 ---
 title: "Introducing Universal"
+description: "Introducing the Universal Package Manager: Simplifying Software Management for Every Linux User"
 date: 2024-12-21
 draft: false
 ---
