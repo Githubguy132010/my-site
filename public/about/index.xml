@@ -13,7 +13,7 @@
       <link>http://localhost:1313/about/who-i-am/</link>
       <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
       <guid>http://localhost:1313/about/who-i-am/</guid>
-      <description>&lt;h2 id=&#34;hi-im-thomas-&#34;&gt;Hi, I&amp;rsquo;m Thomas 👋&lt;/h2&gt;&#xA;&lt;p&gt;A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;🐧 Linux System Configuration&lt;/li&gt;&#xA;&lt;li&gt;🔧 Shell Scripting (Bash)&lt;/li&gt;&#xA;&lt;li&gt;⚙️ Infrastructure as Code (YAML)&lt;/li&gt;&#xA;&lt;li&gt;🤖 GitHub Actions Automation&lt;/li&gt;&#xA;&lt;li&gt;🖥️ WSL Development&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Currently working on a &lt;a href=&#34;https://www.blendos.co&#34;&gt;BlendOS&lt;/a&gt; config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/projects&#34;&gt;Check out my projects →&lt;/a&gt;&lt;/p&gt;</description>
+      <description>Hi, I&amp;rsquo;m Thomas 👋 A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:&#xA;🐧 Linux System Configuration 🔧 Shell Scripting (Bash) ⚙️ Infrastructure as Code (YAML) 🤖 GitHub Actions Automation 🖥️ WSL Development Currently working on a BlendOS config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.&#xA;Check out my projects →</description>
     </item>
   </channel>
 </rss>
