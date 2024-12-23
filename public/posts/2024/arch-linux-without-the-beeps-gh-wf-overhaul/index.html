@@ -198,8 +198,7 @@ Implementation of a smart caching system for Pacman packages Use of monthly cach
 <li>Creating a new release</li>
 </ol>
 <p>If you want to see the complete workflow, I will post a snippet of it here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build ISO</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build ISO</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">workflow_dispatch</span>:
@@ -410,30 +409,25 @@ Implementation of a smart caching system for Pacman packages Use of monthly cach
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Upload Build Logs on Failure</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">failure()</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v4 </span> <span style="color:#75715e"># Upgrade to v4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v4</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">build-logs</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/build.log</span>            
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">retention-days</span>: <span style="color:#ae81ff">5</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">compression-level</span>: <span style="color:#ae81ff">9</span>  <span style="color:#75715e"># Maximum compression for logs</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">```</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">**Additional</span> <span style="color:#f92672">Technical Insights**</span>: <span style="color:#ae81ff">The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## Future Improvements</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">Looking ahead, I plan to integrate more advanced features such as</span>:
-</span></span><span style="display:flex;"><span>- <span style="color:#75715e">**Parallel</span> <span style="color:#f92672">Builds**</span>: <span style="color:#ae81ff">To further reduce build times, I am exploring the possibility of running multiple build processes in parallel.</span>
-</span></span><span style="display:flex;"><span>- <span style="color:#75715e">**Automated</span> <span style="color:#f92672">Testing**</span>: <span style="color:#ae81ff">Implementing automated tests for the ISO to ensure that it functions correctly on a variety of hardware configurations.</span>
-</span></span><span style="display:flex;"><span>- <span style="color:#75715e">**User</span> <span style="color:#f92672">Feedback Integration**</span>: <span style="color:#ae81ff">Gathering feedback from users to continuously improve the build process and address any issues they encounter.</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## Conclusion</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">This rewrite has resulted in a more reliable and efficient workflow. The daily builds are now faster and produce consistent results. The improved error handling and logging make it easier to identify and resolve any issues that may arise.</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">For those interested in the details</span>: <span style="color:#ae81ff">the complete workflow configuration can be found in our [GitHub repository](https://github.com/thomasbrugman/Arch-Linux-without-the-beeps). </span>
-</span></span></code></pre></div>
+</span></span></code></pre></div><p><strong>Additional Technical Insights</strong>: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</p>
+<h2 id="future-improvements">Future Improvements<a hidden class="anchor" aria-hidden="true" href="#future-improvements">#</a></h2>
+<p>Looking ahead, I plan to integrate more advanced features such as:</p>
+<ul>
+<li><strong>Parallel Builds</strong>: To further reduce build times, I am exploring the possibility of running multiple build processes in parallel.</li>
+<li><strong>Automated Testing</strong>: Implementing automated tests for the ISO to ensure that it functions correctly on a variety of hardware configurations.</li>
+<li><strong>User Feedback Integration</strong>: Gathering feedback from users to continuously improve the build process and address any issues they encounter.</li>
+</ul>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>This rewrite has resulted in a more reliable and efficient workflow. The daily builds are now faster and produce consistent results. The improved error handling and logging make it easier to identify and resolve any issues that may arise.</p>
+<p>For those interested in the details: the complete workflow configuration can be found in our <a href="https://github.com/thomasbrugman/Arch-Linux-without-the-beeps">GitHub repository</a>.</p>
+
 
   </div>
 

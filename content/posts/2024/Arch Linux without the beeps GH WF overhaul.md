@@ -51,7 +51,6 @@ The build process is divided into clear steps:
 If you want to see the complete workflow, I will post a snippet of it here:
 
 ```yaml
-
 name: Build ISO
 
 on:
@@ -263,14 +262,15 @@ jobs:
 
       - name: Upload Build Logs on Failure
         if: failure()
-        uses: actions/upload-artifact@v4  # Upgrade to v4
+        uses: actions/upload-artifact@v4
         with:
           name: build-logs
           path: |
             ${{ env.WORKSPACE }}/build.log
           retention-days: 5
           compression-level: 9  # Maximum compression for logs
-          ```
+```
+
 
 **Additional Technical Insights**: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.
 

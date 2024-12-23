@@ -6,12 +6,12 @@
     <description>Recent content in Ci-Cd on Githubguy132010</description>
     <generator>Hugo -- 0.126.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/ci-cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
       <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
-      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
       <description>The GitHub Workflow Rewrite Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
 Key Improvements Enhanced Caching
