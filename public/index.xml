@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Githubguy132010</title>
     <link>http://localhost:1313/</link>
     <description>Recent content on Githubguy132010</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.126.2</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,16 @@
       <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
-      <description>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&amp;rsquo;ve identified projects that are no longer being maintained or used.&#xA;Projects being removed:&#xA;Archcraft (GitHub)&#xA;A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)&#xA;Reason for removal: Lack of development progress. Vanilla-OS-image (GitHub)&#xA;A repo for a custom VanillaOS image that I was working on.</description>
+      <description>Announcing the removal of some inactive projects from my GitHub account</description>
     </item>
     <item>
       <title>Welcome to My Digital Space</title>
       <link>http://localhost:1313/about/who-i-am/</link>
       <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
       <guid>http://localhost:1313/about/who-i-am/</guid>
-      <description>Hi, I&amp;rsquo;m Thomas 👋 A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:&#xA;🐧 Linux System Configuration 🔧 Shell Scripting (Bash) ⚙️ Infrastructure as Code (YAML) 🤖 GitHub Actions Automation 🖥️ WSL Development Currently working on a BlendOS config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.&#xA;Check out my projects →</description>
-    </item>
-    <item>
-      <title></title>
-      <link>http://localhost:1313/posts/2024/introducing-universal/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024/introducing-universal/</guid>
-      <description>Introducing Universal title: &amp;ldquo;Introducing Universal&amp;rdquo; date: 2024-12-21 draft: false Introducing the Universal Package Manager: Simplifying Software Management for Every Linux User I’m incredibly excited to share my latest creation with you: the Universal Package Manager. This innovative tool is here to make managing software on Linux easier than ever before. Whether you’re working with traditional package managers or using formats like Flatpak, Snap, or AppImage, this project brings it all together in one straightforward, user-friendly interface.</description>
+      <description>Hi, I&amp;rsquo;m Thomas 👋 A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:
+🐧 Linux System Configuration 🔧 Shell Scripting (Bash) ⚙️ Infrastructure as Code (YAML) 🤖 GitHub Actions Automation 🖥️ WSL Development Currently working on a BlendOS config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.
+Check out my projects →</description>
     </item>
   </channel>
 </rss>
