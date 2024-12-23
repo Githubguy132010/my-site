@@ -24,5 +24,14 @@
 🐧 Linux System Configuration 🔧 Shell Scripting (Bash) ⚙️ Infrastructure as Code (YAML) 🤖 GitHub Actions Automation 🖥️ WSL Development Currently working on a BlendOS config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.
 Check out my projects →</description>
     </item>
+    <item>
+      <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
+      <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
+      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
+      <description>The GitHub Workflow Rewrite Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
+Key Improvements Enhanced Caching
+Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%.</description>
+    </item>
   </channel>
 </rss>

@@ -22,5 +22,26 @@
       <guid>http://localhost:1313/tags/projects/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Arch-Linux</title>
+      <link>http://localhost:1313/tags/arch-linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/arch-linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ci-Cd</title>
+      <link>http://localhost:1313/tags/ci-cd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ci-cd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Github-Actions</title>
+      <link>http://localhost:1313/tags/github-actions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/github-actions/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

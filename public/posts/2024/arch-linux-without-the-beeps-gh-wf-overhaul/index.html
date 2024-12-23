@@ -5,11 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Posts | Githubguy132010</title>
-<meta name="keywords" content="">
-<meta name="description" content="Posts - Githubguy132010">
+<title>GitHub Workflow Rewrite for Arch Linux without the beeps | Githubguy132010</title>
+<meta name="keywords" content="github-actions, ci-cd, arch-linux">
+<meta name="description" content="The GitHub Workflow Rewrite Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
+Key Improvements Enhanced Caching
+Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/">
+<link rel="canonical" href="http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.e0c97bcc217a9a8796a44cbcd2fdeb59738221ec978f9057e2d0f496d6181b7e.css" integrity="sha256-4Ml7zCF6moeWpEy80v3rWXOCIeyXj5BX4tD0ltYYG34=" rel="preload stylesheet" as="style">
 
 <link rel="stylesheet" href="http://localhost:1313/css/loader.css">
@@ -21,8 +23,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
 <noscript>
     <style>
         #theme-toggle,
@@ -62,7 +63,7 @@
 </noscript>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
     <div id="loading-screen">
         <div class="loader"></div>
     </div>
@@ -117,7 +118,7 @@
             </li>
             <li>
                 <a href="http://localhost:1313/posts/" title="Blog">
-                    <span class="active">Blog</span>
+                    <span>Blog</span>
                 </a>
             </li>
             <li>
@@ -133,42 +134,94 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Posts
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Removing Some Unused Projects
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I’ve identified projects that are no longer being maintained or used.
-Projects being removed:
-Archcraft (GitHub)
-A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)
-Reason for removal: Lack of development progress. Vanilla-OS-image (GitHub)
-A repo for a custom VanillaOS image that I was working on....</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-11 00:00:00 +0000 UTC'>December 11, 2024</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Removing Some Unused Projects" href="http://localhost:1313/posts/2024/removing-some-unused-projects/"></a>
-</article>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      GitHub Workflow Rewrite for Arch Linux without the beeps
+    </h1>
+    <div class="post-meta"><span title='2024-01-23 00:00:00 +0000 UTC'>January 23, 2024</span>&nbsp;·&nbsp;3 min
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">GitHub Workflow Rewrite for Arch Linux without the beeps
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>The GitHub Workflow Rewrite Today, I’d like to share how we’ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
-Key Improvements Enhanced Caching
-Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%....</p>
+</div>
+  </header> 
+  <div class="post-content"><h1 id="the-github-workflow-rewrite">The GitHub Workflow Rewrite<a hidden class="anchor" aria-hidden="true" href="#the-github-workflow-rewrite">#</a></h1>
+<p>Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.</p>
+<h2 id="key-improvements">Key Improvements<a hidden class="anchor" aria-hidden="true" href="#key-improvements">#</a></h2>
+<ol>
+<li>
+<p><strong>Enhanced Caching</strong></p>
+<ul>
+<li>Implementation of a smart caching system for Pacman packages</li>
+<li>Use of monthly cache keys to keep cache size manageable</li>
+<li>Significant acceleration of the build process</li>
+<li><strong>Additional Details</strong>: By leveraging the caching mechanism, we have reduced the build time by approximately 30%. This not only saves time but also reduces the load on our build servers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Robust Error Handling</strong></p>
+<ul>
+<li>Addition of comprehensive error checking</li>
+<li>Improved logging for debugging</li>
+<li>Timeout limit of 120 minutes to prevent hanging builds</li>
+<li><strong>Additional Details</strong>: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.</li>
+</ul>
+</li>
+<li>
+<p><strong>Automated Release Notes</strong></p>
+<ul>
+<li>Automatic generation of release notes</li>
+<li>Including changelog since last release</li>
+<li>Clear presentation of features and changes</li>
+<li><strong>Additional Details</strong>: The release notes are now formatted in Markdown, making them easy to read and integrate into our documentation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Security and Verification</strong></p>
+<ul>
+<li>Automatic generation of SHA256 and SHA512 checksums</li>
+<li>Build process verification</li>
+<li>Checks for successful ISO creation</li>
+<li><strong>Additional Details</strong>: We have also implemented GPG signing for the ISOs, providing an additional layer of security and authenticity verification.</li>
+</ul>
+</li>
+</ol>
+<h2 id="technical-details">Technical Details<a hidden class="anchor" aria-hidden="true" href="#technical-details">#</a></h2>
+<p>The workflow runs in a Docker container based on Arch Linux, ensuring a clean and isolated build environment. We use <code>archiso</code> for building the ISO, with several important modifications:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DOCKER_BUILDKIT</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ISO_FILENAME</span>: <span style="color:#ae81ff">Arch.iso</span>
+</span></span></code></pre></div><p>The build process is divided into clear steps:</p>
+<ol>
+<li>Preparing the build environment</li>
+<li>Caching Pacman packages</li>
+<li>Building the ISO</li>
+<li>Generating checksums</li>
+<li>Creating a new release</li>
+</ol>
+<p><strong>Additional Technical Insights</strong>: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</p>
+<h2 id="future-improvements">Future Improvements<a hidden class="anchor" aria-hidden="true" href="#future-improvements">#</a></h2>
+<p>Looking ahead, I plan to integrate more advanced features such as:</p>
+<ul>
+<li><strong>Parallel Builds</strong>: To further reduce build times, I am exploring the possibility of running multiple build processes in parallel.</li>
+<li><strong>Automated Testing</strong>: Implementing automated tests for the ISO to ensure that it functions correctly on a variety of hardware configurations.</li>
+<li><strong>User Feedback Integration</strong>: Gathering feedback from users to continuously improve the build process and address any issues they encounter.</li>
+</ul>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>This rewrite has resulted in a more reliable and efficient workflow. The daily builds are now faster and produce consistent results. The improved error handling and logging make it easier to identify and resolve any issues that may arise.</p>
+<p>For those interested in the details: the complete workflow configuration can be found in our <a href="https://github.com/thomasbrugman/Arch-Linux-without-the-beeps">GitHub repository</a>.</p>
+
+
   </div>
-  <footer class="entry-footer"><span title='2024-01-23 00:00:00 +0000 UTC'>January 23, 2024</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to GitHub Workflow Rewrite for Arch Linux without the beeps" href="http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/github-actions/">Github-Actions</a></li>
+      <li><a href="http://localhost:1313/tags/ci-cd/">Ci-Cd</a></li>
+      <li><a href="http://localhost:1313/tags/arch-linux/">Arch-Linux</a></li>
+    </ul>
+  </footer>
 </article>
     </main>
     

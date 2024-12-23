@@ -26,6 +26,18 @@
     <loc>http://localhost:1313/about/who-i-am/</loc>
     <lastmod>2024-12-07T18:11:49+01:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/arch-linux/</loc>
+    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/ci-cd/</loc>
+    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</loc>
+    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/github-actions/</loc>
+    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/contact/</loc>
   </url><url>
     <loc>http://localhost:1313/projects/</loc>
