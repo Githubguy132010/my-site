@@ -6,23 +6,23 @@
     <description>Recent content in Posts on Githubguy132010</description>
     <generator>Hugo -- 0.126.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
+      <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
+      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
+      <description>The GitHub Workflow Rewrite Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
+Key Improvements Enhanced Caching
+Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%.</description>
+    </item>
     <item>
       <title>Removing Some Unused Projects</title>
       <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
       <description>Announcing the removal of some inactive projects from my GitHub account</description>
-    </item>
-    <item>
-      <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
-      <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
-      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
-      <description>The GitHub Workflow Rewrite Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
-Key Improvements Enhanced Caching
-Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%.</description>
     </item>
   </channel>
 </rss>
