@@ -43,7 +43,7 @@ theme = 'PaperMod'
     imageHeight = 200
     imageTitle = "my profile photo"
     buttons = [
-      { name = "Projects", url = "/projects" },
-      { name = "Blog", url = "/posts" },
+      { name = "Projects", url = "/my-site/projects" },
+      { name = "Blog", url = "/my-site/posts" },
       { name = "GitHub", url = "https://github.com/Githubguy132010" }
     ]
