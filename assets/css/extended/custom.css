@@ -1,3 +1,4 @@
+
 .nav {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -6,11 +7,10 @@
     margin: 20px auto;
     padding: 0 20px;
     position: sticky;
-    top: 0;
-    z-index: 1000;
+    top: 20px;
+    z-index: 100;
     max-width: calc(var(--nav-width) + var(--gap) * 2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Adjust the hover states for menu items */
