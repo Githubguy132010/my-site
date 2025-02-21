@@ -1,6 +1,6 @@
-baseURL = 'https://Githubguy132010.github.io/'
+baseURL = 'https://thomas-brugman.github.io/'
 languageCode = 'en-us'
-title = 'Githubguy132010'
+title = 'Thomas Brugman'
 theme = 'PaperMod'
 
 [menu]
@@ -38,12 +38,12 @@ theme = 'PaperMod'
     enabled = true
     title = "Thomas Brugman"
     subtitle = "Linux Enthusiast & Hobby Developer"
-    imageUrl = "images/profile.jpg"    # Let op: zonder leading slash
+    imageUrl = "images/profile_pic.jpg"
     imageWidth = 200
     imageHeight = 200
     imageTitle = "my profile photo"
     buttons = [
-      { name = "Projects", url = "/my-site/projects" },
-      { name = "Blog", url = "/my-site/posts" },
-      { name = "GitHub", url = "https://github.com/Githubguy132010" }
+      { name = "Projects", url = "/projects" },
+      { name = "Blog", url = "/posts" },
+      { name = "GitHub", url = "https://github.com/thomas-brugman" }
     ]

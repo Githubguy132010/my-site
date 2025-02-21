@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Arch-Linux on Githubguy132010</title>
+    <title>Arch-Linux on Thomas Brugman</title>
     <link>http://localhost:1313/tags/arch-linux/</link>
-    <description>Recent content in Arch-Linux on Githubguy132010</description>
-    <generator>Hugo -- 0.126.2</generator>
+    <description>Recent content in Arch-Linux on Thomas Brugman</description>
+    <generator>Hugo -- 0.144.1</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/arch-linux/index.xml" rel="self" type="application/rss+xml" />
@@ -13,9 +13,21 @@
       <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
-      <description>The GitHub Workflow Rewrite Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
-Key Improvements Enhanced Caching
-Implementation of a smart caching system for Pacman packages Use of monthly cache keys to keep cache size manageable Significant acceleration of the build process Additional Details: By leveraging the caching mechanism, we have reduced the build time by approximately 30%.</description>
+      <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;
+&lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;
+&lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Enhanced Caching&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implementation of a smart caching system for Pacman packages&lt;/li&gt;
+&lt;li&gt;Use of monthly cache keys to keep cache size manageable&lt;/li&gt;
+&lt;li&gt;Significant acceleration of the build process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: By leveraging the caching mechanism, we have reduced the build time by approximately 30%. This not only saves time but also reduces the load on our build servers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

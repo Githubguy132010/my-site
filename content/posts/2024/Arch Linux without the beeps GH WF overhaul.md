@@ -11,25 +11,20 @@ Today, I'd like to share how we've improved the GitHub Actions workflow for auto
 
 ## Key Improvements
 
-1. **Enhanced Caching**
-   - Implementation of a smart caching system for Pacman packages
-   - Use of monthly cache keys to keep cache size manageable
-   - Significant acceleration of the build process
-   - **Additional Details**: By leveraging the caching mechanism, we have reduced the build time by approximately 30%. This not only saves time but also reduces the load on our build servers.
 
-2. **Robust Error Handling**
+1. **Robust Error Handling**
    - Addition of comprehensive error checking
    - Improved logging for debugging
    - Timeout limit of 120 minutes to prevent hanging builds
    - **Additional Details**: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.
 
-3. **Automated Release Notes**
+2. **Automated Release Notes**
    - Automatic generation of release notes
    - Including changelog since last release
    - Clear presentation of features and changes
    - **Additional Details**: The release notes are now formatted in Markdown, making them easy to read and integrate into our documentation.
 
-4. **Security and Verification**
+3. **Security and Verification**
    - Automatic generation of SHA256 and SHA512 checksums
    - Build process verification
    - Checks for successful ISO creation

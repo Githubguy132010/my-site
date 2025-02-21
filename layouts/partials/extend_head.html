@@ -1,0 +1,18 @@
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/css/background.css">
+
+<!-- Image loading animation script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.post-content img, .entry-content img');
+        images.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', function() {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+    });
+</script>

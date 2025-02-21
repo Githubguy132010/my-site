@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Abouts on Githubguy132010</title>
+    <title>Abouts on Thomas Brugman</title>
     <link>http://localhost:1313/about/</link>
-    <description>Recent content in Abouts on Githubguy132010</description>
-    <generator>Hugo -- 0.126.2</generator>
+    <description>Recent content in Abouts on Thomas Brugman</description>
+    <generator>Hugo -- 0.144.1</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 07 Dec 2024 18:11:49 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/about/index.xml" rel="self" type="application/rss+xml" />
@@ -13,9 +13,17 @@
       <link>http://localhost:1313/about/who-i-am/</link>
       <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
       <guid>http://localhost:1313/about/who-i-am/</guid>
-      <description>Hi, I&amp;rsquo;m Thomas 👋 A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:
-🐧 Linux System Configuration 🔧 Shell Scripting (Bash) ⚙️ Infrastructure as Code (YAML) 🤖 GitHub Actions Automation 🖥️ WSL Development Currently working on a BlendOS config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.
-Check out my projects →</description>
+      <description>&lt;h2 id=&#34;hi-im-thomas-&#34;&gt;Hi, I&amp;rsquo;m Thomas 👋&lt;/h2&gt;
+&lt;p&gt;A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🐧 Linux System Configuration&lt;/li&gt;
+&lt;li&gt;🔧 Shell Scripting (Bash)&lt;/li&gt;
+&lt;li&gt;⚙️ Infrastructure as Code (YAML)&lt;/li&gt;
+&lt;li&gt;🤖 GitHub Actions Automation&lt;/li&gt;
+&lt;li&gt;🖥️ WSL Development&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Currently working on a &lt;a href=&#34;https://www.blendos.co&#34;&gt;BlendOS&lt;/a&gt; config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/projects&#34;&gt;Check out my projects →&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
