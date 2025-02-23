@@ -1,0 +1,19 @@
+{{- define "main" }}
+<article class="post-single error-404">
+    <header class="post-header">
+        <h1 class="post-title error-title">404</h1>
+        <p class="error-subtitle">Oops! Page Not Found</p>
+    </header>
+    <div class="post-content error-content">
+        <div class="error-message">
+            <p>The page you're looking for seems to have wandered off...</p>
+            <p>Don't worry! You can try:</p>
+            <ul class="error-options">
+                <li><a href="/" class="error-link home-link"><span>🏠</span> Return to Homepage</a></li>
+                <li><a href="/posts" class="error-link posts-link"><span>📝</span> Browse All Posts</a></li>
+                <li><a href="/projects" class="error-link projects-link"><span>💼</span> Check Out Projects</a></li>
+            </ul>
+        </div>
+    </div>
+</article>
+{{- end }}

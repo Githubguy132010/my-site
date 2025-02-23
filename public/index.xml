@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Thomas Brugman</title>
-    <link>//:1313///my-site/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Thomas Brugman</description>
     <generator>Hugo -- 0.144.1</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//:1313///my-site/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>January Updates</title>
-      <link>//:1313///my-site/posts/2025/january-updates/</link>
+      <link>http://localhost:1313/posts/2025/january-updates/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>//:1313///my-site/posts/2025/january-updates/</guid>
+      <guid>http://localhost:1313/posts/2025/january-updates/</guid>
       <description>&lt;h2 id=&#34;recent-changes-and-updates&#34;&gt;Recent Changes and Updates&lt;/h2&gt;
 &lt;p&gt;In the last month of 2024, we saw some significant changes to our projects and workflows. Here&amp;rsquo;s a summary of the key updates:&lt;/p&gt;
 &lt;h3 id=&#34;github-workflow-improvements&#34;&gt;GitHub Workflow Improvements&lt;/h3&gt;
@@ -28,9 +28,9 @@
     </item>
     <item>
       <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
-      <link>//:1313///my-site/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
+      <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>//:1313///my-site/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
+      <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
       <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;
 &lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;
 &lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;
@@ -49,16 +49,16 @@
     </item>
     <item>
       <title>Removing Some Unused Projects</title>
-      <link>//:1313///my-site/posts/2024/removing-some-unused-projects/</link>
+      <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>//:1313///my-site/posts/2024/removing-some-unused-projects/</guid>
+      <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
       <description>Announcing the removal of some inactive projects from my GitHub account</description>
     </item>
     <item>
       <title>Welcome to My Digital Space</title>
-      <link>//:1313///my-site/about/who-i-am/</link>
+      <link>http://localhost:1313/about/who-i-am/</link>
       <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
-      <guid>//:1313///my-site/about/who-i-am/</guid>
+      <guid>http://localhost:1313/about/who-i-am/</guid>
       <description>&lt;h2 id=&#34;hi-im-thomas-&#34;&gt;Hi, I&amp;rsquo;m Thomas 👋&lt;/h2&gt;
 &lt;p&gt;A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I specialize in:&lt;/p&gt;
 &lt;ul&gt;
@@ -69,7 +69,7 @@
 &lt;li&gt;🖥️ WSL Development&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Currently working on a &lt;a href=&#34;https://www.blendos.co&#34;&gt;BlendOS&lt;/a&gt; config, an immutable Arch Linux setup with a focus on developer productivity and my own needs.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;//:1313///my-site/projects&#34;&gt;Check out my projects →&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/projects&#34;&gt;Check out my projects →&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

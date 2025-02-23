@@ -1,21 +1,24 @@
 .nav {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 50px;
-    margin: 20px auto;
-    padding: 0 20px;
-    position: sticky;
+    border-radius: 35px;  /* Less rounded corners */
+    padding: 12px 40px;  /* Reduced vertical padding, increased horizontal padding */
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     top: 20px;
     z-index: 100;
-    max-width: calc(var(--nav-width) + var(--gap) * 2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    width: min(90%, 1200px);  /* Wider width with responsive max */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);  /* Lighter shadow */
 }
 
-/* Clean menu style with smooth underline animation */
+/* Adjust the menu items spacing */
 #menu {
     display: flex;
-    gap: 16px;
+    gap: 35px;  /* Increased gap between menu items */
+    align-items: center;
+    font-size: 1rem;  /* Slightly smaller text */
 }
 
 #menu a {
@@ -55,12 +58,19 @@
 
 /* Adjust logo area */
 .logo {
-    padding: 0 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.1rem;  /* Slightly smaller logo */
+    font-weight: 500;  /* Less bold */
 }
 
 /* Make sure dark mode still works properly */
 .dark .nav {
-    background: rgba(29, 30, 32, 0.8);
+    background: rgba(29, 30, 32, 0.75);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -73,8 +83,7 @@ body {
 .post-content,
 .entry-content,
 article,
-.main,
-.nav {
+.main {
     transition: background-color 0.3s ease, 
                 border-color 0.3s ease,
                 box-shadow 0.3s ease;
@@ -103,10 +112,34 @@ p, span, a, li {
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .nav {
+        padding: 8px 25px;
         border-radius: 25px;
-        margin: 10px auto;
-        top: 10px;
+        margin: 10px;
+        width: calc(100% - 20px);  /* Full width minus margins */
+        top: 5px;
     }
+
+    #menu {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .nav {
+        padding: 8px 20px;
+    }
+
+    #menu {
+        gap: 15px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Ensure menu items stay centered */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 /* Profile styling */
@@ -190,6 +223,23 @@ code {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Card-style elements with solid backgrounds */
+.post-entry,
+.first-entry,
+.article-page .main,
+.profile {
+    background: var(--entry);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .post-entry,
+.dark .first-entry,
+.dark .article-page .main,
+.dark .profile {
+    background: var(--entry);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 /* Images */
 .post-content img {
     border-radius: 12px;
@@ -204,6 +254,7 @@ code {
 /* Smooth page load animations */
 .main {
     animation: fadeIn 0.6s ease-out;
+    padding-top: 100px;
 }
 
 @keyframes fadeIn {
@@ -294,4 +345,101 @@ pre code {
 
 pre:hover code {
     filter: brightness(1.1);
+}
+
+/* 404 Error Page Styles */
+.error-404 {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-title {
+    font-size: 8rem;
+    margin: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+.error-subtitle {
+    font-size: 2rem;
+    margin-top: -1rem;
+    color: var(--secondary);
+    opacity: 0.8;
+}
+
+.error-message {
+    margin: 2rem 0;
+    font-size: 1.2rem;
+}
+
+.error-options {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.error-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--entry);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.error-link span {
+    font-size: 1.2rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.dark .error-link {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .error-link:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive adjustments for 404 page */
+@media screen and (max-width: 768px) {
+    .error-title {
+        font-size: 6rem;
+    }
+    
+    .error-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .error-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .error-link {
+        width: 80%;
+    }
 }
