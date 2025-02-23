@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Ci-Cd on Thomas Brugman</title>
-    <link>http://localhost:1313/tags/ci-cd/</link>
+    <link>//:1313///my-site/tags/ci-cd/</link>
     <description>Recent content in Ci-Cd on Thomas Brugman</description>
     <generator>Hugo -- 0.144.1</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ci-cd/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//:1313///my-site/tags/ci-cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
-      <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
+      <link>//:1313///my-site/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
+      <guid>//:1313///my-site/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
       <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;
 &lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;
 &lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Enhanced Caching&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Implementation of a smart caching system for Pacman packages&lt;/li&gt;
-&lt;li&gt;Use of monthly cache keys to keep cache size manageable&lt;/li&gt;
-&lt;li&gt;Significant acceleration of the build process&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: By leveraging the caching mechanism, we have reduced the build time by approximately 30%. This not only saves time but also reduces the load on our build servers.&lt;/li&gt;
+&lt;li&gt;Addition of comprehensive error checking&lt;/li&gt;
+&lt;li&gt;Improved logging for debugging&lt;/li&gt;
+&lt;li&gt;Timeout limit of 120 minutes to prevent hanging builds&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;Automated Release Notes&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
