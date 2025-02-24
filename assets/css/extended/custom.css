@@ -2,23 +2,23 @@
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 25px;  /* Smaller radius */
-    padding: 4px 20px;  /* Even smaller padding */
+    border-radius: 25px;
+    padding: 4px 20px;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    top: 8px;  /* Closer to top */
+    top: 8px;
     z-index: 100;
-    width: min(80%, 900px);  /* Even narrower */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);  /* Lighter shadow */
+    width: min(80%, 900px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
 /* Adjust the menu items spacing */
 #menu {
-    display: flex;
-    gap: 20px;  /* Tighter menu spacing */
-    align-items: center;
-    font-size: 0.85rem;  /* Even smaller text */
+    display: flex !important;
+    gap: 20px !important;  /* Tighter menu spacing */
+    align-items: center !important;
+    font-size: 0.85rem !important;  /* Even smaller text */
 }
 
 #menu a {
@@ -64,7 +64,7 @@
 }
 
 .logo a {
-    font-size: 0.9rem;  /* Smaller logo text */
+    font-size: 0.9rem !important;  /* Smaller logo text */
     font-weight: 500;  /* Less bold */
 }
 
@@ -112,26 +112,26 @@ p, span, a, li {
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .nav {
-        padding: 4px 15px;
-        border-radius: 15px;
-        margin: 5px;
-        width: calc(100% - 10px);
-        top: 2px;
+        padding: 4px 15px !important;
+        border-radius: 15px !important;
+        margin: 5px !important;
+        width: calc(100% - 10px) !important;
+        top: 2px !important;
     }
 
     #menu {
-        gap: 12px;
+        gap: 12px !important;
     }
 }
 
 @media screen and (max-width: 480px) {
     .nav {
-        padding: 3px 12px;
+        padding: 3px 12px !important;
     }
 
     #menu {
-        gap: 10px;
-        font-size: 0.8rem;
+        gap: 10px !important;
+        font-size: 0.8rem !important;
     }
 }
 
@@ -254,7 +254,7 @@ code {
 /* Smooth page load animations */
 .main {
     animation: fadeIn 0.6s ease-out;
-    padding-top: 70px;  /* Reduced top padding further */
+    padding-top: 70px !important;  /* Reduced top padding further */
 }
 
 @keyframes fadeIn {
