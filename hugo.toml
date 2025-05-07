@@ -41,7 +41,7 @@ theme = 'PaperMod'
     imageUrl = "images/profile_pic.jpg"
     imageWidth = 200
     imageHeight = 200
-    imageTitle = "my profile photo"
+    imageTitle = "My profile pic"
     buttons = [
       { name = "Projects", url = "/projects" },
       { name = "Blog", url = "/posts" },
