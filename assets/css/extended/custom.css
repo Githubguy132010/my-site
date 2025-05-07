@@ -443,3 +443,82 @@ pre:hover code {
         width: 80%;
     }
 }
+/* --- Typography and Spacing Improvements --- */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.8em;
+    margin-top: 1.5em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5em;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    font-size: 2em;
+    border-bottom: 1px dashed var(--secondary);
+    padding-bottom: 0.2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+/* Code Blocks */
+pre {
+    padding: 1em;
+    margin-bottom: 1em;
+    overflow-x: auto; /* Add horizontal scroll for wide code */
+    background-color: var(--code-bg); /* Assuming a CSS variable for code background */
+    color: var(--code-fg); /* Assuming a CSS variable for code foreground */
+}
+
+code {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+/* Inline code */
+p code, li code {
+    background-color: var(--inline-code-bg); /* Assuming a CSS variable for inline code background */
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+li {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+/* Blockquotes */
+blockquote {
+    margin: 1em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid var(--primary);
+    background-color: var(--blockquote-bg); /* Assuming a CSS variable for blockquote background */
+    font-style: italic;
+    color: var(--secondary);
+}
+
+/* Horizontal Rule */
+hr {
+    margin: 2em 0;
+    border: 0;
+    border-top: 1px solid var(--border); /* Assuming a CSS variable for border color */
+}
