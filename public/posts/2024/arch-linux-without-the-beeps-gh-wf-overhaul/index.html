@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>GitHub Workflow Rewrite for Arch Linux without the beeps | Thomas Brugman</title>
 <meta name="keywords" content="github-actions, ci-cd, arch-linux">
 <meta name="description" content="The GitHub Workflow Rewrite
@@ -23,16 +23,16 @@ Additional Details: The error handling now includes specific checks for common i
 
 Automated Release Notes">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.00f5af1b155fe769e896d1d08fd78f065b11c04ff9bd5164e2fc0ef23b99c44e.css" integrity="sha256-APWvGxVf52noltHQj9ePBlsRwE/5vVFk4vwO8juZxE4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="canonical" href="https://thomas-brugman.github.io/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.0b672cb5fe641444534c5779c10a3ca585a318c0f6e29db647ceca377db197aa.css" integrity="sha256-C2cstf5kFERTTFd5wQo8pYWjGMD24p22R87KN32xl6o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://thomas-brugman.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://thomas-brugman.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://thomas-brugman.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://thomas-brugman.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://thomas-brugman.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
+<link rel="alternate" hreflang="en" href="https://thomas-brugman.github.io/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
 <noscript>
     <style>
         #theme-toggle,
@@ -86,6 +86,87 @@ Automated Release Notes">
             }
         });
     });
+</script><meta property="og:url" content="https://thomas-brugman.github.io/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/">
+  <meta property="og:site_name" content="Thomas Brugman">
+  <meta property="og:title" content="GitHub Workflow Rewrite for Arch Linux without the beeps">
+  <meta property="og:description" content="The GitHub Workflow Rewrite Today, I’d like to share how we’ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
+Key Improvements Robust Error Handling
+Addition of comprehensive error checking Improved logging for debugging Timeout limit of 120 minutes to prevent hanging builds Additional Details: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient. Automated Release Notes">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-23T00:00:00+00:00">
+    <meta property="article:tag" content="Github-Actions">
+    <meta property="article:tag" content="Ci-Cd">
+    <meta property="article:tag" content="Arch-Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitHub Workflow Rewrite for Arch Linux without the beeps">
+<meta name="twitter:description" content="The GitHub Workflow Rewrite
+Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
+Key Improvements
+
+
+Robust Error Handling
+
+Addition of comprehensive error checking
+Improved logging for debugging
+Timeout limit of 120 minutes to prevent hanging builds
+Additional Details: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.
+
+
+
+Automated Release Notes">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://thomas-brugman.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "GitHub Workflow Rewrite for Arch Linux without the beeps",
+      "item": "https://thomas-brugman.github.io/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GitHub Workflow Rewrite for Arch Linux without the beeps",
+  "name": "GitHub Workflow Rewrite for Arch Linux without the beeps",
+  "description": "The GitHub Workflow Rewrite Today, I\u0026rsquo;d like to share how we\u0026rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.\nKey Improvements Robust Error Handling\nAddition of comprehensive error checking Improved logging for debugging Timeout limit of 120 minutes to prevent hanging builds Additional Details: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient. Automated Release Notes\n",
+  "keywords": [
+    "github-actions", "ci-cd", "arch-linux"
+  ],
+  "articleBody": "The GitHub Workflow Rewrite Today, I’d like to share how we’ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.\nKey Improvements Robust Error Handling\nAddition of comprehensive error checking Improved logging for debugging Timeout limit of 120 minutes to prevent hanging builds Additional Details: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient. Automated Release Notes\nAutomatic generation of release notes Including changelog since last release Clear presentation of features and changes Additional Details: The release notes are now formatted in Markdown, making them easy to read and integrate into our documentation. Security and Verification\nAutomatic generation of SHA256 and SHA512 checksums Build process verification Checks for successful ISO creation Additional Details: We have also implemented GPG signing for the ISOs, providing an additional layer of security and authenticity verification. Technical Details The workflow runs in a Docker container based on Arch Linux, ensuring a clean and isolated build environment. We use archiso for building the ISO.\nThe build process is divided into clear steps:\nPreparing the build environment Caching Pacman packages Building the ISO Generating checksums Creating a new release If you want to see the complete workflow, I will post a snippet of it here:\nname: Build ISO on: workflow_dispatch: schedule: - cron: '0 0 * * *' # Run the workflow every day at midnight push: branches: - main - dev paths-ignore: - '**.md' - '.gitignore' env: DOCKER_BUILDKIT: 1 ISO_FILENAME: Arch.iso jobs: build: runs-on: ubuntu-latest timeout-minutes: 120 # Set a timeout to prevent hung builds steps: - name: Checkout Repository uses: actions/checkout@v4 - name: Set up environment variables id: env run: | echo \"DATE=$(date +'%Y-%m-%d')\" \u003e\u003e $GITHUB_ENV echo \"VERSION=$(date +'%Y.%m.%d')\" \u003e\u003e $GITHUB_ENV echo \"CACHE_KEY=$(date +'%Y-%m')\" \u003e\u003e $GITHUB_ENV echo \"WORKSPACE=${GITHUB_WORKSPACE}\" \u003e\u003e $GITHUB_ENV - name: Create Cache Directories run: | sudo mkdir -p /tmp/pacman-cache sudo chmod 777 /tmp/pacman-cache # Ensure the directory is empty to prevent tar errors sudo rm -rf /tmp/pacman-cache/* - name: Cache Pacman packages uses: actions/cache@v3 with: path: /tmp/pacman-cache key: pacman-${{ runner.os }}-${{ env.CACHE_KEY }} restore-keys: | pacman-${{ runner.os }}- - name: Set up Arch Linux Container run: | docker run --privileged --name arch-container -d \\ -v ${{ env.WORKSPACE }}:/workdir \\ -v /tmp/pacman-cache:/var/cache/pacman/pkg \\ archlinux:latest sleep infinity - name: Initialize Container run: | docker exec arch-container bash -c \" set -euo pipefail # Update package database and system pacman -Syu --noconfirm # Install required packages pacman -S --noconfirm --needed \\ git \\ archiso \\ grub \\ curl \\ jq \\ gnupg \\ make \\ sudo # Verify installation command -v mkarchiso \u003e/dev/null 2\u003e\u00261 || { echo '::error::mkarchiso not found' exit 1 } \" - name: Build ISO id: build run: | docker exec arch-container bash -c \" set -euo pipefail cd /workdir # Cleanup any previous builds rm -rf workdir/ out/ mkdir -p out/ # Build the ISO with verbose output mkarchiso -v -w workdir/ -o out/ . 2\u003e\u00261 | tee build.log || { echo '::error::ISO build failed!' tail -n 50 build.log exit 1 } # Verify ISO was created [ -f out/*.iso ] || { echo '::error::ISO file not found after build' exit 1 } \" - name: Generate Checksums run: | docker exec arch-container bash -c \" set -euo pipefail cd /workdir/out # Generate checksums for iso in *.iso; do sha256sum \\\"\\$iso\\\" \u003e \\\"\\${iso}.sha256sum\\\" sha512sum \\\"\\$iso\\\" \u003e \\\"\\${iso}.sha512sum\\\" done \" - name: Rename and Move ISO run: | docker exec arch-container bash -c \" set -euo pipefail cd /workdir/out for f in *.iso; do newname=\\\"arch-linux-no-beeps-${{ env.VERSION }}.iso\\\" mv \\\"\\$f\\\" \\\"\\$newname\\\" mv \\\"\\$f.sha256sum\\\" \\\"\\$newname.sha256sum\\\" mv \\\"\\$f.sha512sum\\\" \\\"\\$newname.sha512sum\\\" done \" - name: Generate Release Notes id: release_notes run: | # Create a temporary file for release notes TEMP_RELEASE_NOTES=$(mktemp) docker exec arch-container bash -c \" set -euo pipefail cd /workdir # Initialize release notes { echo '🚀 Arch Linux ISO without system beeps (build ${{ env.DATE }})' echo '' echo '### Changes' # Get changes since last release if git tag | grep -q .; then LAST_TAG=\\$(git describe --tags --abbrev=0 2\u003e/dev/null || echo '') if [ ! -z \\\"\\$LAST_TAG\\\" ]; then echo '#### Commits since last release:' git log \\\"\\$LAST_TAG\\\"..HEAD --pretty=format:'- %s' | grep -v 'Merge' echo '' fi fi # Add standard information echo '### Features' echo '- Automatic daily build' echo '- System beeps disabled' echo '- ISO SHA256 and SHA512 checksums included' echo '' echo '### Download' echo '- Download the ISO and verify checksums before use' echo '' echo '### Checksums' echo 'SHA256 and SHA512 checksums are available in the uploaded files.' } \u003e /tmp/release_notes \" # Copy release notes from container to host docker cp arch-container:/tmp/release_notes $TEMP_RELEASE_NOTES # Set the release notes in GITHUB_ENV echo 'RELEASE_NOTES\u003c",
+  "wordCount" : "1094",
+  "inLanguage": "en",
+  "datePublished": "2024-12-23T00:00:00Z",
+  "dateModified": "2024-12-23T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://thomas-brugman.github.io/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Thomas Brugman",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://thomas-brugman.github.io/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 
@@ -104,9 +185,9 @@ Automated Release Notes">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Thomas Brugman (Alt + H)">Thomas Brugman</a>
+            <a href="https://thomas-brugman.github.io/" accesskey="h" title="Thomas Brugman (Alt + H)">Thomas Brugman</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -130,27 +211,27 @@ Automated Release Notes">
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/" title="Home">
+                <a href="https://thomas-brugman.github.io/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/who-i-am/" title="About">
+                <a href="https://thomas-brugman.github.io/about/who-i-am/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="Blog">
+                <a href="https://thomas-brugman.github.io/posts/" title="Blog">
                     <span>Blog</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
+                <a href="https://thomas-brugman.github.io/projects/" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/contact/" title="Contact">
+                <a href="https://thomas-brugman.github.io/contact/" title="Contact">
                     <span>Contact</span>
                 </a>
             </li>
@@ -447,16 +528,16 @@ Automated Release Notes">
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/github-actions/">Github-Actions</a></li>
-      <li><a href="http://localhost:1313/tags/ci-cd/">Ci-Cd</a></li>
-      <li><a href="http://localhost:1313/tags/arch-linux/">Arch-Linux</a></li>
+      <li><a href="https://thomas-brugman.github.io/tags/github-actions/">Github-Actions</a></li>
+      <li><a href="https://thomas-brugman.github.io/tags/ci-cd/">Ci-Cd</a></li>
+      <li><a href="https://thomas-brugman.github.io/tags/arch-linux/">Arch-Linux</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Thomas Brugman</a></span> · 
+        <span>&copy; 2025 <a href="https://thomas-brugman.github.io/">Thomas Brugman</a></span> · 
 
     <span>
         Powered by

@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Thomas Brugman</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://thomas-brugman.github.io/tags/</link>
     <description>Recent content in Tags on Thomas Brugman</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.2</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://thomas-brugman.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Updates</title>
-      <link>http://localhost:1313/tags/updates/</link>
+      <link>https://thomas-brugman.github.io/tags/updates/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/updates/</guid>
+      <guid>https://thomas-brugman.github.io/tags/updates/</guid>
       <description></description>
     </item>
     <item>
       <title>Website</title>
-      <link>http://localhost:1313/tags/website/</link>
+      <link>https://thomas-brugman.github.io/tags/website/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/website/</guid>
+      <guid>https://thomas-brugman.github.io/tags/website/</guid>
       <description></description>
     </item>
     <item>
       <title>Arch-Linux</title>
-      <link>http://localhost:1313/tags/arch-linux/</link>
+      <link>https://thomas-brugman.github.io/tags/arch-linux/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/arch-linux/</guid>
+      <guid>https://thomas-brugman.github.io/tags/arch-linux/</guid>
       <description></description>
     </item>
     <item>
       <title>Ci-Cd</title>
-      <link>http://localhost:1313/tags/ci-cd/</link>
+      <link>https://thomas-brugman.github.io/tags/ci-cd/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ci-cd/</guid>
+      <guid>https://thomas-brugman.github.io/tags/ci-cd/</guid>
       <description></description>
     </item>
     <item>
       <title>Github-Actions</title>
-      <link>http://localhost:1313/tags/github-actions/</link>
+      <link>https://thomas-brugman.github.io/tags/github-actions/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/github-actions/</guid>
+      <guid>https://thomas-brugman.github.io/tags/github-actions/</guid>
       <description></description>
     </item>
     <item>
       <title>GitHub</title>
-      <link>http://localhost:1313/tags/github/</link>
+      <link>https://thomas-brugman.github.io/tags/github/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/github/</guid>
+      <guid>https://thomas-brugman.github.io/tags/github/</guid>
       <description></description>
     </item>
     <item>
       <title>Projects</title>
-      <link>http://localhost:1313/tags/projects/</link>
+      <link>https://thomas-brugman.github.io/tags/projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/projects/</guid>
+      <guid>https://thomas-brugman.github.io/tags/projects/</guid>
       <description></description>
     </item>
   </channel>
