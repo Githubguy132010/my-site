@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Projects on Thomas Brugman</title>
-    <link>https://thomas-brugman.github.io/tags/projects/</link>
+    <link>http://localhost:1313/tags/projects/</link>
     <description>Recent content in Projects on Thomas Brugman</description>
     <generator>Hugo -- 0.147.2</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://thomas-brugman.github.io/tags/projects/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Removing Some Unused Projects</title>
-      <link>https://thomas-brugman.github.io/posts/2024/removing-some-unused-projects/</link>
+      <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://thomas-brugman.github.io/posts/2024/removing-some-unused-projects/</guid>
+      <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
       <description>Announcing the removal of some inactive projects from my GitHub account</description>
     </item>
   </channel>
