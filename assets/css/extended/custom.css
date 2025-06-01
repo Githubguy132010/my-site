@@ -3,11 +3,11 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 25px;
-    padding: 4px 20px;
+    padding: 3px 18px;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    top: 8px;
+    top: 6px;
     z-index: 100;
     width: min(80%, 900px);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
@@ -110,9 +110,11 @@ p, span, a, li {
 }
 
 /* Responsive adjustments */
-@media screen and (max-width: 768px) {
+:start_line:113
+-------
+@media (max-width: 768px) {
     .nav {
-        padding: 4px 15px !important;
+        padding: 3px 12px !important;
         border-radius: 15px !important;
         margin: 5px !important;
         width: calc(100% - 10px) !important;
@@ -122,16 +124,30 @@ p, span, a, li {
     #menu {
         gap: 12px !important;
     }
+
+    .profile .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile .button {
+        width: 80%;
+        text-align: center;
+    }
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
     .nav {
-        padding: 3px 12px !important;
+        padding: 2px 10px !important;
     }
 
     #menu {
         gap: 10px !important;
         font-size: 0.8rem !important;
+    }
+
+    .profile .button {
+        width: 90%;
     }
 }
 
@@ -177,6 +193,8 @@ p, span, a, li {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+:start_line:180
+-------
 /* Add rounded corners to more elements */
 .post-entry,
 .first-entry,
@@ -186,18 +204,22 @@ p, span, a, li {
 .search-result-list,
 .terms-tags a,
 .footer,
-.post-tags a,
 .paginav,
 .paginav a,
 code,
-pre {
+pre,
+.profile .info,
+.profile .buttons {
     border-radius: 15px;
 }
 
+:start_line:197
+-------
 /* Smaller radius for inline elements */
 .post-tags a,
 .terms-tags a,
-code {
+code,
+.profile .button {
     border-radius: 8px;
 }
 
@@ -254,7 +276,10 @@ code {
 /* Smooth page load animations */
 .main {
     animation: fadeIn 0.6s ease-out;
-    padding-top: 70px !important;  /* Reduced top padding further */
+:start_line:257
+-------
+    padding-top: 70px !important;
+    min-height: calc(100vh - 130px); /* Ensure content pushes footer down */
 }
 
 @keyframes fadeIn {
@@ -338,7 +363,34 @@ code {
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+:start_line:335
+-------
 /* Enhance code block appearance */
+pre {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+pre::before {
+    content: attr(data-lang); /* Display language from data-lang attribute */
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--primary);
+    color: var(--theme);
+    padding: 0.2em 0.5em;
+    border-bottom-left-radius: 8px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+pre:hover::before {
+    opacity: 1;
+}
+
 pre code {
     transition: all 0.3s ease;
 }
@@ -443,6 +495,8 @@ pre:hover code {
         width: 80%;
     }
 }
+:start_line:427
+-------
 /* --- Typography and Spacing Improvements --- */
 
 /* Headings */
@@ -450,6 +504,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.8em;
     margin-top: 1.5em;
     line-height: 1.2;
+    color: var(--primary); /* Ensure headings use primary color */
 }
 
 h1 {
@@ -472,6 +527,7 @@ h3 {
 p {
     margin-bottom: 1em;
     line-height: 1.6;
+    color: var(--content); /* Ensure paragraphs use content color */
 }
 
 /* Code Blocks */
@@ -479,7 +535,7 @@ pre {
     padding: 1em;
     margin-bottom: 1em;
     overflow-x: auto; /* Add horizontal scroll for wide code */
-    background-color: var(--code-bg); /* Assuming a CSS variable for code background */
+    background-color: var(--code-block-bg); /* Use code-block-bg for pre */
     color: var(--code-fg); /* Assuming a CSS variable for code foreground */
 }
 
@@ -490,15 +546,17 @@ code {
 
 /* Inline code */
 p code, li code {
-    background-color: var(--inline-code-bg); /* Assuming a CSS variable for inline code background */
+    background-color: var(--inline-code-bg);
     padding: 0.2em 0.4em;
     border-radius: 4px;
+    color: var(--primary); /* Ensure inline code has good contrast */
 }
 
 /* Lists */
 ul, ol {
     margin-bottom: 1em;
     padding-left: 1.5em;
+    color: var(--content); /* Ensure list items use content color */
 }
 
 li {
@@ -511,7 +569,7 @@ blockquote {
     margin: 1em 0;
     padding: 1em 1.5em;
     border-left: 4px solid var(--primary);
-    background-color: var(--blockquote-bg); /* Assuming a CSS variable for blockquote background */
+    background-color: var(--blockquote-bg);
     font-style: italic;
     color: var(--secondary);
 }
@@ -520,5 +578,82 @@ blockquote {
 hr {
     margin: 2em 0;
     border: 0;
-    border-top: 1px solid var(--border); /* Assuming a CSS variable for border color */
+    border-top: 1px solid var(--border);
+}
+
+/* Accessibility: Focus outlines */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* Accessibility: Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: var(--theme);
+    padding: 8px 12px;
+    z-index: 9999;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Consistent button styles (if not already defined by theme) */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: var(--theme);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+/* General link styling for better contrast */
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ensure good contrast for text on various backgrounds */
+body {
+    color: var(--content);
+}
+
+/* Adjustments for better readability on smaller screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.7em;
+    }
+    h3 {
+        font-size: 1.3em;
+    }
+    p, li {
+        font-size: 0.95em;
+    }
 }
