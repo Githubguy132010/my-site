@@ -1,0 +1,203 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+import { getCollection } from 'astro:content';
+
+// Get all published posts, sorted by date
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const totalPosts = posts.length;
+---
+
+<MainLayout title="Blog">
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title="ls -la ~/posts/ | grep -v '^d'">
+      <div class="blog-listing">
+        <div class="listing-header">
+          <div class="command-output">
+            <span class="prompt">$</span>
+            <span class="command">find ./posts -name "*.md" -type f | wc -l</span>
+          </div>
+          <div class="result">
+            <span class="count">{totalPosts}</span>
+            <span class="label">posts found</span>
+          </div>
+        </div>
+
+        <div class="posts-list">
+          <div class="list-header">
+            <span class="permissions">Permissions</span>
+            <span class="owner">Owner</span>
+            <span class="size">Size</span>
+            <span class="date">Date</span>
+            <span class="filename">Filename</span>
+          </div>
+          
+          {posts.map((post) => {
+            const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit'
+            });
+            
+            return (
+              <article class="post-entry">
+                <span class="permissions">-rw-r--r--</span>
+                <span class="owner">thomas</span>
+                <span class="size">2.4K</span>
+                <span class="date">{formattedDate}</span>
+                <a href={`/blog/${post.slug}/`} class="filename">
+                  {post.data.title}.md
+                </a>
+                
+                <div class="post-details">
+                  {post.data.description && (
+                    <p class="description">{post.data.description}</p>
+                  )}
+                  
+                  {post.data.tags && post.data.tags.length > 0 && (
+                    <div class="tags">
+                      {post.data.tags.map((tag) => (
+                        <span class="tag">#{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {posts.length === 0 && (
+          <div class="empty-state">
+            <div class="command-output">
+              <span class="prompt">$</span>
+              <span class="command">ls -la posts/</span>
+            </div>
+            <div class="error-message">
+              <span class="error">ls: cannot access 'posts/': No such file or directory</span>
+            </div>
+          </div>
+        )}
+
+        <div class="listing-footer">
+          <div class="command-output">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+      </div>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .blog-listing {
+    @apply space-y-6;
+  }
+
+  .listing-header {
+    @apply space-y-2 pb-4 border-b border-terminal-green-dim;
+  }
+
+  .command-output {
+    @apply flex items-center space-x-2 font-mono;
+  }
+
+  .prompt {
+    @apply text-terminal-green-primary;
+  }
+
+  .command {
+    @apply text-terminal-green-accent;
+  }
+
+  .result {
+    @apply flex items-center space-x-2 ml-6 font-mono;
+  }
+
+  .count {
+    @apply text-terminal-green-primary text-lg font-bold;
+  }
+
+  .label {
+    @apply text-terminal-text-dim;
+  }
+
+  .posts-list {
+    @apply space-y-1;
+  }
+
+  .list-header {
+    @apply grid grid-cols-5 gap-2 text-xs font-mono text-terminal-text-dim;
+    @apply border-b border-terminal-green-dim pb-2 mb-4;
+  }
+
+  .post-entry {
+    @apply grid grid-cols-5 gap-2 text-sm font-mono;
+    @apply hover:bg-terminal-bg-tertiary p-2 rounded transition-colors;
+    @apply border-b border-terminal-green-dim/30 pb-3 mb-3;
+  }
+
+  .permissions,
+  .owner,
+  .size,
+  .date {
+    @apply text-terminal-text-dim;
+  }
+
+  .filename {
+    @apply text-terminal-green-primary hover:text-terminal-green-accent;
+    @apply transition-colors cursor-pointer;
+  }
+
+  .post-details {
+    @apply col-span-5 mt-2 space-y-2;
+  }
+
+  .description {
+    @apply text-terminal-text-secondary text-sm;
+    @apply ml-4 italic;
+  }
+
+  .tags {
+    @apply flex flex-wrap gap-1 ml-4;
+  }
+
+  .tag {
+    @apply px-2 py-1 bg-terminal-bg-tertiary border border-terminal-green-dim;
+    @apply text-terminal-green-primary text-xs rounded;
+  }
+
+  .empty-state {
+    @apply space-y-2 text-center py-8;
+  }
+
+  .error-message {
+    @apply ml-6 font-mono;
+  }
+
+  .error {
+    @apply text-terminal-error;
+  }
+
+  .listing-footer {
+    @apply border-t border-terminal-green-dim pt-4;
+  }
+
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

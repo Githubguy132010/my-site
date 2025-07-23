@@ -1,0 +1,266 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+---
+
+<MainLayout title="Contact">
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title="netstat -an | grep :contact">
+      <div class="contact-content">
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">whoami && hostname -f</span>
+        </div>
+        
+        <div class="connection-info">
+          <div class="info-line">
+            <span class="label">User:</span>
+            <span class="value">thomas@brugman.dev</span>
+          </div>
+          <div class="info-line">
+            <span class="label">Status:</span>
+            <span class="value">ONLINE - Available for collaboration</span>
+          </div>
+          <div class="info-line">
+            <span class="label">Timezone:</span>
+            <span class="value">UTC+1 (Central European Time)</span>
+          </div>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">cat ~/contact_methods.txt</span>
+        </div>
+
+        <div class="contact-methods">
+          <div class="contact-item">
+            <div class="contact-header">
+              <span class="protocol">git@</span>
+              <span class="service">github.com</span>
+              <span class="status">[ACTIVE]</span>
+            </div>
+            <div class="contact-details">
+              <a href="https://github.com/GitHubguy132010" target="_blank" class="contact-link">
+                GitHub: @GitHubguy132010
+              </a>
+              <p class="contact-description">
+                Primary platform for code repositories, collaboration, and open-source contributions.
+                Check out my projects and feel free to open issues or submit pull requests.
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-header">
+              <span class="protocol">mailto:</span>
+              <span class="service">contact</span>
+              <span class="status">[SECURE]</span>
+            </div>
+            <div class="contact-details">
+              <span class="contact-link">thomas@brugman.dev</span>
+              <p class="contact-description">
+                For professional inquiries, collaboration opportunities, or technical discussions.
+                Please include a clear subject line and relevant details.
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-header">
+              <span class="protocol">rss://</span>
+              <span class="service">blog.feed</span>
+              <span class="status">[LIVE]</span>
+            </div>
+            <div class="contact-details">
+              <a href="/rss.xml" class="contact-link">
+                RSS Feed: /rss.xml
+              </a>
+              <p class="contact-description">
+                Stay updated with my latest blog posts and project updates through RSS.
+                Perfect for RSS readers and staying in the loop.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">cat ~/collaboration_preferences.md</span>
+        </div>
+
+        <div class="collaboration-info">
+          <h3>What I'm interested in:</h3>
+          <ul class="interest-list">
+            <li>Open-source projects and contributions</li>
+            <li>Linux system administration and automation</li>
+            <li>Terminal applications and CLI tools</li>
+            <li>DevOps and CI/CD pipeline optimization</li>
+            <li>Static site generators and web technologies</li>
+            <li>Docker containerization projects</li>
+          </ul>
+
+          <h3>Best ways to reach me:</h3>
+          <ul class="contact-preferences">
+            <li><strong>GitHub Issues:</strong> For project-specific discussions</li>
+            <li><strong>Email:</strong> For detailed proposals or collaborations</li>
+            <li><strong>Pull Requests:</strong> For code contributions</li>
+          </ul>
+
+          <h3>Response time:</h3>
+          <p class="response-info">
+            I typically respond within 24-48 hours during weekdays. 
+            For urgent matters, please clearly mark them as such in your subject line.
+          </p>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">ping -c 3 thomas@brugman.dev</span>
+        </div>
+
+        <div class="ping-output">
+          <div class="ping-line">PING thomas@brugman.dev (192.168.1.42): 56 data bytes</div>
+          <div class="ping-line">64 bytes from thomas: icmp_seq=0 time=1.337ms</div>
+          <div class="ping-line">64 bytes from thomas: icmp_seq=1 time=0.420ms</div>
+          <div class="ping-line">64 bytes from thomas: icmp_seq=2 time=0.666ms</div>
+          <div class="ping-stats">--- thomas@brugman.dev ping statistics ---</div>
+          <div class="ping-stats">3 packets transmitted, 3 received, 0% packet loss</div>
+        </div>
+
+        <div class="terminal-footer">
+          <div class="command-output">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+      </div>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .contact-content {
+    @apply space-y-6;
+  }
+
+  .command-output {
+    @apply flex items-center space-x-2 font-mono mb-4;
+  }
+
+  .prompt {
+    @apply text-terminal-green-primary;
+  }
+
+  .command {
+    @apply text-terminal-green-accent;
+  }
+
+  .connection-info {
+    @apply ml-6 space-y-2 mb-6 p-4 bg-terminal-bg-tertiary rounded border-l-4 border-terminal-green-primary;
+  }
+
+  .info-line {
+    @apply flex items-center font-mono text-sm;
+  }
+
+  .label {
+    @apply text-terminal-green-dim w-24;
+  }
+
+  .value {
+    @apply text-terminal-text-secondary;
+  }
+
+  .contact-methods {
+    @apply ml-6 space-y-6;
+  }
+
+  .contact-item {
+    @apply bg-terminal-bg-tertiary p-4 rounded border border-terminal-green-dim;
+  }
+
+  .contact-header {
+    @apply flex items-center space-x-2 font-mono text-sm mb-3;
+  }
+
+  .protocol {
+    @apply text-terminal-green-primary;
+  }
+
+  .service {
+    @apply text-terminal-text-secondary;
+  }
+
+  .status {
+    @apply text-terminal-green-accent;
+  }
+
+  .contact-details {
+    @apply space-y-2;
+  }
+
+  .contact-link {
+    @apply text-terminal-info hover:text-terminal-green-accent;
+    @apply transition-colors font-mono;
+  }
+
+  .contact-description {
+    @apply text-terminal-text-secondary text-sm leading-relaxed;
+  }
+
+  .collaboration-info {
+    @apply ml-6 space-y-4 text-terminal-text-secondary;
+  }
+
+  .collaboration-info h3 {
+    @apply text-terminal-green-primary font-mono font-bold mb-2;
+  }
+
+  .interest-list,
+  .contact-preferences {
+    @apply space-y-1 ml-4;
+  }
+
+  .interest-list li,
+  .contact-preferences li {
+    @apply before:content-['→'] before:text-terminal-green-primary before:mr-2;
+  }
+
+  .contact-preferences strong {
+    @apply text-terminal-green-accent;
+  }
+
+  .response-info {
+    @apply leading-relaxed;
+  }
+
+  .ping-output {
+    @apply ml-6 font-mono text-sm space-y-1;
+  }
+
+  .ping-line {
+    @apply text-terminal-text-secondary;
+  }
+
+  .ping-stats {
+    @apply text-terminal-green-dim;
+  }
+
+  .terminal-footer {
+    @apply border-t border-terminal-green-dim pt-4;
+  }
+
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

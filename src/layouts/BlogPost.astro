@@ -1,0 +1,224 @@
+---
+import MainLayout from './MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    date: Date;
+    tags: string[];
+    description?: string;
+    author?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, date, tags, description, author = 'Thomas Brugman' } = frontmatter;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const readingTime = Math.ceil(Astro.slots.render('default').then(content => content.split(' ').length / 200));
+---
+
+<MainLayout title={title} description={description}>
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title={`cat ${title.toLowerCase().replace(/\s+/g, '-')}.md`}>
+      <article class="terminal-article">
+        <header class="article-header">
+          <div class="file-info">
+            <span class="file-permissions">-rw-r--r--</span>
+            <span class="file-owner">thomas</span>
+            <span class="file-group">dev</span>
+            <span class="file-size">2.4K</span>
+            <span class="file-date">{formattedDate}</span>
+            <span class="file-name">{title}</span>
+          </div>
+          
+          <h1 class="article-title">
+            <span class="prompt">$ cat</span>
+            <span class="filename">{title}</span>
+          </h1>
+          
+          <div class="article-meta">
+            <span class="meta-item">
+              <span class="meta-label">Author:</span>
+              <span class="meta-value">{author}</span>
+            </span>
+            <span class="meta-item">
+              <span class="meta-label">Date:</span>
+              <span class="meta-value">{formattedDate}</span>
+            </span>
+          </div>
+          
+          {tags.length > 0 && (
+            <div class="article-tags">
+              <span class="tags-label"># Tags:</span>
+              {tags.map((tag) => (
+                <span class="tag">#{tag}</span>
+              ))}
+            </div>
+          )}
+        </header>
+        
+        <div class="article-content prose prose-terminal">
+          <slot />
+        </div>
+        
+        <footer class="article-footer">
+          <div class="end-marker">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </footer>
+      </article>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .terminal-article {
+    @apply space-y-6;
+  }
+  
+  .file-info {
+    @apply font-mono text-xs text-terminal-text-dim;
+    @apply grid grid-cols-6 gap-2 mb-4 p-2 bg-terminal-bg-tertiary rounded;
+  }
+  
+  .article-title {
+    @apply text-2xl font-bold text-terminal-green-primary mb-4;
+  }
+  
+  .prompt {
+    @apply text-terminal-green-accent;
+  }
+  
+  .filename {
+    @apply text-terminal-text-secondary ml-2;
+  }
+
+  .article-meta {
+    @apply flex flex-wrap gap-4 mb-4 text-sm font-mono;
+  }
+
+  .meta-item {
+    @apply flex items-center space-x-2;
+  }
+
+  .meta-label {
+    @apply text-terminal-green-dim;
+  }
+
+  .meta-value {
+    @apply text-terminal-text-secondary;
+  }
+  
+  .article-tags {
+    @apply flex flex-wrap items-center gap-2 mb-6;
+  }
+  
+  .tags-label {
+    @apply text-terminal-green-dim font-mono;
+  }
+  
+  .tag {
+    @apply px-2 py-1 bg-terminal-bg-tertiary border border-terminal-green-dim;
+    @apply text-terminal-green-primary text-sm rounded font-mono;
+    @apply hover:border-terminal-green-primary transition-colors cursor-pointer;
+  }
+  
+  .end-marker {
+    @apply flex items-center space-x-2 mt-8 pt-4;
+    @apply border-t border-terminal-green-dim;
+  }
+  
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  /* Terminal prose styling */
+  :global(.prose-terminal) {
+    @apply text-terminal-text-secondary max-w-none;
+  }
+
+  :global(.prose-terminal h1),
+  :global(.prose-terminal h2),
+  :global(.prose-terminal h3),
+  :global(.prose-terminal h4),
+  :global(.prose-terminal h5),
+  :global(.prose-terminal h6) {
+    @apply text-terminal-green-primary font-mono;
+    position: relative;
+  }
+
+  :global(.prose-terminal h1::before) { content: "# "; }
+  :global(.prose-terminal h2::before) { content: "## "; }
+  :global(.prose-terminal h3::before) { content: "### "; }
+  :global(.prose-terminal h4::before) { content: "#### "; }
+  :global(.prose-terminal h5::before) { content: "##### "; }
+  :global(.prose-terminal h6::before) { content: "###### "; }
+
+  :global(.prose-terminal h1::before),
+  :global(.prose-terminal h2::before),
+  :global(.prose-terminal h3::before),
+  :global(.prose-terminal h4::before),
+  :global(.prose-terminal h5::before),
+  :global(.prose-terminal h6::before) {
+    @apply text-terminal-green-dim;
+  }
+
+  :global(.prose-terminal code) {
+    @apply bg-terminal-bg-tertiary text-terminal-green-accent;
+    @apply px-2 py-1 rounded border border-terminal-green-dim font-mono;
+  }
+
+  :global(.prose-terminal pre) {
+    @apply bg-terminal-bg-tertiary border border-terminal-green-dim rounded-lg p-4;
+    @apply relative overflow-x-auto;
+  }
+
+  :global(.prose-terminal pre::before) {
+    content: "$ ";
+    @apply text-terminal-green-primary;
+  }
+
+  :global(.prose-terminal blockquote) {
+    @apply border-l-4 border-terminal-green-primary pl-4;
+    @apply bg-terminal-bg-tertiary/50 py-2 my-4 rounded-r;
+  }
+
+  :global(.prose-terminal a) {
+    @apply text-terminal-info underline;
+    @apply hover:text-terminal-green-accent transition-colors;
+  }
+
+  :global(.prose-terminal ul li::marker) {
+    content: "→ ";
+    @apply text-terminal-green-primary;
+  }
+
+  :global(.prose-terminal ol li::marker) {
+    @apply text-terminal-green-primary;
+  }
+
+  :global(.prose-terminal p) {
+    @apply leading-relaxed mb-4;
+  }
+
+  :global(.prose-terminal strong) {
+    @apply text-terminal-green-accent font-bold;
+  }
+
+  :global(.prose-terminal em) {
+    @apply text-terminal-info italic;
+  }
+</style>

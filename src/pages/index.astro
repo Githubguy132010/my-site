@@ -1,0 +1,121 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+---
+
+<MainLayout title="Home">
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title="thomas@brugman.dev:~$ whoami">
+      <div class="space-y-6">
+        <div class="terminal-header">
+          <h1 class="text-3xl font-bold text-terminal-green-primary mb-2">
+            Thomas Brugman
+          </h1>
+          <p class="text-terminal-text-secondary">
+            Linux Enthusiast & Hobby Developer
+          </p>
+        </div>
+
+        <div class="terminal-output">
+          <div class="output-line">
+            <span class="prompt">$</span>
+            <span class="command">cat /etc/profile</span>
+          </div>
+          <div class="file-content">
+            <p class="text-terminal-text-secondary leading-relaxed">
+              Welcome to my digital workspace! I'm passionate about Linux systems, 
+              open-source development, and creating efficient terminal-based workflows. 
+              This site showcases my projects, thoughts, and journey in the world of technology.
+            </p>
+          </div>
+        </div>
+
+        <div class="terminal-actions">
+          <div class="output-line">
+            <span class="prompt">$</span>
+            <span class="command">ls -la ~/quick_access/</span>
+          </div>
+          <div class="action-buttons">
+            <a href="/projects" class="terminal-button">
+              <span class="prefix">./</span>projects
+            </a>
+            <a href="/blog" class="terminal-button">
+              <span class="prefix">./</span>blog
+            </a>
+            <a href="https://github.com/GitHubguy132010" class="terminal-button" target="_blank">
+              <span class="prefix">git clone</span> github
+            </a>
+          </div>
+        </div>
+
+        <div class="terminal-footer">
+          <div class="output-line">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+      </div>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .terminal-header {
+    @apply border-b border-terminal-green-dim pb-4;
+  }
+
+  .terminal-output,
+  .terminal-actions {
+    @apply space-y-3;
+  }
+
+  .output-line {
+    @apply flex items-center space-x-2 font-mono;
+  }
+
+  .prompt {
+    @apply text-terminal-green-primary;
+  }
+
+  .command {
+    @apply text-terminal-green-accent;
+  }
+
+  .file-content {
+    @apply ml-8 p-4 bg-terminal-bg-tertiary rounded border-l-4 border-terminal-green-primary;
+  }
+
+  .action-buttons {
+    @apply ml-8 flex flex-wrap gap-3;
+  }
+
+  .terminal-button {
+    @apply inline-flex items-center space-x-2 px-4 py-2;
+    @apply bg-terminal-bg-tertiary border border-terminal-green-dim rounded;
+    @apply text-terminal-text-secondary hover:text-terminal-green-primary;
+    @apply hover:border-terminal-green-primary transition-all duration-200;
+    @apply hover:shadow-lg hover:shadow-terminal-green-primary/20;
+  }
+
+  .prefix {
+    @apply text-terminal-green-dim text-sm;
+  }
+
+  .terminal-footer {
+    @apply border-t border-terminal-green-dim pt-4;
+  }
+
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

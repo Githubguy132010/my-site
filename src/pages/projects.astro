@@ -1,0 +1,255 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+---
+
+<MainLayout title="Projects">
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title="ls -la ~/projects/ --color=auto">
+      <div class="projects-content">
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">find ~/projects -type d -name "*.git" | wc -l</span>
+        </div>
+        
+        <div class="project-count">
+          <span class="count">5</span>
+          <span class="label">active repositories</span>
+        </div>
+
+        <div class="projects-list">
+          <div class="project-entry">
+            <div class="project-header">
+              <span class="project-type">drwxr-xr-x</span>
+              <span class="project-owner">thomas</span>
+              <span class="project-size">4.0K</span>
+              <span class="project-date">Dec 23</span>
+              <a href="https://github.com/GitHubguy132010/arch-linux-nobeep" target="_blank" class="project-name">
+                arch-linux-nobeep/
+              </a>
+            </div>
+            <div class="project-description">
+              <p>Custom Arch Linux ISO build without system beeps. Features automated daily builds 
+              via GitHub Actions with comprehensive error handling and release management.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Shell</span>
+                <span class="tech-tag">GitHub Actions</span>
+                <span class="tech-tag">Arch Linux</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-header">
+              <span class="project-type">drwxr-xr-x</span>
+              <span class="project-owner">thomas</span>
+              <span class="project-size">2.1K</span>
+              <span class="project-date">Jan 15</span>
+              <a href="https://github.com/GitHubguy132010/my-site" target="_blank" class="project-name">
+                my-site/
+              </a>
+            </div>
+            <div class="project-description">
+              <p>Personal website and blog built with Hugo and now migrated to Astro with TypeScript. 
+              Features a terminal-themed design with green matrix aesthetics.</p>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Astro</span>
+                <span class="tech-tag">Tailwind CSS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-header">
+              <span class="project-type">drwxr-xr-x</span>
+              <span class="project-owner">thomas</span>
+              <span class="project-size">1.8K</span>
+              <span class="project-date">Nov 10</span>
+              <span class="project-name">terminal-configs/</span>
+            </div>
+            <div class="project-description">
+              <p>Collection of terminal configurations, dotfiles, and shell scripts for optimizing 
+              command-line workflows. Includes custom bash prompts and productivity aliases.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Bash</span>
+                <span class="tech-tag">Dotfiles</span>
+                <span class="tech-tag">Vim</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-header">
+              <span class="project-type">drwxr-xr-x</span>
+              <span class="project-owner">thomas</span>
+              <span class="project-size">3.2K</span>
+              <span class="project-date">Sep 22</span>
+              <span class="project-name">automation-scripts/</span>
+            </div>
+            <div class="project-description">
+              <p>Various automation scripts for system administration, backup management, 
+              and development workflow optimization. Written primarily in Python and Bash.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Bash</span>
+                <span class="tech-tag">Automation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-entry">
+            <div class="project-header">
+              <span class="project-type">drwxr-xr-x</span>
+              <span class="project-owner">thomas</span>
+              <span class="project-size">5.7K</span>
+              <span class="project-date">Aug 15</span>
+              <span class="project-name">docker-homelab/</span>
+            </div>
+            <div class="project-description">
+              <p>Docker compose configurations for self-hosted homelab services. Includes 
+              monitoring, media management, and development tools orchestration.</p>
+              <div class="project-tech">
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Docker Compose</span>
+                <span class="tech-tag">Self-hosting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">git log --oneline --since="1 month ago" | head -3</span>
+        </div>
+
+        <div class="recent-activity">
+          <div class="commit-line">
+            <span class="commit-hash">a1b2c3d</span>
+            <span class="commit-message">feat: implement terminal theme for website</span>
+          </div>
+          <div class="commit-line">
+            <span class="commit-hash">e4f5g6h</span>
+            <span class="commit-message">fix: improve arch iso build reliability</span>
+          </div>
+          <div class="commit-line">
+            <span class="commit-hash">i7j8k9l</span>
+            <span class="commit-message">docs: update project documentation</span>
+          </div>
+        </div>
+
+        <div class="terminal-footer">
+          <div class="command-output">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+      </div>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .projects-content {
+    @apply space-y-6;
+  }
+
+  .command-output {
+    @apply flex items-center space-x-2 font-mono;
+  }
+
+  .prompt {
+    @apply text-terminal-green-primary;
+  }
+
+  .command {
+    @apply text-terminal-green-accent;
+  }
+
+  .project-count {
+    @apply flex items-center space-x-2 ml-6 mb-6 font-mono;
+  }
+
+  .count {
+    @apply text-terminal-green-primary text-lg font-bold;
+  }
+
+  .label {
+    @apply text-terminal-text-dim;
+  }
+
+  .projects-list {
+    @apply space-y-6;
+  }
+
+  .project-entry {
+    @apply border-b border-terminal-green-dim pb-4;
+  }
+
+  .project-header {
+    @apply grid grid-cols-5 gap-2 text-sm font-mono mb-2;
+  }
+
+  .project-type,
+  .project-owner,
+  .project-size,
+  .project-date {
+    @apply text-terminal-text-dim;
+  }
+
+  .project-name {
+    @apply text-terminal-green-primary hover:text-terminal-green-accent;
+    @apply transition-colors cursor-pointer;
+  }
+
+  .project-description {
+    @apply ml-4 space-y-3;
+  }
+
+  .project-description p {
+    @apply text-terminal-text-secondary leading-relaxed;
+  }
+
+  .project-tech {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tech-tag {
+    @apply px-2 py-1 bg-terminal-bg-tertiary border border-terminal-green-dim;
+    @apply text-terminal-green-primary text-xs rounded font-mono;
+  }
+
+  .recent-activity {
+    @apply ml-6 space-y-2;
+  }
+
+  .commit-line {
+    @apply flex items-center space-x-3 font-mono text-sm;
+  }
+
+  .commit-hash {
+    @apply text-terminal-green-accent;
+  }
+
+  .commit-message {
+    @apply text-terminal-text-secondary;
+  }
+
+  .terminal-footer {
+    @apply border-t border-terminal-green-dim pt-4;
+  }
+
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

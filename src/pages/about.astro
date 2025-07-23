@@ -1,0 +1,183 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+---
+
+<MainLayout title="About">
+  <div class="container mx-auto px-6 py-8">
+    <TerminalWindow title="cat ~/about.txt">
+      <div class="about-content">
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">whoami && cat /etc/passwd | grep thomas</span>
+        </div>
+        
+        <div class="user-info">
+          <div class="info-line">
+            <span class="label">User:</span>
+            <span class="value">Thomas Brugman</span>
+          </div>
+          <div class="info-line">
+            <span class="label">Role:</span>
+            <span class="value">Linux Enthusiast & Hobby Developer</span>
+          </div>
+          <div class="info-line">
+            <span class="label">Location:</span>
+            <span class="value">/home/thomas</span>
+          </div>
+          <div class="info-line">
+            <span class="label">Shell:</span>
+            <span class="value">/bin/bash</span>
+          </div>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">cat ~/bio.txt</span>
+        </div>
+
+        <div class="bio-content">
+          <p>
+            Welcome to my digital space! I'm Thomas, a passionate Linux enthusiast 
+            and hobby developer who loves exploring the depths of open-source technologies. 
+            My journey in the tech world revolves around creating efficient, terminal-based 
+            workflows and contributing to the open-source community.
+          </p>
+
+          <p>
+            When I'm not diving into code or configuring my latest Arch Linux setup, 
+            you'll find me documenting my discoveries, sharing knowledge through blog posts, 
+            and working on various projects that showcase the power and elegance of 
+            command-line interfaces.
+          </p>
+
+          <p>
+            This website serves as both a portfolio of my work and a knowledge base 
+            where I share insights, tutorials, and thoughts on Linux systems, 
+            development practices, and the ever-evolving world of technology.
+          </p>
+        </div>
+
+        <div class="command-output">
+          <span class="prompt">$</span>
+          <span class="command">ls -la ~/skills/</span>
+        </div>
+
+        <div class="skills-list">
+          <div class="skill-category">
+            <h3>Operating Systems</h3>
+            <ul>
+              <li>Arch Linux</li>
+              <li>Ubuntu/Debian</li>
+              <li>CentOS/RHEL</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Development</h3>
+            <ul>
+              <li>Shell Scripting (Bash)</li>
+              <li>Python</li>
+              <li>JavaScript/TypeScript</li>
+              <li>Git & GitHub</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Tools & Technologies</h3>
+            <ul>
+              <li>Docker & Containerization</li>
+              <li>GitHub Actions</li>
+              <li>Hugo & Static Site Generators</li>
+              <li>Terminal Applications</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="terminal-footer">
+          <div class="command-output">
+            <span class="prompt">$</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+      </div>
+    </TerminalWindow>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+  }
+
+  .about-content {
+    @apply space-y-6;
+  }
+
+  .command-output {
+    @apply flex items-center space-x-2 font-mono mb-4;
+  }
+
+  .prompt {
+    @apply text-terminal-green-primary;
+  }
+
+  .command {
+    @apply text-terminal-green-accent;
+  }
+
+  .user-info {
+    @apply ml-6 space-y-2 mb-6 p-4 bg-terminal-bg-tertiary rounded border-l-4 border-terminal-green-primary;
+  }
+
+  .info-line {
+    @apply flex items-center font-mono text-sm;
+  }
+
+  .label {
+    @apply text-terminal-green-dim w-24;
+  }
+
+  .value {
+    @apply text-terminal-text-secondary;
+  }
+
+  .bio-content {
+    @apply ml-6 space-y-4 text-terminal-text-secondary leading-relaxed;
+  }
+
+  .skills-list {
+    @apply ml-6 grid md:grid-cols-3 gap-6;
+  }
+
+  .skill-category {
+    @apply bg-terminal-bg-tertiary p-4 rounded border border-terminal-green-dim;
+  }
+
+  .skill-category h3 {
+    @apply text-terminal-green-primary font-mono font-bold mb-3;
+  }
+
+  .skill-category ul {
+    @apply space-y-1;
+  }
+
+  .skill-category li {
+    @apply text-terminal-text-secondary text-sm;
+    @apply before:content-['→'] before:text-terminal-green-primary before:mr-2;
+  }
+
+  .terminal-footer {
+    @apply border-t border-terminal-green-dim pt-4;
+  }
+
+  .cursor {
+    @apply bg-terminal-green-primary text-terminal-bg-primary px-1;
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

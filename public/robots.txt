@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://GitHubguy132010.github.io/sitemap-index.xml

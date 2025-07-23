@@ -1,0 +1,91 @@
+---
+interface Props {
+  title?: string;
+  className?: string;
+}
+
+const { title = "thomas@website:~$", className = "" } = Astro.props;
+---
+
+<div class={`terminal-window ${className}`}>
+  <div class="terminal-header">
+    <div class="terminal-controls">
+      <div class="control close"></div>
+      <div class="control minimize"></div>
+      <div class="control maximize"></div>
+    </div>
+    <div class="terminal-title">
+      <span class="typing-text">{title}</span>
+    </div>
+  </div>
+  <div class="terminal-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .terminal-window {
+    @apply bg-terminal-bg-secondary border border-terminal-green-dim rounded-lg overflow-hidden;
+    box-shadow: 
+      0 0 20px rgba(0, 255, 65, 0.3),
+      inset 0 0 20px rgba(0, 255, 65, 0.1);
+  }
+  
+  .terminal-header {
+    @apply flex items-center justify-between px-4 py-2 bg-terminal-bg-tertiary border-b border-terminal-green-dim;
+  }
+  
+  .terminal-controls {
+    @apply flex space-x-2;
+  }
+  
+  .control {
+    @apply w-3 h-3 rounded-full cursor-pointer;
+    transition: opacity 0.2s ease;
+  }
+  
+  .control:hover {
+    opacity: 0.8;
+  }
+  
+  .control.close { 
+    @apply bg-red-500; 
+  }
+  
+  .control.minimize { 
+    @apply bg-yellow-500; 
+  }
+  
+  .control.maximize { 
+    @apply bg-green-500; 
+  }
+  
+  .terminal-title {
+    @apply text-terminal-green-primary font-mono text-sm;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .terminal-content {
+    @apply p-6;
+  }
+  
+  /* Typing animation for title */
+  .typing-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid var(--terminal-green-primary);
+    white-space: nowrap;
+    animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--terminal-green-primary); }
+  }
+</style>

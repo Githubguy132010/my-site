@@ -1,0 +1,128 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="terminal-theme">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Thomas Brugman</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-terminal-bg-primary text-terminal-text-primary font-mono min-h-screen">
+    <!-- Scanline overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- CRT screen wrapper -->
+    <div class="crt-screen">
+      <slot />
+    </div>
+    
+    <!-- Terminal cursor -->
+    <div class="terminal-cursor"></div>
+  </body>
+</html>
+
+<style>
+  /* Global terminal theme styles */
+  :root {
+    /* Terminal Green Theme */
+    --terminal-green-primary: #00ff41;
+    --terminal-green-secondary: #00cc33;
+    --terminal-green-accent: #39ff14;
+    --terminal-green-dim: #009926;
+    
+    /* Background Colors */
+    --terminal-bg-primary: #0a0a0a;
+    --terminal-bg-secondary: #1a1a1a;
+    --terminal-bg-tertiary: #2a2a2a;
+    
+    /* Text Colors */
+    --terminal-text-primary: #00ff41;
+    --terminal-text-secondary: #ffffff;
+    --terminal-text-dim: #888888;
+    
+    /* Accent Colors */
+    --terminal-error: #ff0039;
+    --terminal-warning: #ffff00;
+    --terminal-info: #00ffff;
+  }
+
+  /* CRT Monitor Effect */
+  .crt-screen {
+    @apply relative min-h-screen;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+  
+  .crt-screen::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      transparent 50%, 
+      rgba(0, 255, 65, 0.05) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  
+  /* Scanlines */
+  .scanlines {
+    @apply fixed top-0 left-0 w-full h-full pointer-events-none;
+    background: linear-gradient(
+      transparent 50%, 
+      rgba(0, 255, 65, 0.02) 50%
+    );
+    background-size: 100% 2px;
+    animation: scanlines 0.1s linear infinite;
+    z-index: 999;
+  }
+  
+  @keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+  }
+  
+  /* Terminal cursor */
+  .terminal-cursor {
+    @apply fixed w-2 h-5 bg-terminal-green-primary;
+    animation: cursor-blink 1s infinite;
+    z-index: 1001;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--terminal-bg-secondary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--terminal-green-dim);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--terminal-green-primary);
+  }
+</style>
