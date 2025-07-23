@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://GitHubguy132010.github.io/sitemap-index.xml
+Sitemap: https://githubguy132010.github.io/my-site/sitemap-index.xml

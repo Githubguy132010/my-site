@@ -21,7 +21,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-const readingTime = Math.ceil(Astro.slots.render('default').then(content => content.split(' ').length / 200));
+const readingTime = 5; // Approximate reading time in minutes
 ---
 
 <MainLayout title={title} description={description}>
