@@ -14,6 +14,11 @@ class Terminal {
             "Ready to dive into the world of open source..."
         ];
         this.currentWelcomeIndex = 0;
+        this.welcomeInterval = null;
+        this.hasUserTyped = false;
+        this.blogSelectionMode = false;
+        this.selectedPostIndex = 0;
+        this.availablePosts = [];
         
         this.init();
         this.startWelcomeRotation();
@@ -34,10 +39,26 @@ class Terminal {
             ? siteData.content.welcomeMessages 
             : this.welcomeMessages;
             
-        setInterval(() => {
-            this.currentWelcomeIndex = (this.currentWelcomeIndex + 1) % messages.length;
-            this.typeText('welcome-message', messages[this.currentWelcomeIndex]);
+        this.welcomeInterval = setInterval(() => {
+            if (!this.hasUserTyped) {
+                this.currentWelcomeIndex = (this.currentWelcomeIndex + 1) % messages.length;
+                this.typeText('welcome-message', messages[this.currentWelcomeIndex]);
+            }
         }, 5000);
+    }
+    
+    hideWelcomeMessages() {
+        if (this.welcomeInterval) {
+            clearInterval(this.welcomeInterval);
+            this.welcomeInterval = null;
+        }
+        const welcomeElement = document.getElementById('welcome-message');
+        if (welcomeElement) {
+            welcomeElement.style.opacity = '0';
+            setTimeout(() => {
+                welcomeElement.style.display = 'none';
+            }, 300);
+        }
     }
     
     typeText(elementId, text) {
@@ -62,6 +83,35 @@ class Terminal {
     }
     
     handleKeyDown(e) {
+        // Hide welcome messages on first keystroke
+        if (!this.hasUserTyped) {
+            this.hideWelcomeMessages();
+            this.hasUserTyped = true;
+        }
+        
+        // Handle blog selection mode
+        if (this.blogSelectionMode) {
+            switch(e.key) {
+                case 'ArrowUp':
+                    e.preventDefault();
+                    this.navigateBlogSelection(-1);
+                    break;
+                case 'ArrowDown':
+                    e.preventDefault();
+                    this.navigateBlogSelection(1);
+                    break;
+                case 'Enter':
+                    e.preventDefault();
+                    this.selectBlogPost();
+                    break;
+                case 'Escape':
+                    e.preventDefault();
+                    this.exitBlogSelection();
+                    break;
+            }
+            return;
+        }
+        
         switch(e.key) {
             case 'Enter':
                 e.preventDefault();
@@ -84,9 +134,9 @@ class Terminal {
     
     updateCursor() {
         // Position cursor after the input text
-        const inputRect = this.input.getBoundingClientRect();
+        const promptWidth = this.getTextWidth('thomas@website:~$ ', this.input);
         const textWidth = this.getTextWidth(this.input.value, this.input);
-        this.cursor.style.left = textWidth + 'px';
+        this.cursor.style.left = (promptWidth + textWidth) + 'px';
         
         // Restart cursor blink animation
         this.cursor.style.animation = 'none';
@@ -224,8 +274,8 @@ class Terminal {
         this.addOutput('  projects  - View my projects', 'success');
         this.addOutput('  skills    - List my technical skills', 'success');
         this.addOutput('  contact   - Get my contact information', 'success');
-        this.addOutput('  blog      - Read my latest blog posts', 'success');
-        this.addOutput('  read <N>  - Read blog post number N', 'success');
+        this.addOutput('  blog      - Read my latest blog posts (interactive)', 'success');
+        this.addOutput('  read <N>  - Read blog post number N (legacy)', 'success');
         this.addOutput('  clear     - Clear the terminal screen', 'success');
         this.addOutput('  theme     - Toggle light/dark theme', 'success');
         this.addOutput('  reboot    - Reload the website', 'success');
@@ -347,6 +397,84 @@ class Terminal {
         this.addOutput('• Development tools', 'success');
     }
     
+    renderBlogList() {
+        // Remove existing blog list if any
+        const existingList = document.getElementById('blog-list');
+        if (existingList) {
+            existingList.remove();
+        }
+        
+        const listContainer = document.createElement('div');
+        listContainer.id = 'blog-list';
+        
+        this.availablePosts.forEach((post, index) => {
+            const isSelected = index === this.selectedPostIndex;
+            const line = document.createElement('div');
+            line.className = `terminal-line ${isSelected ? 'selected-post' : ''}`;
+            line.innerHTML = `<span class="${isSelected ? 'success' : ''}">${isSelected ? '► ' : '  '}${index + 1}. ${post.title}</span>`;
+            listContainer.appendChild(line);
+            
+            const dateLine = document.createElement('div');
+            dateLine.className = 'terminal-line';
+            dateLine.innerHTML = `<span class="info">    Date: ${post.date}</span>`;
+            listContainer.appendChild(dateLine);
+            
+            const summaryLine = document.createElement('div');
+            summaryLine.className = 'terminal-line';
+            summaryLine.textContent = `    ${post.summary}`;
+            listContainer.appendChild(summaryLine);
+            
+            const spacerLine = document.createElement('div');
+            spacerLine.className = 'terminal-line';
+            listContainer.appendChild(spacerLine);
+        });
+        
+        this.output.appendChild(listContainer);
+        this.scrollToBottom();
+    }
+    
+    navigateBlogSelection(direction) {
+        if (direction === -1 && this.selectedPostIndex > 0) {
+            this.selectedPostIndex--;
+        } else if (direction === 1 && this.selectedPostIndex < this.availablePosts.length - 1) {
+            this.selectedPostIndex++;
+        }
+        this.renderBlogList();
+    }
+    
+    selectBlogPost() {
+        const selectedPost = this.availablePosts[this.selectedPostIndex];
+        this.addOutput(`Opening "${selectedPost.title}"...`, 'info');
+        
+        // Add a smooth transition effect
+        setTimeout(() => {
+            this.addOutput('Navigating to blog post...', 'success');
+            setTimeout(() => {
+                window.location.href = selectedPost.url;
+            }, 800);
+        }, 500);
+        
+        this.exitBlogSelection();
+    }
+    
+    exitBlogSelection() {
+        this.blogSelectionMode = false;
+        this.selectedPostIndex = 0;
+        this.availablePosts = [];
+        
+        // Re-enable input
+        this.input.style.opacity = '1';
+        this.input.readOnly = false;
+        this.input.value = '';
+        this.input.focus();
+        
+        // Remove blog list
+        const existingList = document.getElementById('blog-list');
+        if (existingList) {
+            existingList.remove();
+        }
+    }
+    
     readPost(postNumber) {
         const index = parseInt(postNumber) - 1;
         
@@ -371,19 +499,23 @@ class Terminal {
     }
     
     showBlog() {
-        this.addOutput('Latest Blog Posts', 'info');
-        this.addOutput('');
-        
         if (typeof siteData !== 'undefined' && siteData.content.posts && siteData.content.posts.length > 0) {
-            this.addOutput('Select a post to read by typing "read <number>":', 'info');
+            this.availablePosts = siteData.content.posts.slice(0, 10); // Show up to 10 posts
+            this.selectedPostIndex = 0;
+            this.blogSelectionMode = true;
+            
+            this.addOutput('Latest Blog Posts', 'info');
             this.addOutput('');
-            siteData.content.posts.slice(0, 5).forEach((post, index) => {
-                this.addOutput(`${index + 1}. ${post.title}`, 'success');
-                this.addOutput(`   Date: ${post.date}`, 'info');
-                this.addOutput(`   ${post.summary}`);
-                this.addOutput('');
-            });
-            this.addOutput('Example: "read 1" to read the first post', 'info');
+            this.addOutput('Use ↑/↓ arrow keys to navigate, Enter to select, Esc to cancel', 'info');
+            this.addOutput('');
+            
+            this.renderBlogList();
+            
+            // Keep input focused but visually indicate selection mode
+            this.input.style.opacity = '0.3';
+            this.input.readOnly = true;
+            this.input.value = '[Blog Selection Mode]';
+            this.input.focus();
         } else {
             this.addOutput('No blog posts available yet.', 'info');
             this.addOutput('Check back soon for updates!');

@@ -145,6 +145,25 @@
             animation: fadeIn 0.3s ease-out;
         }
         
+        .terminal-line.selected-post {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            padding-left: 10px;
+            margin-left: -10px;
+            border-radius: 3px;
+            animation: fadeIn 0.3s ease-out, glow 0.5s ease-out;
+        }
+        
+        #welcome-message {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: none; }
+            50% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+            100% { box-shadow: none; }
+        }
+        
         .error {
             color: #ff6b6b;
         }
