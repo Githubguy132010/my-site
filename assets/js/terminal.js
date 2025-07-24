@@ -56,6 +56,7 @@ class Terminal {
                 welcomeElement.style.display = 'none';
             }, 300);
         }
+        // Keep the command list visible - don't hide it
     }
     
     typeText(elementId, text) {
