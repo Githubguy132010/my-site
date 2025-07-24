@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title> - Thomas Brugman</title>
-    <meta name="description" content="Get in Touch
-I&rsquo;m always interested in discussing:
-
-Linux configurations
-Open source collaboration
-Automation projects
-Development tools
-
-Where to find me
-
-Email: thomas.brugman.teb3@gmail.com
-GitHub: Githubguy132010
-">
-    <meta name="author" content="Thomas Brugman">
+    <title>{{- if .IsHome }}{{ site.Title }}{{- else }}{{ .Title }} - {{ site.Title }}{{- end }}</title>
+    <meta name="description" content="{{ if .IsHome }}{{ site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
+    <meta name="author" content="{{ site.Params.author | default site.Title }}">
     
-    
-    
-    
+    <!-- Terminal CSS -->
+    {{ $terminalCSS := resources.Get "css/terminal.css" }}
+    {{ if $terminalCSS }}
+        {{ $terminalCSS = $terminalCSS | resources.Minify }}
+        <link rel="stylesheet" href="{{ $terminalCSS.RelPermalink }}">
+    {{ end }}
     
     <style>
         * {
@@ -116,7 +107,7 @@ GitHub: Githubguy132010
             font-size: inherit;
             outline: none;
             flex: 1;
-            caret-color: transparent;  
+            caret-color: transparent; /* Hide the default input cursor */
         }
         
         .cursor {
@@ -201,50 +192,13 @@ GitHub: Githubguy132010
     </style>
 </head>
 <body>
-<div class="terminal-container">
-    <div class="terminal-header">
-        <div class="terminal-title"> - thomas@website:~$</div>
-        <div class="terminal-controls">
-            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
-            <div class="terminal-btn btn-minimize"></div>
-            <div class="terminal-btn btn-maximize"></div>
-        </div>
-    </div>
+    {{- block "main" . }}{{- end }}
     
-    <div class="terminal-output">
-        <div class="terminal-line">
-            <span class="info"></span>
-        </div>
-        <div class="terminal-line"></div>
-        
-        <h2 id="get-in-touch">Get in Touch</h2>
-<p>I&rsquo;m always interested in discussing:</p>
-<ul>
-<li>Linux configurations</li>
-<li>Open source collaboration</li>
-<li>Automation projects</li>
-<li>Development tools</li>
-</ul>
-<h3 id="where-to-find-me">Where to find me</h3>
-<ul>
-<li><strong>Email</strong>: <a href="mailto:thomas.brugman.teb3@gmail.com">thomas.brugman.teb3@gmail.com</a></li>
-<li><strong>GitHub</strong>: <a href="https://github.com/Githubguy132010">Githubguy132010</a></li>
-</ul>
-
-        
-        <div class="terminal-line"></div>
-        
-        <div class="terminal-line">
-            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
-        </div>
-    </div>
-</div>
-    
-    
-    
-    
-        
-        <script src="/js/terminal.min.js"></script>
-    
+    <!-- Terminal JavaScript -->
+    {{ $terminalJS := resources.Get "js/terminal.js" }}
+    {{ if $terminalJS }}
+        {{ $terminalJS = $terminalJS | resources.Minify }}
+        <script src="{{ $terminalJS.RelPermalink }}"></script>
+    {{ end }}
 </body>
 </html>

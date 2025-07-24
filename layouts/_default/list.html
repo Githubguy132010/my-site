@@ -1,0 +1,37 @@
+{{- define "main" }}
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">{{ .Title }} - thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
+            <div class="terminal-btn btn-minimize"></div>
+            <div class="terminal-btn btn-maximize"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output">
+        <div class="terminal-line">
+            <span class="info">{{ .Title }}</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        {{ .Content }}
+        
+        <div class="terminal-line"></div>
+        
+        {{- range .Pages }}
+        <div class="terminal-line">
+            <span class="success">• <a href="{{ .RelPermalink }}" style="color: #00ff00;">{{ .Title }}</a></span>
+        </div>
+        <div class="terminal-line">
+            <span>{{ .Summary | plainify | truncate 150 }}</span>
+        </div>
+        <div class="terminal-line"></div>
+        {{- end }}
+        
+        <div class="terminal-line">
+            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
+        </div>
+    </div>
+</div>
+{{- end }}

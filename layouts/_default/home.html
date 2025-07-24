@@ -1,56 +1,84 @@
 {{- define "main" }}
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="handleShutdown()"></div>
+            <div class="terminal-btn btn-minimize" onclick="minimizeTerminal()"></div>
+            <div class="terminal-btn btn-maximize" onclick="maximizeTerminal()"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output" id="terminal-output">
+        <div class="terminal-line">
+            <span class="info">Welcome to Thomas Brugman's Personal Website</span>
+        </div>
+        <div class="terminal-line">
+            <span class="info">Linux Enthusiast & Hobby Developer</span>
+        </div>
+        <div class="terminal-line"></div>
+        <div class="terminal-line typing-text" id="welcome-message">
+            Type 'help' to see available commands...
+        </div>
+        <div class="terminal-line"></div>
+    </div>
+    
+    <div class="terminal-input-line">
+        <span class="terminal-prompt">thomas@website:~$</span>
+        <input type="text" class="terminal-input" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+        <span class="cursor" id="cursor"></span>
+    </div>
+</div>
 
-{{- if (and site.Params.profileMode.enabled .IsHome) }}
-{{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
+<script>
+// Site data for terminal commands
+const siteData = {
+    title: "{{ site.Title }}",
+    author: "Thomas Brugman",
+    description: "Linux Enthusiast & Hobby Developer",
+    email: "{{ site.Data.profile.contact.email }}",
+    github: "{{ site.Data.profile.contact.github }}",
+    content: {
+        about: `{{ with site.GetPage "/about/who-i-am" }}{{ .Content | plainify | truncate 500 }}{{ end }}`,
+        projects: [
+            {{- range site.Data.profile.projects }}
+            {
+                name: "{{ .name }}",
+                description: "{{ .description }}",
+                url: "{{ .url }}",
+                technologies: [{{ range .technologies }}"{{ . }}",{{ end }}],
+                status: "{{ .status }}",
+                featured: {{ .featured }}
+            },
+            {{- end }}
+        ],
+        skills: [
+            {{- range site.Data.skills.skills }}
+            {
+                name: "{{ .name }}",
+                category: "{{ .category }}",
+                description: "{{ .description }}",
+                level: "{{ .level }}"
+            },
+            {{- end }}
+        ],
+        posts: [
+            {{- range (where site.RegularPages "Type" "posts") }}
+            {
+                title: "{{ .Title }}",
+                date: "{{ .Date.Format "2006-01-02" }}",
+                url: "{{ .RelPermalink }}",
+                summary: "{{ .Summary | plainify | truncate 150 }}"
+            },
+            {{- end }}
+        ],
+        welcomeMessages: [
+            {{- range site.Data.profile.terminal.welcome_messages }}
+            "{{ . }}",
+            {{- end }}
+        ]
+    }
+};
+</script>
 
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-
-{{- if site.Params.ShowAllPagesInArchive }}
-{{- $paginator := .Paginate $pages }}
-{{- else }}
-{{- $paginator := .Paginate (where site.RegularPages "Type" "posts") }}
-{{- end }}
-
-{{- if and site.Params.homeInfoParams (eq .Paginator.PageNumber 1) }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{- range .Paginator.Pages }}
-<article class="post-entry">
-  {{- $isHidden := (site.Params.cover.hidden | default site.Params.cover.hiddenInList) }}
-  {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2>
-      {{- .Title }}
-      {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
-    </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <section class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}...</p>
-  </section>
-  {{- end }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
-
-{{- if gt .Paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination">
-    {{- if .Paginator.HasPrev }}
-    <a class="prev" href="{{ .Paginator.Prev.URL | absURL }}">« {{ i18n "prev_page" }}</a>
-    {{- end }}
-    {{- if .Paginator.HasNext }}
-    <a class="next" href="{{ .Paginator.Next.URL | absURL }}">{{ i18n "next_page" }} »</a>
-    {{- end }}
-  </nav>
-</footer>
-{{- end }}
-
-{{- end }}{{/* end profileMode */}}
-
-{{- end }}{{/* end main */}} 
+{{- end }} 

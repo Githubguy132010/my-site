@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github-Actions on Thomas Brugman</title>
     <link>http://localhost:1313/tags/github-actions/</link>
     <description>Recent content in Github-Actions on Thomas Brugman</description>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/github-actions/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,7 @@
       <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
-      <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;
-&lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;
-&lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Addition of comprehensive error checking&lt;/li&gt;
-&lt;li&gt;Improved logging for debugging&lt;/li&gt;
-&lt;li&gt;Timeout limit of 120 minutes to prevent hanging builds&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Automated Release Notes&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;&#xA;&lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;&#xA;&lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Addition of comprehensive error checking&lt;/li&gt;&#xA;&lt;li&gt;Improved logging for debugging&lt;/li&gt;&#xA;&lt;li&gt;Timeout limit of 120 minutes to prevent hanging builds&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Automated Release Notes&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
