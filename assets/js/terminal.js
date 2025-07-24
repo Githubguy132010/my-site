@@ -29,9 +29,14 @@ class Terminal {
     }
     
     startWelcomeRotation() {
+        // Use data from Hugo if available, otherwise fallback to defaults
+        const messages = (typeof siteData !== 'undefined' && siteData.content.welcomeMessages) 
+            ? siteData.content.welcomeMessages 
+            : this.welcomeMessages;
+            
         setInterval(() => {
-            this.currentWelcomeIndex = (this.currentWelcomeIndex + 1) % this.welcomeMessages.length;
-            this.typeText('welcome-message', this.welcomeMessages[this.currentWelcomeIndex]);
+            this.currentWelcomeIndex = (this.currentWelcomeIndex + 1) % messages.length;
+            this.typeText('welcome-message', messages[this.currentWelcomeIndex]);
         }, 5000);
     }
     
@@ -117,7 +122,7 @@ class Terminal {
     
     autocomplete() {
         const partial = this.input.value.toLowerCase();
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
         const matches = commands.filter(cmd => cmd.startsWith(partial));
         
         if (matches.length === 1) {
@@ -164,6 +169,18 @@ class Terminal {
             case 'matrix':
                 this.matrixEffect();
                 break;
+            case 'sudo':
+                this.sudoCommand();
+                break;
+            case 'whoami':
+                this.whoamiCommand();
+                break;
+            case 'ls':
+                this.lsCommand();
+                break;
+            case 'pwd':
+                this.pwdCommand();
+                break;
             default:
                 this.addOutput(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
                 this.suggestCommand(command);
@@ -185,6 +202,15 @@ class Terminal {
         this.addOutput('  theme     - Toggle light/dark theme', 'success');
         this.addOutput('  reboot    - Reload the website', 'success');
         this.addOutput('  shutdown  - Close the terminal', 'success');
+        this.addOutput('');
+        this.addOutput('Unix-like commands:', 'info');
+        this.addOutput('  whoami    - Display current user info', 'success');
+        this.addOutput('  pwd       - Show current directory', 'success');
+        this.addOutput('  ls        - List directory contents', 'success');
+        this.addOutput('');
+        this.addOutput('Easter eggs:', 'info');
+        this.addOutput('  matrix    - Enter the Matrix', 'success');
+        this.addOutput('  sudo      - Try to gain root access', 'success');
         this.addOutput('');
         this.addOutput('Tip: Use Tab for autocomplete and arrow keys for command history', 'info');
     }
@@ -210,12 +236,30 @@ class Terminal {
         this.addOutput('');
         
         if (typeof siteData !== 'undefined' && siteData.content.projects) {
-            siteData.content.projects.forEach((project, index) => {
-                this.addOutput(`${index + 1}. ${project.name}`, 'success');
-                this.addOutput(`   ${project.description}`);
-                this.addOutput(`   URL: ${project.url}`, 'info');
-                this.addOutput('');
-            });
+            const featuredProjects = siteData.content.projects.filter(p => p.featured);
+            const otherProjects = siteData.content.projects.filter(p => !p.featured);
+            
+            if (featuredProjects.length > 0) {
+                this.addOutput('Featured Projects:', 'success');
+                featuredProjects.forEach((project, index) => {
+                    this.addOutput(`${index + 1}. ${project.name}`, 'success');
+                    this.addOutput(`   ${project.description}`);
+                    this.addOutput(`   Tech: ${project.technologies.join(', ')}`, 'info');
+                    this.addOutput(`   Status: ${project.status}`, 'info');
+                    this.addOutput(`   URL: ${project.url}`, 'info');
+                    this.addOutput('');
+                });
+            }
+            
+            if (otherProjects.length > 0) {
+                this.addOutput('Other Projects:', 'success');
+                otherProjects.forEach((project, index) => {
+                    this.addOutput(`${index + 1}. ${project.name}`, 'success');
+                    this.addOutput(`   ${project.description}`);
+                    this.addOutput(`   URL: ${project.url}`, 'info');
+                    this.addOutput('');
+                });
+            }
         }
         
         this.addOutput('Check out more projects on my GitHub:', 'info');
@@ -227,12 +271,38 @@ class Terminal {
         this.addOutput('');
         
         if (typeof siteData !== 'undefined' && siteData.content.skills) {
-            siteData.content.skills.forEach((skill, index) => {
+            // Group skills by category
+            const categories = {};
+            siteData.content.skills.forEach(skill => {
+                if (!categories[skill.category]) {
+                    categories[skill.category] = [];
+                }
+                categories[skill.category].push(skill);
+            });
+            
+            // Display skills by category
+            Object.keys(categories).forEach(category => {
+                this.addOutput(`${category}:`, 'success');
+                categories[category].forEach(skill => {
+                    this.addOutput(`  • ${skill.name} (${skill.level})`, 'success');
+                    this.addOutput(`    ${skill.description}`);
+                });
+                this.addOutput('');
+            });
+        } else {
+            // Fallback for old format
+            const fallbackSkills = [
+                "Linux System Configuration",
+                "Shell Scripting (Bash)", 
+                "Infrastructure as Code (YAML)",
+                "GitHub Actions Automation",
+                "WSL Development"
+            ];
+            fallbackSkills.forEach((skill, index) => {
                 this.addOutput(`• ${skill}`, 'success');
             });
         }
         
-        this.addOutput('');
         this.addOutput('Always learning and exploring new technologies!', 'info');
     }
     
@@ -318,10 +388,44 @@ class Terminal {
             output += line + '\n';
         }
         this.addOutput(output, 'success');
+        this.addOutput('Welcome to the Matrix, Neo...', 'success');
+    }
+    
+    sudoCommand() {
+        this.addOutput('thomas is not in the sudoers file. This incident will be reported.', 'error');
+        setTimeout(() => {
+            this.addOutput('Just kidding! 😄', 'success');
+            this.addOutput('With great power comes great responsibility!', 'info');
+        }, 2000);
+    }
+    
+    whoamiCommand() {
+        this.addOutput('thomas', 'success');
+        this.addOutput('Full name: Thomas Brugman', 'info');
+        this.addOutput('Role: Linux Enthusiast & Hobby Developer', 'info');
+        this.addOutput('Location: Netherlands', 'info');
+        this.addOutput('Superpower: Making computers do exactly what I want (most of the time)', 'success');
+    }
+    
+    lsCommand() {
+        this.addOutput('total 42', 'info');
+        this.addOutput('drwxr-xr-x  about/', 'success');
+        this.addOutput('drwxr-xr-x  projects/', 'success');
+        this.addOutput('drwxr-xr-x  blog/', 'success');
+        this.addOutput('drwxr-xr-x  skills/', 'success');
+        this.addOutput('-rw-r--r--  contact.txt', 'success');
+        this.addOutput('-rw-r--r--  resume.pdf', 'success');
+        this.addOutput('-rw-r--r--  .secrets', 'error');
+        this.addOutput('');
+        this.addOutput('Tip: Use specific commands like "about", "projects" to explore these directories!', 'info');
+    }
+    
+    pwdCommand() {
+        this.addOutput('/home/thomas/website', 'success');
     }
     
     suggestCommand(command) {
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
         const suggestions = commands.filter(cmd => {
             const distance = this.levenshteinDistance(command, cmd);
             return distance <= 2;

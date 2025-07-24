@@ -1,0 +1,41 @@
+projects:
+  - name: "Arch Linux Configuration"
+    description: "Collection of Arch Linux configuration files and scripts designed to eliminate system beeps on the Arch Linux install media"
+    url: "https://github.com/Githubguy132010/Arch-Linux-without-the-beeps"
+    technologies: ["Bash", "Linux", "Arch Linux"]
+    status: "Active"
+    featured: true
+    
+  - name: "Personal Website"
+    description: "Terminal-themed personal website built with Hugo and custom JavaScript terminal interface"
+    url: "https://github.com/Githubguy132010/my-site"
+    technologies: ["Hugo", "JavaScript", "CSS", "HTML"]
+    status: "Active"
+    featured: true
+
+contact:
+  email: "thomas.brugman.teb3@gmail.com"
+  github: "https://github.com/Githubguy132010"
+  location: "Netherlands"
+  
+social:
+  - name: "GitHub"
+    url: "https://github.com/Githubguy132010"
+    username: "Githubguy132010"
+    
+terminal:
+  welcome_messages:
+    - "Welcome to Thomas Brugman's digital workspace..."
+    - "Linux enthusiast & hobby developer at your service..."
+    - "Type 'help' to explore my projects and skills..."
+    - "Ready to dive into the world of open source..."
+    - "Automation and efficiency enthusiast here..."
+    - "Let's explore some Linux magic together..."
+  
+  easter_eggs:
+    - command: "matrix"
+      description: "Enter the Matrix"
+    - command: "easter"
+      description: "Find hidden surprises"
+    - command: "sudo"
+      description: "With great power..."

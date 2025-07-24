@@ -36,23 +36,31 @@ const siteData = {
     title: "{{ site.Title }}",
     author: "Thomas Brugman",
     description: "Linux Enthusiast & Hobby Developer",
-    email: "thomas.brugman.teb3@gmail.com",
-    github: "https://github.com/Githubguy132010",
+    email: "{{ site.Data.profile.contact.email }}",
+    github: "{{ site.Data.profile.contact.github }}",
     content: {
         about: `{{ with site.GetPage "/about/who-i-am" }}{{ .Content | plainify | truncate 500 }}{{ end }}`,
         projects: [
+            {{- range site.Data.profile.projects }}
             {
-                name: "Arch Linux Configuration",
-                description: "Collection of Arch Linux configuration files and scripts",
-                url: "https://github.com/Githubguy132010/Arch-Linux-without-the-beeps"
-            }
+                name: "{{ .name }}",
+                description: "{{ .description }}",
+                url: "{{ .url }}",
+                technologies: [{{ range .technologies }}"{{ . }}",{{ end }}],
+                status: "{{ .status }}",
+                featured: {{ .featured }}
+            },
+            {{- end }}
         ],
         skills: [
-            "Linux System Configuration",
-            "Shell Scripting (Bash)", 
-            "Infrastructure as Code (YAML)",
-            "GitHub Actions Automation",
-            "WSL Development"
+            {{- range site.Data.skills.skills }}
+            {
+                name: "{{ .name }}",
+                category: "{{ .category }}",
+                description: "{{ .description }}",
+                level: "{{ .level }}"
+            },
+            {{- end }}
         ],
         posts: [
             {{- range (where site.RegularPages "Type" "posts") }}
@@ -62,6 +70,11 @@ const siteData = {
                 url: "{{ .RelPermalink }}",
                 summary: "{{ .Summary | plainify | truncate 150 }}"
             },
+            {{- end }}
+        ],
+        welcomeMessages: [
+            {{- range site.Data.profile.terminal.welcome_messages }}
+            "{{ . }}",
             {{- end }}
         ]
     }

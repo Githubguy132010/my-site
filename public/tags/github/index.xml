@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>GitHub on Thomas Brugman</title>
-    <link>http://localhost:1313/tags/github/</link>
-    <description>Recent content in GitHub on Thomas Brugman</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/github/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Removing Some Unused Projects</title>
-      <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
-      <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
-      <description>&lt;p&gt;I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&amp;rsquo;ve identified projects that are no longer being maintained or used.&lt;/p&gt;&#xA;&lt;p&gt;Projects being removed:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Archcraft&lt;/strong&gt; (&lt;a href=&#34;https://github.com/Githubguy132010/archcraft&#34;&gt;GitHub&lt;/a&gt;)&lt;br&gt;&#xA;A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Reason for removal:&lt;/strong&gt; Lack of development progress.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Vanilla-OS-image&lt;/strong&gt; (&lt;a href=&#34;https://github.com/Githubguy132010/VanillaOS-image&#34;&gt;GitHub&lt;/a&gt;)&lt;br&gt;&#xA;A repo for a custom VanillaOS image that I was working on.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitHub on Thomas Brugman</title><link>https://GitHubguy132010.github.io/tags/github/</link><description>Recent content in GitHub on Thomas Brugman</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://GitHubguy132010.github.io/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Removing Some Unused Projects</title><link>https://GitHubguy132010.github.io/posts/2024/removing-some-unused-projects/</link><pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/posts/2024/removing-some-unused-projects/</guid><description>&lt;p>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&amp;rsquo;ve identified projects that are no longer being maintained or used.&lt;/p>
+&lt;p>Projects being removed:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Archcraft&lt;/strong> (&lt;a href="https://github.com/Githubguy132010/archcraft">GitHub&lt;/a>)&lt;br>
+A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Reason for removal:&lt;/strong> Lack of development progress.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vanilla-OS-image&lt;/strong> (&lt;a href="https://github.com/Githubguy132010/VanillaOS-image">GitHub&lt;/a>)&lt;br>
+A repo for a custom VanillaOS image that I was working on.&lt;/p></description></item></channel></rss>
