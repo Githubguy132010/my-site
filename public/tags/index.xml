@@ -1,1 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on Thomas Brugman</title><link>https://GitHubguy132010.github.io/tags/</link><description>Recent content in Tags on Thomas Brugman</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://GitHubguy132010.github.io/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>Updates</title><link>https://GitHubguy132010.github.io/tags/updates/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/updates/</guid><description/></item><item><title>Website</title><link>https://GitHubguy132010.github.io/tags/website/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/website/</guid><description/></item><item><title>Arch-Linux</title><link>https://GitHubguy132010.github.io/tags/arch-linux/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/arch-linux/</guid><description/></item><item><title>Ci-Cd</title><link>https://GitHubguy132010.github.io/tags/ci-cd/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/ci-cd/</guid><description/></item><item><title>Github-Actions</title><link>https://GitHubguy132010.github.io/tags/github-actions/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/github-actions/</guid><description/></item><item><title>GitHub</title><link>https://GitHubguy132010.github.io/tags/github/</link><pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/github/</guid><description/></item><item><title>Projects</title><link>https://GitHubguy132010.github.io/tags/projects/</link><pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate><guid>https://GitHubguy132010.github.io/tags/projects/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Thomas Brugman</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Thomas Brugman</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Updates</title>
+      <link>http://localhost:1313/tags/updates/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/updates/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Website</title>
+      <link>http://localhost:1313/tags/website/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/website/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Arch-Linux</title>
+      <link>http://localhost:1313/tags/arch-linux/</link>
+      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/arch-linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ci-Cd</title>
+      <link>http://localhost:1313/tags/ci-cd/</link>
+      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ci-cd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Github-Actions</title>
+      <link>http://localhost:1313/tags/github-actions/</link>
+      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub</title>
+      <link>http://localhost:1313/tags/github/</link>
+      <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/github/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>http://localhost:1313/tags/projects/</link>
+      <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/projects/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

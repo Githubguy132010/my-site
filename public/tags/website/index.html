@@ -1,2 +1,232 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Website - Thomas Brugman</title>
-<meta name=description content><meta name=author content="Thomas Brugman"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:courier new,monospace;background:#000;color:#0f0;overflow:hidden;height:100vh}.terminal-container{height:100vh;display:flex;flex-direction:column;padding:20px;background:#000;transition:all .3s ease}.terminal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #333;margin-bottom:20px;animation:slideDown .5s ease-out}.terminal-title{color:#0f0;font-weight:700}.terminal-controls{display:flex;gap:10px}.terminal-btn{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.terminal-btn:hover{transform:scale(1.1);box-shadow:0 0 10px rgba(255,255,255,.3)}.btn-close{background:#ff5f56}.btn-minimize{background:#ffbd2e}.btn-maximize{background:#27ca3f}.terminal-output{flex:1;overflow-y:auto;padding:10px 0;line-height:1.6;animation:fadeIn .8s ease-out}.terminal-input-line{display:flex;align-items:center;margin-top:auto;padding:10px 0;position:relative;animation:slideUp .5s ease-out}.terminal-prompt{color:#0f0;margin-right:10px}.terminal-input{background:0 0;border:none;color:#0f0;font-family:inherit;font-size:inherit;outline:none;flex:1;caret-color:transparent}.cursor{display:inline-block;width:10px;height:20px;background:#0f0;animation:blink 1s infinite;position:absolute;margin-left:2px}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.terminal-line{margin:5px 0;animation:fadeIn .3s ease-out}.terminal-line.selected-post{background:rgba(0,255,0,.1);border-left:3px solid #0f0;padding-left:10px;margin-left:-10px;border-radius:3px;animation:fadeIn .3s ease-out,glow .5s ease-out}#welcome-message{transition:opacity .3s ease,transform .3s ease}@keyframes glow{0%{box-shadow:none}50%{box-shadow:0 0 10px rgba(0,255,0,.5)}100%{box-shadow:none}}.error{color:#ff6b6b}.info{color:#74c0fc}.success{color:#51cf66}.command{color:#ffd43b}@media(max-width:768px){.terminal-container{padding:10px}.terminal-header{font-size:14px}}</style></head><body><div class=terminal-container><div class=terminal-header><div class=terminal-title>Website - thomas@website:~$</div><div class=terminal-controls><div class="terminal-btn btn-close" onclick='window.location.href="/"'></div><div class="terminal-btn btn-minimize"></div><div class="terminal-btn btn-maximize"></div></div></div><div class=terminal-output><div class=terminal-line><span class=info>Website</span></div><div class=terminal-line></div><div class=terminal-line></div><div class=terminal-line><span class=success>• <a href=/posts/2025/january-updates/ style=color:#0f0>January Updates</a></span></div><div class=terminal-line><span>Recent Changes and Updates In the last month of 2024, we saw some significant changes to our projects and workflows. Here&rsquo;s a summary of the key …</span></div><div class=terminal-line></div><div class=terminal-line><span class=info>Type "help" in the <a href=/ style=color:#0f0>main terminal</a> for navigation commands</span></div></div></div><script src=/js/terminal.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Website - Thomas Brugman</title>
+    <meta name="description" content="">
+    <meta name="author" content="Thomas Brugman">
+    
+    
+    
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .terminal-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #000;
+            transition: all 0.3s ease;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .terminal-title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .terminal-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+        
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            line-height: 1.6;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            padding: 10px 0;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+            caret-color: transparent;  
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+            position: absolute;
+            margin-left: 2px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .terminal-line.selected-post {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            padding-left: 10px;
+            margin-left: -10px;
+            border-radius: 3px;
+            animation: fadeIn 0.3s ease-out, glow 0.5s ease-out;
+        }
+        
+        #welcome-message {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: none; }
+            50% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+            100% { box-shadow: none; }
+        }
+        
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .info {
+            color: #74c0fc;
+        }
+        
+        .success {
+            color: #51cf66;
+        }
+        
+        .command {
+            color: #ffd43b;
+        }
+        
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 10px;
+            }
+            
+            .terminal-header {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">Website - thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
+            <div class="terminal-btn btn-minimize"></div>
+            <div class="terminal-btn btn-maximize"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output">
+        <div class="terminal-line">
+            <span class="info">Website</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        
+        
+        <div class="terminal-line"></div>
+        <div class="terminal-line">
+            <span class="success">• <a href="/posts/2025/january-updates/" style="color: #00ff00;">January Updates</a></span>
+        </div>
+        <div class="terminal-line">
+            <span>Recent Changes and Updates In the last month of 2024, we saw some significant changes to our projects and workflows. Here&rsquo;s a summary of the key …</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        <div class="terminal-line">
+            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    
+        
+        <script src="/js/terminal.min.js"></script>
+    
+</body>
+</html>
