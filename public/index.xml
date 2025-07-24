@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Thomas Brugman</title>
     <link>http://localhost:1313/</link>
     <description>Recent content on Thomas Brugman</description>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
@@ -13,62 +13,28 @@
       <link>http://localhost:1313/posts/2025/january-updates/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2025/january-updates/</guid>
-      <description>&lt;h2 id=&#34;recent-changes-and-updates&#34;&gt;Recent Changes and Updates&lt;/h2&gt;
-&lt;p&gt;In the last month of 2024, we saw some significant changes to our projects and workflows. Here&amp;rsquo;s a summary of the key updates:&lt;/p&gt;
-&lt;h3 id=&#34;github-workflow-improvements&#34;&gt;GitHub Workflow Improvements&lt;/h3&gt;
-&lt;p&gt;Our Arch Linux ISO building workflow received a major overhaul, introducing several improvements:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Enhanced caching system for Pacman packages, reducing build times by ~30%&lt;/li&gt;
-&lt;li&gt;Improved error handling and logging&lt;/li&gt;
-&lt;li&gt;Automated release notes generation&lt;/li&gt;
-&lt;li&gt;SHA256 and SHA512 checksums for all releases&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;website-enhancements&#34;&gt;Website Enhancements&lt;/h3&gt;
-&lt;p&gt;The website has received several improvements:&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;recent-changes-and-updates&#34;&gt;Recent Changes and Updates&lt;/h2&gt;&#xA;&lt;p&gt;In the last month of 2024, we saw some significant changes to our projects and workflows. Here&amp;rsquo;s a summary of the key updates:&lt;/p&gt;&#xA;&lt;h3 id=&#34;github-workflow-improvements&#34;&gt;GitHub Workflow Improvements&lt;/h3&gt;&#xA;&lt;p&gt;Our Arch Linux ISO building workflow received a major overhaul, introducing several improvements:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Enhanced caching system for Pacman packages, reducing build times by ~30%&lt;/li&gt;&#xA;&lt;li&gt;Improved error handling and logging&lt;/li&gt;&#xA;&lt;li&gt;Automated release notes generation&lt;/li&gt;&#xA;&lt;li&gt;SHA256 and SHA512 checksums for all releases&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;website-enhancements&#34;&gt;Website Enhancements&lt;/h3&gt;&#xA;&lt;p&gt;The website has received several improvements:&lt;/p&gt;</description>
     </item>
     <item>
       <title>GitHub Workflow Rewrite for Arch Linux without the beeps</title>
       <link>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/</guid>
-      <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;
-&lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;
-&lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Addition of comprehensive error checking&lt;/li&gt;
-&lt;li&gt;Improved logging for debugging&lt;/li&gt;
-&lt;li&gt;Timeout limit of 120 minutes to prevent hanging builds&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Automated Release Notes&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;the-github-workflow-rewrite&#34;&gt;The GitHub Workflow Rewrite&lt;/h1&gt;&#xA;&lt;p&gt;Today, I&amp;rsquo;d like to share how we&amp;rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.&lt;/p&gt;&#xA;&lt;h2 id=&#34;key-improvements&#34;&gt;Key Improvements&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Robust Error Handling&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Addition of comprehensive error checking&lt;/li&gt;&#xA;&lt;li&gt;Improved logging for debugging&lt;/li&gt;&#xA;&lt;li&gt;Timeout limit of 120 minutes to prevent hanging builds&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Additional Details&lt;/strong&gt;: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Automated Release Notes&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Removing Some Unused Projects</title>
       <link>http://localhost:1313/posts/2024/removing-some-unused-projects/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/2024/removing-some-unused-projects/</guid>
-      <description>Announcing the removal of some inactive projects from my GitHub account</description>
+      <description>&lt;p&gt;I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&amp;rsquo;ve identified projects that are no longer being maintained or used.&lt;/p&gt;&#xA;&lt;p&gt;Projects being removed:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Archcraft&lt;/strong&gt; (&lt;a href=&#34;https://github.com/Githubguy132010/archcraft&#34;&gt;GitHub&lt;/a&gt;)&lt;br&gt;&#xA;A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Reason for removal:&lt;/strong&gt; Lack of development progress.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Vanilla-OS-image&lt;/strong&gt; (&lt;a href=&#34;https://github.com/Githubguy132010/VanillaOS-image&#34;&gt;GitHub&lt;/a&gt;)&lt;br&gt;&#xA;A repo for a custom VanillaOS image that I was working on.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Welcome to My Digital Space</title>
       <link>http://localhost:1313/about/who-i-am/</link>
       <pubDate>Sat, 07 Dec 2024 18:11:49 +0100</pubDate>
       <guid>http://localhost:1313/about/who-i-am/</guid>
-      <description>&lt;h2 id=&#34;hi-im-thomas-&#34;&gt;Hi, I&amp;rsquo;m Thomas 👋&lt;/h2&gt;
-&lt;p&gt;A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I have several years of experience tinkering with Linux systems, configuring servers, and developing small-scale applications. My passion lies in finding efficient solutions to technical challenges and automating repetitive tasks. I specialize in:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;🐧 Linux System Configuration: Extensive experience with various Linux distributions, including Arch Linux, Debian, and Ubuntu. Proficient in system administration, package management, and troubleshooting.&lt;/li&gt;
-&lt;li&gt;🔧 Shell Scripting (Bash): Skilled in writing Bash scripts to automate system tasks, manage files, and process data.&lt;/li&gt;
-&lt;li&gt;⚙️ Infrastructure as Code (YAML): Experience with using YAML for configuration management and infrastructure automation, particularly with tools like Ansible and Docker Compose.&lt;/li&gt;
-&lt;li&gt;🤖 GitHub Actions Automation: Proficient in creating and managing CI/CD pipelines using GitHub Actions to automate software builds, testing, and deployment.&lt;/li&gt;
-&lt;li&gt;🖥️ WSL Development: Experienced in setting up and utilizing Windows Subsystem for Linux (WSL) for a seamless development experience across Windows and Linux environments.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Feel free to explore my &lt;a href=&#34;http://localhost:1313/projects&#34;&gt;projects&lt;/a&gt; to see some of my work. If you have any questions or would like to connect, don&amp;rsquo;t hesitate to reach out via the &lt;a href=&#34;http://localhost:1313/contact&#34;&gt;contact&lt;/a&gt; page.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;hi-im-thomas-&#34;&gt;Hi, I&amp;rsquo;m Thomas 👋&lt;/h2&gt;&#xA;&lt;p&gt;A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I have several years of experience tinkering with Linux systems, configuring servers, and developing small-scale applications. My passion lies in finding efficient solutions to technical challenges and automating repetitive tasks. I specialize in:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;🐧 Linux System Configuration: Extensive experience with various Linux distributions, including Arch Linux, Debian, and Ubuntu. Proficient in system administration, package management, and troubleshooting.&lt;/li&gt;&#xA;&lt;li&gt;🔧 Shell Scripting (Bash): Skilled in writing Bash scripts to automate system tasks, manage files, and process data.&lt;/li&gt;&#xA;&lt;li&gt;⚙️ Infrastructure as Code (YAML): Experience with using YAML for configuration management and infrastructure automation, particularly with tools like Ansible and Docker Compose.&lt;/li&gt;&#xA;&lt;li&gt;🤖 GitHub Actions Automation: Proficient in creating and managing CI/CD pipelines using GitHub Actions to automate software builds, testing, and deployment.&lt;/li&gt;&#xA;&lt;li&gt;🖥️ WSL Development: Experienced in setting up and utilizing Windows Subsystem for Linux (WSL) for a seamless development experience across Windows and Linux environments.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Feel free to explore my &lt;a href=&#34;http://localhost:1313/projects&#34;&gt;projects&lt;/a&gt; to see some of my work. If you have any questions or would like to connect, don&amp;rsquo;t hesitate to reach out via the &lt;a href=&#34;http://localhost:1313/contact&#34;&gt;contact&lt;/a&gt; page.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
