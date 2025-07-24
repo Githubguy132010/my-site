@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <title>GitHub Workflow Rewrite for Arch Linux without the beeps - Thomas Brugman</title>
-    <meta name="description" content="The GitHub Workflow Rewrite
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>GitHub Workflow Rewrite for Arch Linux without the beeps - Thomas Brugman</title>
+<meta name=description content="The GitHub Workflow Rewrite
 Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.
 Key Improvements
 
@@ -20,491 +13,222 @@ Additional Details: The error handling now includes specific checks for common i
 
 
 
-Automated Release Notes">
-    <meta name="author" content="Thomas Brugman">
-    
-    
-    
-    
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Courier New', monospace;
-            background: #000;
-            color: #00ff00;
-            overflow: hidden;
-            height: 100vh;
-        }
-        
-        .terminal-container {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            background: #000;
-            transition: all 0.3s ease;
-        }
-        
-        .terminal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-            margin-bottom: 20px;
-            animation: slideDown 0.5s ease-out;
-        }
-        
-        .terminal-title {
-            color: #00ff00;
-            font-weight: bold;
-        }
-        
-        .terminal-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .terminal-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-close { background: #ff5f56; }
-        .btn-minimize { background: #ffbd2e; }
-        .btn-maximize { background: #27ca3f; }
-        
-        .terminal-output {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px 0;
-            line-height: 1.6;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .terminal-input-line {
-            display: flex;
-            align-items: center;
-            margin-top: auto;
-            padding: 10px 0;
-            position: relative;
-            animation: slideUp 0.5s ease-out;
-        }
-        
-        .terminal-prompt {
-            color: #00ff00;
-            margin-right: 10px;
-        }
-        
-        .terminal-input {
-            background: transparent;
-            border: none;
-            color: #00ff00;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-            flex: 1;
-            caret-color: transparent;  
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background: #00ff00;
-            animation: blink 1s infinite;
-            position: absolute;
-            margin-left: 2px;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .terminal-line {
-            margin: 5px 0;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        .terminal-line.selected-post {
-            background: rgba(0, 255, 0, 0.1);
-            border-left: 3px solid #00ff00;
-            padding-left: 10px;
-            margin-left: -10px;
-            border-radius: 3px;
-            animation: fadeIn 0.3s ease-out, glow 0.5s ease-out;
-        }
-        
-        #welcome-message {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        @keyframes glow {
-            0% { box-shadow: none; }
-            50% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
-            100% { box-shadow: none; }
-        }
-        
-        .error {
-            color: #ff6b6b;
-        }
-        
-        .info {
-            color: #74c0fc;
-        }
-        
-        .success {
-            color: #51cf66;
-        }
-        
-        .command {
-            color: #ffd43b;
-        }
-        
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 10px;
-            }
-            
-            .terminal-header {
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-<body>
-<div class="terminal-container">
-    <div class="terminal-header">
-        <div class="terminal-title">GitHub Workflow Rewrite for Arch Linux without the beeps - thomas@website:~$</div>
-        <div class="terminal-controls">
-            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
-            <div class="terminal-btn btn-minimize"></div>
-            <div class="terminal-btn btn-maximize"></div>
-        </div>
-    </div>
-    
-    <div class="terminal-output">
-        <div class="terminal-line">
-            <span class="info">GitHub Workflow Rewrite for Arch Linux without the beeps</span>
-        </div>
-        <div class="terminal-line"></div>
-        
-        <h1 id="the-github-workflow-rewrite">The GitHub Workflow Rewrite</h1>
-<p>Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.</p>
-<h2 id="key-improvements">Key Improvements</h2>
-<ol>
-<li>
-<p><strong>Robust Error Handling</strong></p>
-<ul>
-<li>Addition of comprehensive error checking</li>
-<li>Improved logging for debugging</li>
-<li>Timeout limit of 120 minutes to prevent hanging builds</li>
-<li><strong>Additional Details</strong>: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.</li>
-</ul>
-</li>
-<li>
-<p><strong>Automated Release Notes</strong></p>
-<ul>
-<li>Automatic generation of release notes</li>
-<li>Including changelog since last release</li>
-<li>Clear presentation of features and changes</li>
-<li><strong>Additional Details</strong>: The release notes are now formatted in Markdown, making them easy to read and integrate into our documentation.</li>
-</ul>
-</li>
-<li>
-<p><strong>Security and Verification</strong></p>
-<ul>
-<li>Automatic generation of SHA256 and SHA512 checksums</li>
-<li>Build process verification</li>
-<li>Checks for successful ISO creation</li>
-<li><strong>Additional Details</strong>: We have also implemented GPG signing for the ISOs, providing an additional layer of security and authenticity verification.</li>
-</ul>
-</li>
-</ol>
-<h2 id="technical-details">Technical Details</h2>
-<p>The workflow runs in a Docker container based on Arch Linux, ensuring a clean and isolated build environment. We use <code>archiso</code> for building the ISO.</p>
-<p>The build process is divided into clear steps:</p>
-<ol>
-<li>Preparing the build environment</li>
-<li>Caching Pacman packages</li>
-<li>Building the ISO</li>
-<li>Generating checksums</li>
-<li>Creating a new release</li>
-</ol>
-<p>If you want to see the complete workflow, I will post a snippet of it here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build ISO</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">workflow_dispatch</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schedule</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">cron</span>: <span style="color:#e6db74">&#39;0 0 * * *&#39;</span>  <span style="color:#75715e"># Run the workflow every day at midnight</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main</span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">dev</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">paths-ignore</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#39;**.md&#39;</span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#39;.gitignore&#39;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">env</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DOCKER_BUILDKIT</span>: <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ISO_FILENAME</span>: <span style="color:#ae81ff">Arch.iso</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">timeout-minutes</span>: <span style="color:#ae81ff">120</span>  <span style="color:#75715e"># Set a timeout to prevent hung builds</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout Repository</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up environment variables</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">env</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;DATE=$(date +&#39;%Y-%m-%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;VERSION=$(date +&#39;%Y.%m.%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;CACHE_KEY=$(date +&#39;%Y-%m&#39;)&#34; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;WORKSPACE=${GITHUB_WORKSPACE}&#34; &gt;&gt; $GITHUB_ENV</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create Cache Directories</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo mkdir -p /tmp/pacman-cache
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo chmod 777 /tmp/pacman-cache
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Ensure the directory is empty to prevent tar errors
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf /tmp/pacman-cache/*</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Cache Pacman packages</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/cache@v3</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/tmp/pacman-cache</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">pacman-${{ runner.os }}-${{ env.CACHE_KEY }}</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">restore-keys</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            pacman-${{ runner.os }}-</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Arch Linux Container</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker run --privileged --name arch-container -d \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -v ${{ env.WORKSPACE }}:/workdir \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -v /tmp/pacman-cache:/var/cache/pacman/pkg \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            archlinux:latest sleep infinity</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Initialize Container</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker exec arch-container bash -c &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set -euo pipefail
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Update package database and system
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            pacman -Syu --noconfirm
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Install required packages
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            pacman -S --noconfirm --needed \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              git \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              archiso \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              grub \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              curl \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              jq \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              gnupg \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              make \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sudo
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Verify installation
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            command -v mkarchiso &gt;/dev/null 2&gt;&amp;1 || {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;::error::mkarchiso not found&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              exit 1
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build ISO</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">build</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker exec arch-container bash -c &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set -euo pipefail
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            cd /workdir
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Cleanup any previous builds
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            rm -rf workdir/ out/
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            mkdir -p out/
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Build the ISO with verbose output
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            mkarchiso -v -w workdir/ -o out/ . 2&gt;&amp;1 | tee build.log || {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;::error::ISO build failed!&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              tail -n 50 build.log
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              exit 1
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Verify ISO was created
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            [ -f out/*.iso ] || {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;::error::ISO file not found after build&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              exit 1
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Generate Checksums</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker exec arch-container bash -c &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set -euo pipefail
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            cd /workdir/out
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Generate checksums
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            for iso in *.iso; do
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sha256sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha256sum\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sha512sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha512sum\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            done
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Rename and Move ISO</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker exec arch-container bash -c &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set -euo pipefail
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            cd /workdir/out
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            for f in *.iso; do
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              newname=\&#34;arch-linux-no-beeps-${{ env.VERSION }}.iso\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              mv \&#34;\$f\&#34; \&#34;\$newname\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              mv \&#34;\$f.sha256sum\&#34; \&#34;\$newname.sha256sum\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              mv \&#34;\$f.sha512sum\&#34; \&#34;\$newname.sha512sum\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            done
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Generate Release Notes</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">release_notes</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Create a temporary file for release notes
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          TEMP_RELEASE_NOTES=$(mktemp)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker exec arch-container bash -c &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set -euo pipefail
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            cd /workdir
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            # Initialize release notes
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            {
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;🚀 Arch Linux ISO without system beeps (build ${{ env.DATE }})&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;### Changes&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              # Get changes since last release
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              if git tag | grep -q .; then
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                LAST_TAG=\$(git describe --tags --abbrev=0 2&gt;/dev/null || echo &#39;&#39;)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                if [ ! -z \&#34;\$LAST_TAG\&#34; ]; then
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  echo &#39;#### Commits since last release:&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  git log \&#34;\$LAST_TAG\&#34;..HEAD --pretty=format:&#39;- %s&#39; | grep -v &#39;Merge&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                  echo &#39;&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                fi
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              fi
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              # Add standard information
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;### Features&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;- Automatic daily build&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;- System beeps disabled&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;- ISO SHA256 and SHA512 checksums included&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;### Download&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;- Download the ISO and verify checksums before use&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;### Checksums&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;SHA256 and SHA512 checksums are available in the uploaded files.&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            } &gt; /tmp/release_notes
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Copy release notes from container to host
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker cp arch-container:/tmp/release_notes $TEMP_RELEASE_NOTES
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Set the release notes in GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#39;RELEASE_NOTES&lt;&lt;EOF&#39; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          cat $TEMP_RELEASE_NOTES &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#39;EOF&#39; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Cleanup
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          rm -f $TEMP_RELEASE_NOTES</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create Release</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">create_release</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">softprops/action-gh-release@v1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">github.ref == &#39;refs/heads/main&#39;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">tag_name</span>: <span style="color:#ae81ff">v${{ env.VERSION }}</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Arch Linux No Beeps v${{ env.VERSION }}&#34;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">body</span>: <span style="color:#ae81ff">${{ env.RELEASE_NOTES }}</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">draft</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">prerelease</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">files</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/out/*.iso
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/out/*.sha*sum</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Clean Up</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">always()</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          if docker ps -a | grep -q arch-container; then
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            docker stop arch-container || true
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            docker rm -f arch-container || true
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          fi
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf workdir/ out/ /tmp/pacman-cache/*</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Upload Build Logs on Failure</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">failure()</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v4</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">build-logs</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/build.log</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">retention-days</span>: <span style="color:#ae81ff">5</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">compression-level</span>: <span style="color:#ae81ff">9</span>  <span style="color:#75715e"># Maximum compression for logs</span>
-</span></span></code></pre></div><p><strong>Additional Technical Insights</strong>: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</p>
-<h2 id="future-improvements">Future Improvements</h2>
-<p>Looking ahead, I plan to integrate more advanced features such as:</p>
-<ul>
-<li><strong>Parallel Builds</strong>: To further reduce build times, I am exploring the possibility of running multiple build processes in parallel.</li>
-<li><strong>Automated Testing</strong>: Implementing automated tests for the ISO to ensure that it functions correctly on a variety of hardware configurations.</li>
-<li><strong>User Feedback Integration</strong>: Gathering feedback from users to continuously improve the build process and address any issues they encounter.</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>This rewrite has resulted in a more reliable and efficient workflow. The daily builds are now faster and produce consistent results. The improved error handling and logging make it easier to identify and resolve any issues that may arise.</p>
-<p>For those interested in the details: the complete workflow configuration can be found in our <a href="https://github.com/thomasbrugman/Arch-Linux-without-the-beeps">GitHub repository</a>.</p>
-
-        
-        <div class="terminal-line"></div>
-        <div class="terminal-line">
-            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
-        </div>
-    </div>
-</div>
-    
-    
-    
-    
-        
-        <script src="/js/terminal.min.js"></script>
-    
-</body>
-</html>
+Automated Release Notes"><meta name=author content="Thomas Brugman"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:courier new,monospace;background:#000;color:#0f0;overflow:hidden;height:100vh}.terminal-container{height:100vh;display:flex;flex-direction:column;padding:20px;background:#000;transition:all .3s ease}.terminal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #333;margin-bottom:20px;animation:slideDown .5s ease-out}.terminal-title{color:#0f0;font-weight:700}.terminal-controls{display:flex;gap:10px}.terminal-btn{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.terminal-btn:hover{transform:scale(1.1);box-shadow:0 0 10px rgba(255,255,255,.3)}.btn-close{background:#ff5f56}.btn-minimize{background:#ffbd2e}.btn-maximize{background:#27ca3f}.terminal-output{flex:1;overflow-y:auto;padding:10px 0;line-height:1.6;animation:fadeIn .8s ease-out}.terminal-input-line{display:flex;align-items:center;margin-top:auto;padding:10px 0;position:relative;animation:slideUp .5s ease-out}.terminal-prompt{color:#0f0;margin-right:10px}.terminal-input{background:0 0;border:none;color:#0f0;font-family:inherit;font-size:inherit;outline:none;flex:1;caret-color:transparent}.cursor{display:inline-block;width:10px;height:20px;background:#0f0;animation:blink 1s infinite;position:absolute;margin-left:2px}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.terminal-line{margin:5px 0;animation:fadeIn .3s ease-out}.terminal-line.selected-post{background:rgba(0,255,0,.1);border-left:3px solid #0f0;padding-left:10px;margin-left:-10px;border-radius:3px;animation:fadeIn .3s ease-out,glow .5s ease-out}#welcome-message{transition:opacity .3s ease,transform .3s ease}@keyframes glow{0%{box-shadow:none}50%{box-shadow:0 0 10px rgba(0,255,0,.5)}100%{box-shadow:none}}.error{color:#ff6b6b}.info{color:#74c0fc}.success{color:#51cf66}.command{color:#ffd43b}@media(max-width:768px){.terminal-container{padding:10px}.terminal-header{font-size:14px}}</style></head><body><div class=terminal-container><div class=terminal-header><div class=terminal-title>GitHub Workflow Rewrite for Arch Linux without the beeps - thomas@website:~$</div><div class=terminal-controls><div class="terminal-btn btn-close" onclick='window.location.href="/"'></div><div class="terminal-btn btn-minimize"></div><div class="terminal-btn btn-maximize"></div></div></div><div class=terminal-output><div class=terminal-line><span class=info>GitHub Workflow Rewrite for Arch Linux without the beeps</span></div><div class=terminal-line></div><h1 id=the-github-workflow-rewrite>The GitHub Workflow Rewrite</h1><p>Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch Linux ISO without system beeps. This workflow is a crucial component of our project, as it generates a fresh ISO with the latest updates daily.</p><h2 id=key-improvements>Key Improvements</h2><ol><li><p><strong>Robust Error Handling</strong></p><ul><li>Addition of comprehensive error checking</li><li>Improved logging for debugging</li><li>Timeout limit of 120 minutes to prevent hanging builds</li><li><strong>Additional Details</strong>: The error handling now includes specific checks for common issues such as network failures and package conflicts, ensuring that the build process is more resilient.</li></ul></li><li><p><strong>Automated Release Notes</strong></p><ul><li>Automatic generation of release notes</li><li>Including changelog since last release</li><li>Clear presentation of features and changes</li><li><strong>Additional Details</strong>: The release notes are now formatted in Markdown, making them easy to read and integrate into our documentation.</li></ul></li><li><p><strong>Security and Verification</strong></p><ul><li>Automatic generation of SHA256 and SHA512 checksums</li><li>Build process verification</li><li>Checks for successful ISO creation</li><li><strong>Additional Details</strong>: We have also implemented GPG signing for the ISOs, providing an additional layer of security and authenticity verification.</li></ul></li></ol><h2 id=technical-details>Technical Details</h2><p>The workflow runs in a Docker container based on Arch Linux, ensuring a clean and isolated build environment. We use <code>archiso</code> for building the ISO.</p><p>The build process is divided into clear steps:</p><ol><li>Preparing the build environment</li><li>Caching Pacman packages</li><li>Building the ISO</li><li>Generating checksums</li><li>Creating a new release</li></ol><p>If you want to see the complete workflow, I will post a snippet of it here:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build ISO</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>workflow_dispatch</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>schedule</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>cron</span>: <span style=color:#e6db74>&#39;0 0 * * *&#39;</span>  <span style=color:#75715e># Run the workflow every day at midnight</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>main</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>dev</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths-ignore</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;**.md&#39;</span>
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;.gitignore&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>DOCKER_BUILDKIT</span>: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>ISO_FILENAME</span>: <span style=color:#ae81ff>Arch.iso</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>timeout-minutes</span>: <span style=color:#ae81ff>120</span>  <span style=color:#75715e># Set a timeout to prevent hung builds</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout Repository</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up environment variables</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>: <span style=color:#ae81ff>env</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#34;DATE=$(date +&#39;%Y-%m-%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#34;VERSION=$(date +&#39;%Y.%m.%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#34;CACHE_KEY=$(date +&#39;%Y-%m&#39;)&#34; &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#34;WORKSPACE=${GITHUB_WORKSPACE}&#34; &gt;&gt; $GITHUB_ENV</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Create Cache Directories</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sudo mkdir -p /tmp/pacman-cache
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sudo chmod 777 /tmp/pacman-cache
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          # Ensure the directory is empty to prevent tar errors
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sudo rm -rf /tmp/pacman-cache/*</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Cache Pacman packages</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/cache@v3</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>path</span>: <span style=color:#ae81ff>/tmp/pacman-cache</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>key</span>: <span style=color:#ae81ff>pacman-${{ runner.os }}-${{ env.CACHE_KEY }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>restore-keys</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            pacman-${{ runner.os }}-</span>            
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Arch Linux Container</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker run --privileged --name arch-container -d \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -v ${{ env.WORKSPACE }}:/workdir \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -v /tmp/pacman-cache:/var/cache/pacman/pkg \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            archlinux:latest sleep infinity</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Initialize Container</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker exec arch-container bash -c &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            set -euo pipefail
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Update package database and system
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            pacman -Syu --noconfirm
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Install required packages
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            pacman -S --noconfirm --needed \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              git \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              archiso \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              grub \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              curl \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              jq \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              gnupg \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              make \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              sudo
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Verify installation
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            command -v mkarchiso &gt;/dev/null 2&gt;&amp;1 || {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;::error::mkarchiso not found&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              exit 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          &#34;</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build ISO</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>: <span style=color:#ae81ff>build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker exec arch-container bash -c &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            set -euo pipefail
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            cd /workdir
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Cleanup any previous builds
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            rm -rf workdir/ out/
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            mkdir -p out/
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Build the ISO with verbose output
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            mkarchiso -v -w workdir/ -o out/ . 2&gt;&amp;1 | tee build.log || {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;::error::ISO build failed!&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              tail -n 50 build.log
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              exit 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Verify ISO was created
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            [ -f out/*.iso ] || {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;::error::ISO file not found after build&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              exit 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          &#34;</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate Checksums</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker exec arch-container bash -c &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            set -euo pipefail
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            cd /workdir/out
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Generate checksums
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            for iso in *.iso; do
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              sha256sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha256sum\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              sha512sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha512sum\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            done
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          &#34;</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Rename and Move ISO</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker exec arch-container bash -c &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            set -euo pipefail
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            cd /workdir/out
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            for f in *.iso; do
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              newname=\&#34;arch-linux-no-beeps-${{ env.VERSION }}.iso\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              mv \&#34;\$f\&#34; \&#34;\$newname\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              mv \&#34;\$f.sha256sum\&#34; \&#34;\$newname.sha256sum\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              mv \&#34;\$f.sha512sum\&#34; \&#34;\$newname.sha512sum\&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            done
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          &#34;</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate Release Notes</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>: <span style=color:#ae81ff>release_notes</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          # Create a temporary file for release notes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          TEMP_RELEASE_NOTES=$(mktemp)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker exec arch-container bash -c &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            set -euo pipefail
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            cd /workdir
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            # Initialize release notes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;🚀 Arch Linux ISO without system beeps (build ${{ env.DATE }})&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;### Changes&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              # Get changes since last release
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              if git tag | grep -q .; then
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                LAST_TAG=\$(git describe --tags --abbrev=0 2&gt;/dev/null || echo &#39;&#39;)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                if [ ! -z \&#34;\$LAST_TAG\&#34; ]; then
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                  echo &#39;#### Commits since last release:&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                  git log \&#34;\$LAST_TAG\&#34;..HEAD --pretty=format:&#39;- %s&#39; | grep -v &#39;Merge&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                  echo &#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                fi
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              fi
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              # Add standard information
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;### Features&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;- Automatic daily build&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;- System beeps disabled&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;- ISO SHA256 and SHA512 checksums included&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;### Download&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;- Download the ISO and verify checksums before use&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;### Checksums&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              echo &#39;SHA256 and SHA512 checksums are available in the uploaded files.&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            } &gt; /tmp/release_notes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          &#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          # Copy release notes from container to host
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          docker cp arch-container:/tmp/release_notes $TEMP_RELEASE_NOTES
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          # Set the release notes in GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#39;RELEASE_NOTES&lt;&lt;EOF&#39; &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          cat $TEMP_RELEASE_NOTES &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          echo &#39;EOF&#39; &gt;&gt; $GITHUB_ENV
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          # Cleanup
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          rm -f $TEMP_RELEASE_NOTES</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Create Release</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>: <span style=color:#ae81ff>create_release</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>softprops/action-gh-release@v1</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>if</span>: <span style=color:#ae81ff>github.ref == &#39;refs/heads/main&#39;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>tag_name</span>: <span style=color:#ae81ff>v${{ env.VERSION }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;Arch Linux No Beeps v${{ env.VERSION }}&#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>body</span>: <span style=color:#ae81ff>${{ env.RELEASE_NOTES }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>draft</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>prerelease</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>files</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            ${{ env.WORKSPACE }}/out/*.iso
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            ${{ env.WORKSPACE }}/out/*.sha*sum</span>            
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Clean Up</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>if</span>: <span style=color:#ae81ff>always()</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          if docker ps -a | grep -q arch-container; then
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            docker stop arch-container || true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            docker rm -f arch-container || true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          fi
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sudo rm -rf workdir/ out/ /tmp/pacman-cache/*</span>          
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Upload Build Logs on Failure</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>if</span>: <span style=color:#ae81ff>failure()</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/upload-artifact@v4</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>name</span>: <span style=color:#ae81ff>build-logs</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>path</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            ${{ env.WORKSPACE }}/build.log</span>            
+</span></span><span style=display:flex><span>          <span style=color:#f92672>retention-days</span>: <span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>compression-level</span>: <span style=color:#ae81ff>9</span>  <span style=color:#75715e># Maximum compression for logs</span>
+</span></span></code></pre></div><p><strong>Additional Technical Insights</strong>: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</p><h2 id=future-improvements>Future Improvements</h2><p>Looking ahead, I plan to integrate more advanced features such as:</p><ul><li><strong>Parallel Builds</strong>: To further reduce build times, I am exploring the possibility of running multiple build processes in parallel.</li><li><strong>Automated Testing</strong>: Implementing automated tests for the ISO to ensure that it functions correctly on a variety of hardware configurations.</li><li><strong>User Feedback Integration</strong>: Gathering feedback from users to continuously improve the build process and address any issues they encounter.</li></ul><h2 id=conclusion>Conclusion</h2><p>This rewrite has resulted in a more reliable and efficient workflow. The daily builds are now faster and produce consistent results. The improved error handling and logging make it easier to identify and resolve any issues that may arise.</p><p>For those interested in the details: the complete workflow configuration can be found in our <a href=https://github.com/thomasbrugman/Arch-Linux-without-the-beeps>GitHub repository</a>.</p><div class=terminal-line></div><div class=terminal-line><span class=info>Type "help" in the <a href=/ style=color:#0f0>main terminal</a> for navigation commands</span></div></div></div><script src=/js/terminal.min.js></script></body></html>
