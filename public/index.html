@@ -1,1 +1,230 @@
- <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+	<meta name="generator" content="Hugo 0.140.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Thomas Brugman</title>
+    <meta name="description" content="">
+    <meta name="author" content="Thomas Brugman">
+    
+    
+    
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .terminal-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #000;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .terminal-title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+        
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            padding: 10px 0;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+        }
+        
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .info {
+            color: #74c0fc;
+        }
+        
+        .success {
+            color: #51cf66;
+        }
+        
+        .command {
+            color: #ffd43b;
+        }
+        
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 10px;
+            }
+            
+            .terminal-header {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="handleShutdown()"></div>
+            <div class="terminal-btn btn-minimize" onclick="minimizeTerminal()"></div>
+            <div class="terminal-btn btn-maximize" onclick="maximizeTerminal()"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output" id="terminal-output">
+        <div class="terminal-line">
+            <span class="info">Welcome to Thomas Brugman's Personal Website</span>
+        </div>
+        <div class="terminal-line">
+            <span class="info">Linux Enthusiast & Hobby Developer</span>
+        </div>
+        <div class="terminal-line"></div>
+        <div class="terminal-line typing-text" id="welcome-message">
+            Type 'help' to see available commands...
+        </div>
+        <div class="terminal-line"></div>
+    </div>
+    
+    <div class="terminal-input-line">
+        <span class="terminal-prompt">thomas@website:~$</span>
+        <input type="text" class="terminal-input" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+        <span class="cursor" id="cursor"></span>
+    </div>
+</div>
+
+<script>
+
+const siteData = {
+    title: "Thomas Brugman",
+    author: "Thomas Brugman",
+    description: "Linux Enthusiast & Hobby Developer",
+    email: "thomas.brugman.teb3@gmail.com",
+    github: "https://github.com/Githubguy132010",
+    content: {
+        about: `Hi, I\u0026rsquo;m Thomas 👋 A Linux enthusiast and hobby developer from the Netherlands with a passion for automation and open source. I have several years of experience tinkering with Linux systems, configuring servers, and developing small-scale applications. My passion lies in finding efficient solutions to technical challenges and automating repetitive tasks. I specialize in:\n🐧 Linux System Configuration: Extensive experience with various Linux distributions, including Arch Linux, Debian, and …`,
+        projects: [
+            {
+                name: "Arch Linux Configuration",
+                description: "Collection of Arch Linux configuration files and scripts",
+                url: "https://github.com/Githubguy132010/Arch-Linux-without-the-beeps"
+            }
+        ],
+        skills: [
+            "Linux System Configuration",
+            "Shell Scripting (Bash)", 
+            "Infrastructure as Code (YAML)",
+            "GitHub Actions Automation",
+            "WSL Development"
+        ],
+        posts: [
+            {
+                title: "January Updates",
+                date: "2025-02-21",
+                url: "\/posts\/2025\/january-updates\/",
+                summary: "Recent Changes and Updates In the last month of 2024, we saw some significant changes to our projects and workflows. Here\u0026rsquo;s a summary of the key …"
+            },
+            {
+                title: "GitHub Workflow Rewrite for Arch Linux without the beeps",
+                date: "2024-12-23",
+                url: "\/posts\/2024\/arch-linux-without-the-beeps-gh-wf-overhaul\/",
+                summary: "The GitHub Workflow Rewrite Today, I\u0026rsquo;d like to share how we\u0026rsquo;ve improved the GitHub Actions workflow for automatically building our Arch …"
+            },
+            {
+                title: "Removing Some Unused Projects",
+                date: "2024-12-11",
+                url: "\/posts\/2024\/removing-some-unused-projects\/",
+                summary: "I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I\u0026rsquo;ve …"
+            },
+        ]
+    }
+};
+</script>
+    
+    
+    
+    
+        
+        <script src="/js/terminal.min.js"></script>
+    
+</body>
+</html>

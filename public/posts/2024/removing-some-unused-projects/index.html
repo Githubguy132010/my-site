@@ -1,164 +1,174 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>Removing Some Unused Projects | Thomas Brugman</title>
-<meta name="keywords" content="GitHub, Projects">
-<meta name="description" content="Announcing the removal of some inactive projects from my GitHub account">
-<meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/2024/removing-some-unused-projects/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.64e181d45408f87f680da11003d39f95b9c86505bc0887b7cc5c1e744053d80c.css" integrity="sha256-ZOGB1FQI&#43;H9oDaEQA9OflbnIZQW8CIe3zFwedEBT2Aw=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/2024/removing-some-unused-projects/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript>
-<link rel="stylesheet" href="/css/background.css">
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const images = document.querySelectorAll('.post-content img, .entry-content img');
-        images.forEach(img => {
-            if (img.complete) {
-                img.classList.add('loaded');
-            } else {
-                img.addEventListener('load', function() {
-                    img.classList.add('loaded');
-                });
-            }
-        });
-    });
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Thomas Brugman (Alt + H)">Thomas Brugman</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="http://localhost:1313/" title="Home">
-                    <span>Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/about/who-i-am/" title="About">
-                    <span>About</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/posts/" title="Blog">
-                    <span>Blog</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
-                    <span>Projects</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://localhost:1313/contact/" title="Contact">
-                    <span>Contact</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <h1 class="post-title entry-hint-parent">
-      Removing Some Unused Projects
-    </h1>
-    <div class="post-description">
-      Announcing the removal of some inactive projects from my GitHub account
-    </div>
-    <div class="post-meta"><span title='2024-12-11 00:00:00 +0000 UTC'>December 11, 2024</span>&nbsp;·&nbsp;1 min
+    <title>Removing Some Unused Projects - Thomas Brugman</title>
+    <meta name="description" content="I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&rsquo;ve identified projects that are no longer being maintained or used.
+Projects being removed:
 
-</div>
-  </header> 
-  <div class="post-content"><p>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&rsquo;ve identified projects that are no longer being maintained or used.</p>
+
+Archcraft (GitHub)
+A fork intended to replicate Arch Linux modifications without audio signals. (Arch Linux without the beeps)
+
+Reason for removal: Lack of development progress.
+
+
+
+Vanilla-OS-image (GitHub)
+A repo for a custom VanillaOS image that I was working on.">
+    <meta name="author" content="Thomas Brugman">
+    
+    
+    
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .terminal-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #000;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .terminal-title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+        
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            padding: 10px 0;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+        }
+        
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .info {
+            color: #74c0fc;
+        }
+        
+        .success {
+            color: #51cf66;
+        }
+        
+        .command {
+            color: #ffd43b;
+        }
+        
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 10px;
+            }
+            
+            .terminal-header {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">Removing Some Unused Projects - thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
+            <div class="terminal-btn btn-minimize"></div>
+            <div class="terminal-btn btn-maximize"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output">
+        <div class="terminal-line">
+            <span class="info">Removing Some Unused Projects</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        <p>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&rsquo;ve identified projects that are no longer being maintained or used.</p>
 <p>Projects being removed:</p>
 <ul>
 <li>
@@ -206,87 +216,19 @@ A repo for a custom BlendOS install config that I was working on.</p>
 </ul>
 <p>I will be <strong>removing</strong> these repositories on GitHub, so they wont be accessible anymore. If you have any questions or concerns about this decision, please feel free to reach out to me.</p>
 
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/github/">GitHub</a></li>
-      <li><a href="http://localhost:1313/tags/projects/">Projects</a></li>
-    </ul>
-  </footer>
-</article>
-    </main>
+        
+        <div class="terminal-line"></div>
+        <div class="terminal-line">
+            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
+        </div>
+    </div>
+</div>
     
-<footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Thomas Brugman</a></span> · 
-
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+    
+    
+    
+        
+        <script src="/js/terminal.min.js"></script>
+    
 </body>
-
 </html>
