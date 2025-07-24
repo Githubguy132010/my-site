@@ -37,6 +37,7 @@
             flex-direction: column;
             padding: 20px;
             background: #000;
+            transition: all 0.3s ease;
         }
         
         .terminal-header {
@@ -46,6 +47,7 @@
             padding: 10px 0;
             border-bottom: 1px solid #333;
             margin-bottom: 20px;
+            animation: slideDown 0.5s ease-out;
         }
         
         .terminal-title {
@@ -63,6 +65,12 @@
             height: 12px;
             border-radius: 50%;
             cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .terminal-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
         
         .btn-close { background: #ff5f56; }
@@ -74,6 +82,7 @@
             overflow-y: auto;
             padding: 10px 0;
             line-height: 1.6;
+            animation: fadeIn 0.8s ease-out;
         }
         
         .terminal-input-line {
@@ -81,6 +90,8 @@
             align-items: center;
             margin-top: auto;
             padding: 10px 0;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
         }
         
         .terminal-prompt {
@@ -96,6 +107,7 @@
             font-size: inherit;
             outline: none;
             flex: 1;
+            caret-color: transparent; /* Hide the default input cursor */
         }
         
         .cursor {
@@ -104,6 +116,8 @@
             height: 20px;
             background: #00ff00;
             animation: blink 1s infinite;
+            position: absolute;
+            margin-left: 2px;
         }
         
         @keyframes blink {
@@ -111,8 +125,24 @@
             51%, 100% { opacity: 0; }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .terminal-line {
             margin: 5px 0;
+            animation: fadeIn 0.3s ease-out;
         }
         
         .error {

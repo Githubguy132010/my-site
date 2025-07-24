@@ -50,10 +50,15 @@ class Terminal {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
+                // Add a subtle visual effect
+                element.style.opacity = '0.8';
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                }, 50);
             } else {
                 clearInterval(typing);
             }
-        }, 50);
+        }, 30); // Faster typing for better UX
     }
     
     handleKeyDown(e) {
@@ -78,12 +83,24 @@ class Terminal {
     }
     
     updateCursor() {
-        // Hide cursor when typing, show when idle
-        this.cursor.style.opacity = '0';
-        clearTimeout(this.cursorTimeout);
-        this.cursorTimeout = setTimeout(() => {
-            this.cursor.style.opacity = '1';
-        }, 500);
+        // Position cursor after the input text
+        const inputRect = this.input.getBoundingClientRect();
+        const textWidth = this.getTextWidth(this.input.value, this.input);
+        this.cursor.style.left = textWidth + 'px';
+        
+        // Restart cursor blink animation
+        this.cursor.style.animation = 'none';
+        setTimeout(() => {
+            this.cursor.style.animation = 'blink 1s infinite';
+        }, 10);
+    }
+    
+    getTextWidth(text, element) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const computedStyle = window.getComputedStyle(element);
+        context.font = computedStyle.font;
+        return context.measureText(text).width;
     }
     
     executeCommand() {
@@ -122,17 +139,27 @@ class Terminal {
     
     autocomplete() {
         const partial = this.input.value.toLowerCase();
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
         const matches = commands.filter(cmd => cmd.startsWith(partial));
         
         if (matches.length === 1) {
             this.input.value = matches[0];
+            this.updateCursor();
         } else if (matches.length > 1) {
             this.addOutput(`Available commands: ${matches.join(', ')}`, 'info');
         }
     }
     
     processCommand(command) {
+        // Handle read command with arguments
+        if (command.startsWith('read ')) {
+            const args = command.split(' ');
+            if (args.length >= 2) {
+                this.readPost(args[1]);
+                return;
+            }
+        }
+        
         switch(command) {
             case 'help':
                 this.showHelp();
@@ -198,6 +225,7 @@ class Terminal {
         this.addOutput('  skills    - List my technical skills', 'success');
         this.addOutput('  contact   - Get my contact information', 'success');
         this.addOutput('  blog      - Read my latest blog posts', 'success');
+        this.addOutput('  read <N>  - Read blog post number N', 'success');
         this.addOutput('  clear     - Clear the terminal screen', 'success');
         this.addOutput('  theme     - Toggle light/dark theme', 'success');
         this.addOutput('  reboot    - Reload the website', 'success');
@@ -319,18 +347,43 @@ class Terminal {
         this.addOutput('• Development tools', 'success');
     }
     
+    readPost(postNumber) {
+        const index = parseInt(postNumber) - 1;
+        
+        if (typeof siteData !== 'undefined' && siteData.content.posts && siteData.content.posts.length > 0) {
+            if (index >= 0 && index < siteData.content.posts.length) {
+                const post = siteData.content.posts[index];
+                this.addOutput(`Opening "${post.title}"...`, 'info');
+                
+                // Add a smooth transition effect
+                setTimeout(() => {
+                    this.addOutput('Navigating to blog post...', 'success');
+                    setTimeout(() => {
+                        window.location.href = post.url;
+                    }, 800);
+                }, 500);
+            } else {
+                this.addOutput(`Post ${postNumber} not found. Use "blog" to see available posts.`, 'error');
+            }
+        } else {
+            this.addOutput('No blog posts available.', 'error');
+        }
+    }
+    
     showBlog() {
         this.addOutput('Latest Blog Posts', 'info');
         this.addOutput('');
         
         if (typeof siteData !== 'undefined' && siteData.content.posts && siteData.content.posts.length > 0) {
+            this.addOutput('Select a post to read by typing "read <number>":', 'info');
+            this.addOutput('');
             siteData.content.posts.slice(0, 5).forEach((post, index) => {
                 this.addOutput(`${index + 1}. ${post.title}`, 'success');
                 this.addOutput(`   Date: ${post.date}`, 'info');
                 this.addOutput(`   ${post.summary}`);
-                this.addOutput(`   Read more: ${window.location.origin}${post.url}`, 'info');
                 this.addOutput('');
             });
+            this.addOutput('Example: "read 1" to read the first post', 'info');
         } else {
             this.addOutput('No blog posts available yet.', 'info');
             this.addOutput('Check back soon for updates!');
@@ -414,7 +467,6 @@ class Terminal {
         this.addOutput('drwxr-xr-x  blog/', 'success');
         this.addOutput('drwxr-xr-x  skills/', 'success');
         this.addOutput('-rw-r--r--  contact.txt', 'success');
-        this.addOutput('-rw-r--r--  resume.pdf', 'success');
         this.addOutput('-rw-r--r--  .secrets', 'error');
         this.addOutput('');
         this.addOutput('Tip: Use specific commands like "about", "projects" to explore these directories!', 'info');
@@ -425,7 +477,7 @@ class Terminal {
     }
     
     suggestCommand(command) {
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
         const suggestions = commands.filter(cmd => {
             const distance = this.levenshteinDistance(command, cmd);
             return distance <= 2;
@@ -464,7 +516,16 @@ class Terminal {
         const line = document.createElement('div');
         line.className = `terminal-line ${className}`;
         line.textContent = text;
+        line.style.opacity = '0';
+        line.style.transform = 'translateY(10px)';
         this.output.appendChild(line);
+        
+        // Animate the new line in
+        setTimeout(() => {
+            line.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            line.style.opacity = '1';
+            line.style.transform = 'translateY(0)';
+        }, 10);
     }
     
     scrollToBottom() {

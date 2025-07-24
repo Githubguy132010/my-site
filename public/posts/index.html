@@ -1,2 +1,197 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Posts - Thomas Brugman</title>
-<meta name=description content><meta name=author content="Thomas Brugman"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:courier new,monospace;background:#000;color:#0f0;overflow:hidden;height:100vh}.terminal-container{height:100vh;display:flex;flex-direction:column;padding:20px;background:#000}.terminal-header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #333;margin-bottom:20px}.terminal-title{color:#0f0;font-weight:700}.terminal-controls{display:flex;gap:10px}.terminal-btn{width:12px;height:12px;border-radius:50%;cursor:pointer}.btn-close{background:#ff5f56}.btn-minimize{background:#ffbd2e}.btn-maximize{background:#27ca3f}.terminal-output{flex:1;overflow-y:auto;padding:10px 0;line-height:1.6}.terminal-input-line{display:flex;align-items:center;margin-top:auto;padding:10px 0}.terminal-prompt{color:#0f0;margin-right:10px}.terminal-input{background:0 0;border:none;color:#0f0;font-family:inherit;font-size:inherit;outline:none;flex:1}.cursor{display:inline-block;width:10px;height:20px;background:#0f0;animation:blink 1s infinite}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}.terminal-line{margin:5px 0}.error{color:#ff6b6b}.info{color:#74c0fc}.success{color:#51cf66}.command{color:#ffd43b}@media(max-width:768px){.terminal-container{padding:10px}.terminal-header{font-size:14px}}</style></head><body><div class=terminal-container><div class=terminal-header><div class=terminal-title>Posts - thomas@website:~$</div><div class=terminal-controls><div class="terminal-btn btn-close" onclick='window.location.href="/"'></div><div class="terminal-btn btn-minimize"></div><div class="terminal-btn btn-maximize"></div></div></div><div class=terminal-output><div class=terminal-line><span class=info>Posts</span></div><div class=terminal-line></div><div class=terminal-line></div><div class=terminal-line><span class=success>• <a href=/posts/2025/january-updates/ style=color:#0f0>January Updates</a></span></div><div class=terminal-line><span>Recent Changes and Updates In the last month of 2024, we saw some significant changes to our projects and workflows. Here&rsquo;s a summary of the key …</span></div><div class=terminal-line></div><div class=terminal-line><span class=success>• <a href=/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/ style=color:#0f0>GitHub Workflow Rewrite for Arch Linux without the beeps</a></span></div><div class=terminal-line><span>The GitHub Workflow Rewrite Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch …</span></div><div class=terminal-line></div><div class=terminal-line><span class=success>• <a href=/posts/2024/removing-some-unused-projects/ style=color:#0f0>Removing Some Unused Projects</a></span></div><div class=terminal-line><span>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&rsquo;ve …</span></div><div class=terminal-line></div><div class=terminal-line><span class=info>Type "help" in the <a href=/ style=color:#0f0>main terminal</a> for navigation commands</span></div></div></div><script src=/js/terminal.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Posts - Thomas Brugman</title>
+    <meta name="description" content="">
+    <meta name="author" content="Thomas Brugman">
+    
+    
+    
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .terminal-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #000;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .terminal-title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+        
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            padding: 10px 0;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+        }
+        
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .info {
+            color: #74c0fc;
+        }
+        
+        .success {
+            color: #51cf66;
+        }
+        
+        .command {
+            color: #ffd43b;
+        }
+        
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 10px;
+            }
+            
+            .terminal-header {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">Posts - thomas@website:~$</div>
+        <div class="terminal-controls">
+            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
+            <div class="terminal-btn btn-minimize"></div>
+            <div class="terminal-btn btn-maximize"></div>
+        </div>
+    </div>
+    
+    <div class="terminal-output">
+        <div class="terminal-line">
+            <span class="info">Posts</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        
+        
+        <div class="terminal-line"></div>
+        <div class="terminal-line">
+            <span class="success">• <a href="/posts/2025/january-updates/" style="color: #00ff00;">January Updates</a></span>
+        </div>
+        <div class="terminal-line">
+            <span>Recent Changes and Updates In the last month of 2024, we saw some significant changes to our projects and workflows. Here&rsquo;s a summary of the key …</span>
+        </div>
+        <div class="terminal-line"></div>
+        <div class="terminal-line">
+            <span class="success">• <a href="/posts/2024/arch-linux-without-the-beeps-gh-wf-overhaul/" style="color: #00ff00;">GitHub Workflow Rewrite for Arch Linux without the beeps</a></span>
+        </div>
+        <div class="terminal-line">
+            <span>The GitHub Workflow Rewrite Today, I&rsquo;d like to share how we&rsquo;ve improved the GitHub Actions workflow for automatically building our Arch …</span>
+        </div>
+        <div class="terminal-line"></div>
+        <div class="terminal-line">
+            <span class="success">• <a href="/posts/2024/removing-some-unused-projects/" style="color: #00ff00;">Removing Some Unused Projects</a></span>
+        </div>
+        <div class="terminal-line">
+            <span>I would like to announce that I will be removing several inactive projects from my GitHub account. After reviewing my repositories, I&rsquo;ve …</span>
+        </div>
+        <div class="terminal-line"></div>
+        
+        <div class="terminal-line">
+            <span class="info">Type "help" in the <a href="/" style="color: #00ff00;">main terminal</a> for navigation commands</span>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    
+        
+        <script src="/js/terminal.min.js"></script>
+    
+</body>
+</html>
