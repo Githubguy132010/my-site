@@ -13,8 +13,6 @@ class Terminal {
             "Type 'help' to explore my projects and skills...",
             "Ready to dive into the world of open source..."
         ];
-        this.currentWelcomeIndex = 0;
-        this.welcomeInterval = null;
         this.hasUserTyped = false;
         this.blogSelectionMode = false;
         this.selectedPostIndex = 0;
@@ -27,10 +25,14 @@ class Terminal {
     init() {
         this.input.addEventListener('keydown', (e) => this.handleKeyDown(e));
         this.input.addEventListener('input', () => this.updateCursor());
+        this.input.addEventListener('keyup', () => this.updateCursor()); // Add keyup listener
         this.input.focus();
         
         // Keep focus on input
         document.addEventListener('click', () => this.input.focus());
+        
+        // Initialize cursor position
+        setTimeout(() => this.updateCursor(), 100);
     }
     
     startWelcomeRotation() {
@@ -39,19 +41,14 @@ class Terminal {
             ? siteData.content.welcomeMessages 
             : this.welcomeMessages;
             
-        this.welcomeInterval = setInterval(() => {
-            if (!this.hasUserTyped) {
-                this.currentWelcomeIndex = (this.currentWelcomeIndex + 1) % messages.length;
-                this.typeText('welcome-message', messages[this.currentWelcomeIndex]);
-            }
-        }, 5000);
+        // Only show the first welcome message initially - no rotation
+        // The message should stay until user starts typing
+        if (messages.length > 0) {
+            this.typeText('welcome-message', messages[0]);
+        }
     }
     
     hideWelcomeMessages() {
-        if (this.welcomeInterval) {
-            clearInterval(this.welcomeInterval);
-            this.welcomeInterval = null;
-        }
         const welcomeElement = document.getElementById('welcome-message');
         if (welcomeElement) {
             welcomeElement.style.opacity = '0';
@@ -133,24 +130,34 @@ class Terminal {
     }
     
     updateCursor() {
-        // Position cursor after the input text
-        const promptWidth = this.getTextWidth('thomas@website:~$ ', this.input);
-        const textWidth = this.getTextWidth(this.input.value, this.input);
-        this.cursor.style.left = (promptWidth + textWidth) + 'px';
+        if (!this.cursor || !this.input) return;
+        
+        // Get the actual rendered position of the text
+        const inputRect = this.input.getBoundingClientRect();
+        const prompt = this.input.parentElement.querySelector('.terminal-prompt');
+        const promptRect = prompt ? prompt.getBoundingClientRect() : { width: 0 };
+        
+        // Create a temporary span to measure actual text width
+        const tempSpan = document.createElement('span');
+        tempSpan.style.visibility = 'hidden';
+        tempSpan.style.position = 'absolute';
+        tempSpan.style.fontSize = window.getComputedStyle(this.input).fontSize;
+        tempSpan.style.fontFamily = window.getComputedStyle(this.input).fontFamily;
+        tempSpan.style.whiteSpace = 'pre';
+        tempSpan.textContent = this.input.value;
+        document.body.appendChild(tempSpan);
+        
+        const textWidth = tempSpan.getBoundingClientRect().width;
+        document.body.removeChild(tempSpan);
+        
+        // Position cursor at the end of the text within the input field
+        this.cursor.style.left = (promptRect.width + textWidth + 5) + 'px';
         
         // Restart cursor blink animation
         this.cursor.style.animation = 'none';
         setTimeout(() => {
             this.cursor.style.animation = 'blink 1s infinite';
         }, 10);
-    }
-    
-    getTextWidth(text, element) {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        const computedStyle = window.getComputedStyle(element);
-        context.font = computedStyle.font;
-        return context.measureText(text).width;
     }
     
     executeCommand() {
@@ -165,6 +172,8 @@ class Terminal {
         
         this.input.value = '';
         this.historyIndex = -1;
+        // Update cursor position after clearing input
+        setTimeout(() => this.updateCursor(), 10);
     }
     
     addToHistory(command) {
@@ -185,6 +194,8 @@ class Terminal {
             this.historyIndex = -1;
             this.input.value = '';
         }
+        // Update cursor position after changing input value
+        setTimeout(() => this.updateCursor(), 10);
     }
     
     autocomplete() {
@@ -473,6 +484,9 @@ class Terminal {
         if (existingList) {
             existingList.remove();
         }
+        
+        // Update cursor position
+        setTimeout(() => this.updateCursor(), 10);
     }
     
     readPost(postNumber) {

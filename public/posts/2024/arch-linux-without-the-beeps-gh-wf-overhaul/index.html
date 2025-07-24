@@ -295,14 +295,14 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;DATE=$(date +&#39;%Y-%m-%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;VERSION=$(date +&#39;%Y.%m.%d&#39;)&#34; &gt;&gt; $GITHUB_ENV
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;CACHE_KEY=$(date +&#39;%Y-%m&#39;)&#34; &gt;&gt; $GITHUB_ENV
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;WORKSPACE=${GITHUB_WORKSPACE}&#34; &gt;&gt; $GITHUB_ENV</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;WORKSPACE=${GITHUB_WORKSPACE}&#34; &gt;&gt; $GITHUB_ENV</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create Cache Directories</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo mkdir -p /tmp/pacman-cache
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo chmod 777 /tmp/pacman-cache
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Ensure the directory is empty to prevent tar errors
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf /tmp/pacman-cache/*</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf /tmp/pacman-cache/*</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Cache Pacman packages</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/cache@v3</span>
@@ -310,14 +310,14 @@ Automated Release Notes">
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/tmp/pacman-cache</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">pacman-${{ runner.os }}-${{ env.CACHE_KEY }}</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">restore-keys</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            pacman-${{ runner.os }}-</span>            
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            pacman-${{ runner.os }}-</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Arch Linux Container</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          docker run --privileged --name arch-container -d \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -v ${{ env.WORKSPACE }}:/workdir \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -v /tmp/pacman-cache:/var/cache/pacman/pkg \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            archlinux:latest sleep infinity</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            archlinux:latest sleep infinity</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Initialize Container</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
@@ -343,7 +343,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;::error::mkarchiso not found&#39;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              exit 1
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build ISO</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">build</span>
@@ -368,7 +368,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              echo &#39;::error::ISO file not found after build&#39;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              exit 1
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Generate Checksums</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
@@ -381,7 +381,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sha256sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha256sum\&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sha512sum \&#34;\$iso\&#34; &gt; \&#34;\${iso}.sha512sum\&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            done
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Rename and Move ISO</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
@@ -395,7 +395,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              mv \&#34;\$f.sha256sum\&#34; \&#34;\$newname.sha256sum\&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              mv \&#34;\$f.sha512sum\&#34; \&#34;\$newname.sha512sum\&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            done
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Generate Release Notes</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">release_notes</span>
@@ -446,7 +446,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#39;EOF&#39; &gt;&gt; $GITHUB_ENV
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          # Cleanup
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          rm -f $TEMP_RELEASE_NOTES</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          rm -f $TEMP_RELEASE_NOTES</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create Release</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">create_release</span>
@@ -460,7 +460,7 @@ Automated Release Notes">
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">prerelease</span>: <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">files</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/out/*.iso
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/out/*.sha*sum</span>            
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/out/*.sha*sum</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Clean Up</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">always()</span>
@@ -469,7 +469,7 @@ Automated Release Notes">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            docker stop arch-container || true
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            docker rm -f arch-container || true
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          fi
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf workdir/ out/ /tmp/pacman-cache/*</span>          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo rm -rf workdir/ out/ /tmp/pacman-cache/*</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Upload Build Logs on Failure</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">if</span>: <span style="color:#ae81ff">failure()</span>
@@ -477,7 +477,7 @@ Automated Release Notes">
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">build-logs</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/build.log</span>            
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ env.WORKSPACE }}/build.log</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">retention-days</span>: <span style="color:#ae81ff">5</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">compression-level</span>: <span style="color:#ae81ff">9</span>  <span style="color:#75715e"># Maximum compression for logs</span>
 </span></span></code></pre></div><p><strong>Additional Technical Insights</strong>: The Docker container is configured to use the latest Arch Linux base image, ensuring that we always build with the most up-to-date packages. We have also optimized the Dockerfile to minimize the image size and build time.</p>
