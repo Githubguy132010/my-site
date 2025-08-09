@@ -33,6 +33,26 @@ title = 'Thomas Brugman'
 [params]
   defaultTheme = "auto"
   ShowReadingTime = true
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      typographer = true
+      table = true
+      taskList = true
+      footnote = true
+      definitionList = true
+
+  [markup.highlight]
+    noClasses = false
+    style = "github"
+    lineNos = true
+    lineNumbersInTable = true
+    tabWidth = 4
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
   
   [params.profileMode]
     enabled = true
