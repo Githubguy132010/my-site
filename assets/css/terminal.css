@@ -1,0 +1,18 @@
+/* Terminal base styles used by custom layouts */
+.terminal-container { height: 100vh; display: flex; flex-direction: column; padding: 20px; background: #000; }
+.terminal-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #333; margin-bottom: 20px; }
+.terminal-title { color: #00ff00; font-weight: bold; }
+.terminal-controls { display: flex; gap: 10px; }
+.terminal-btn { width: 12px; height: 12px; border-radius: 50%; }
+.btn-close { background: #ff5f56; }
+.btn-minimize { background: #ffbd2e; }
+.btn-maximize { background: #27ca3f; }
+.terminal-output { flex: 1; overflow-y: auto; padding: 10px 0; line-height: 1.6; }
+.terminal-input-line { display: flex; align-items: center; margin-top: auto; padding: 10px 0; position: relative; }
+.terminal-prompt { color: #00ff00; margin-right: 10px; }
+.terminal-input { background: transparent; border: none; color: #00ff00; font-family: inherit; font-size: inherit; outline: none; flex: 1; }
+.cursor { display: inline-block; width: 10px; height: 20px; background: #00ff00; }
+.terminal-line { margin: 5px 0; }
+.error { color: #ff6b6b; }
+.info { color: #74c0fc; }
+.success { color: #51cf66; }

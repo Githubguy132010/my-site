@@ -3,7 +3,7 @@
     <div class="terminal-header">
         <div class="terminal-title">{{ .Title }} - thomas@website:~$</div>
         <div class="terminal-controls">
-            <div class="terminal-btn btn-close" onclick="window.location.href='/'"></div>
+            <div class="terminal-btn btn-close" onclick="window.location.href='{{ "/" | relURL }}'"></div>
             <div class="terminal-btn btn-minimize"></div>
             <div class="terminal-btn btn-maximize"></div>
         </div>
