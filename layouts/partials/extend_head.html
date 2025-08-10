@@ -1,6 +1,14 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{{ "css/background.css" | relURL }}">
 
+{{ if eq .Layout "terminal" }}
+  {{ $terminalCSS := resources.Get "css/terminal.css" }}
+  {{ if $terminalCSS }}
+    {{ $terminalCSS = $terminalCSS | resources.Minify }}
+    <link rel="stylesheet" href="{{ $terminalCSS.RelPermalink }}">
+  {{ end }}
+{{ end }}
+
 <!-- Image loading animation script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {

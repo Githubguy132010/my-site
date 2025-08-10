@@ -1,9 +1,10 @@
-// Terminal functionality
+ // Terminal functionality
+const TERMINUS_SYSTEM_PROMPT = "You are Terminus, the built-in command-line assistant of the personal site of Thomas Brugman. Your role is to help visitors quickly with concise, accurate answers and guidance. Be brief by default; expand only when explicitly asked.\n\nSite context:\n- The site is a Hugo-powered personal website for Thomas Brugman. It features an About page, Projects, Skills, a technical Blog with posts about Linux, automation, GitHub Actions, and open source, and a Contact page.\n- The site includes an interactive terminal with built-in commands: about, projects, skills, contact, blog, read, clear, theme, reboot, shutdown, matrix, sudo, whoami, ls, pwd.\n- When appropriate, guide users to these sections, summarize their content, or suggest relevant commands.\n\nBehavior:\n- Communicate clearly, avoid jargon unless appropriate, and provide actionable steps.\n- Never request or reveal secrets; do not echo API keys.\n- If a request is unclear or broad, ask a minimal clarifying question.";
 class Terminal {
     constructor() {
-        this.input = document.getElementById('terminal-input');
-        this.output = document.getElementById('terminal-output');
-        this.cursor = document.getElementById('cursor');
+        this.input = document.getElementById('terminal-input') || document.getElementById('input');
+        this.output = document.getElementById('terminal-output') || document.getElementById('output');
+        this.cursor = document.getElementById('cursor') || null;
         this.history = [];
         this.historyIndex = -1;
         this.currentTheme = 'dark';
@@ -18,14 +19,19 @@ class Terminal {
         this.selectedPostIndex = 0;
         this.availablePosts = [];
         
+        this.lastFullCommand = "";
+        this.activeStreamId = 0;
+        
         this.init();
         this.startWelcomeRotation();
     }
     
     init() {
+        if (!this.input || !this.output) return;
         this.input.addEventListener('keydown', (e) => this.handleKeyDown(e));
         this.input.addEventListener('input', () => this.updateCursor());
         this.input.addEventListener('keyup', () => this.updateCursor()); // Add keyup listener
+        if (window.TERMINAL_DEBUG) console.debug('[Terminal] init', { inputId: this.input && this.input.id, outputId: this.output && this.output.id });
         this.input.focus();
         
         // Keep focus on input
@@ -135,8 +141,8 @@ class Terminal {
         
         // Get the actual rendered position of the text
         const inputRect = this.input.getBoundingClientRect();
-        const prompt = this.input.parentElement.querySelector('.terminal-prompt');
-        const promptRect = prompt ? prompt.getBoundingClientRect() : { width: 0 };
+        const promptEl = this.input.parentElement.querySelector('.terminal-prompt') || this.input.parentElement.querySelector('.prompt');
+        const promptRect = promptEl ? promptEl.getBoundingClientRect() : { width: 0 };
         
         // Create a temporary span to measure actual text width
         const tempSpan = document.createElement('span');
@@ -164,6 +170,7 @@ class Terminal {
     executeCommand() {
         const command = this.input.value.trim().toLowerCase();
         const fullCommand = this.input.value.trim();
+        this.lastFullCommand = fullCommand;
         
         if (command) {
             this.addToHistory(fullCommand);
@@ -201,7 +208,7 @@ class Terminal {
     
     autocomplete() {
         const partial = this.input.value.toLowerCase();
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix', 'setkey', 'clearkey', 'ai'];
         const matches = commands.filter(cmd => cmd.startsWith(partial));
         
         if (matches.length === 1) {
@@ -220,6 +227,43 @@ class Terminal {
                 this.readPost(args[1]);
                 return;
             }
+        }
+
+        // Handle API key management
+        if (command === 'setkey' || command.startsWith('setkey')) {
+            const key = (this.lastFullCommand || '').slice(7).trim();
+            if (!key) {
+                this.addOutput('Usage: setkey YOUR_API_KEY', 'error');
+            } else {
+                try {
+                    localStorage.setItem('gemini_api_key', key);
+                    const masked = key.length >= 4 ? '****' + key.slice(-4) : '****';
+                    this.addOutput(`API key set: ${masked}`, 'success');
+                } catch (e) {
+                    this.addOutput('Failed to store API key in localStorage.', 'error');
+                }
+            }
+            this.scrollToBottom();
+            return;
+        }
+
+        if (command === 'clearkey') {
+            localStorage.removeItem('gemini_api_key');
+            this.addOutput('API key cleared.', 'success');
+            this.scrollToBottom();
+            return;
+        }
+
+        // Explicit AI prompt
+        if (command === 'ai' || command.startsWith('ai ')) {
+            const prompt = (this.lastFullCommand || '').slice(2).trim();
+            if (!prompt) {
+                this.addOutput('Usage: ai <prompt>', 'error');
+            } else {
+                this.aiFallback(prompt);
+            }
+            this.scrollToBottom();
+            return;
         }
         
         switch(command) {
@@ -271,8 +315,8 @@ class Terminal {
                 this.pwdCommand();
                 break;
             default:
-                this.addOutput(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
-                this.suggestCommand(command);
+                this.aiFallback(this.lastFullCommand);
+                break;
         }
         
         this.scrollToBottom();
@@ -303,6 +347,12 @@ class Terminal {
         this.addOutput('  sudo      - Try to gain root access', 'success');
         this.addOutput('');
         this.addOutput('Tip: Use Tab for autocomplete and arrow keys for command history', 'info');
+        this.addOutput('');
+        this.addOutput('AI integration:', 'info');
+        this.addOutput('  ai <prompt> - Ask Terminus explicitly', 'success');
+        this.addOutput('  setkey <API_KEY> - Add Terminus API key', 'success');
+        this.addOutput('  clearkey - Remove stored API key', 'success');
+        this.addOutput('Note: Unrecognized commands are routed to Terminus automatically.', 'info');
     }
     
     showAbout() {
@@ -538,6 +588,7 @@ class Terminal {
     }
     
     clearTerminal() {
+        this.abortActiveStream();
         this.output.innerHTML = `
             <div class="terminal-line">
                 <span class="info">Terminal cleared</span>
@@ -561,6 +612,7 @@ class Terminal {
     }
     
     reboot() {
+        this.abortActiveStream();
         this.addOutput('Rebooting system...', 'info');
         setTimeout(() => {
             window.location.reload();
@@ -568,6 +620,7 @@ class Terminal {
     }
     
     shutdown() {
+        this.abortActiveStream();
         this.addOutput('System shutting down...', 'info');
         this.addOutput('Thank you for visiting!', 'success');
         setTimeout(() => {
@@ -675,8 +728,139 @@ class Terminal {
         }, 10);
     }
     
+    createStreamingLine() {
+        const line = document.createElement('div');
+        line.className = 'terminal-line ai-line';
+        const prefix = document.createElement('span');
+        prefix.className = 'assistant-prefix';
+        prefix.textContent = `[${new Date().toLocaleTimeString()}] Terminus: `;
+        const content = document.createElement('span');
+        line.appendChild(prefix);
+        line.appendChild(content);
+        line.style.opacity = '0';
+        line.style.transform = 'translateY(10px)';
+        this.output.appendChild(line);
+
+        requestAnimationFrame(() => {
+            line.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            line.style.opacity = '1';
+            line.style.transform = 'translateY(0)';
+        });
+
+        let buffer = '';
+        let rafId = null;
+        const flush = () => {
+            if (buffer) {
+                content.textContent += buffer;
+                buffer = '';
+                rafId = null;
+            }
+        };
+
+        return {
+            append: (text) => {
+                buffer += text;
+                if (!rafId) rafId = requestAnimationFrame(flush);
+            },
+            done: () => {
+                flush();
+            },
+            el: line
+        };
+    }
+
     scrollToBottom() {
         this.output.scrollTop = this.output.scrollHeight;
+    }
+
+    async aiFallback(prompt) {
+        const key = localStorage.getItem('gemini_api_key');
+        if (!key) {
+            this.addOutput('No API key set. Use: setkey YOUR_API_KEY', 'error');
+            return;
+        }
+        if (typeof window.getGeminiModel !== 'function') {
+            try {
+                const mod = await import('https://esm.run/@google/generative-ai');
+                if (mod && mod.GoogleGenerativeAI) {
+                    window.getGeminiModel = (key) => new mod.GoogleGenerativeAI(key).getGenerativeModel({
+                        model: 'gemini-2.5-flash-preview-05-20'
+                    });
+                }
+            } catch (e) {
+                // Ignored; will fall back to REST if SDK remains unavailable
+            }
+        }
+
+        const streamId = ++this.activeStreamId;
+        const line = this.createStreamingLine();
+
+        if (typeof window.getGeminiModel !== 'function') {
+            // Fallback to REST (non-streaming) to avoid CSP/script-src issues
+            await this.aiFallbackREST(prompt, key, line, streamId);
+            return;
+        }
+
+        try {
+            const model = window.getGeminiModel(key);
+            const result = await model.generateContentStream({
+                systemInstruction: TERMINUS_SYSTEM_PROMPT,
+                contents: [{ role: 'user', parts: [{ text: prompt }]}]
+            });
+
+            for await (const chunk of result.stream) {
+                if (streamId !== this.activeStreamId) break;
+                const text = typeof chunk.text === 'function'
+                    ? chunk.text()
+                    : ((chunk && chunk.candidates && chunk.candidates[0] && chunk.candidates[0].content && chunk.candidates[0].content.parts && chunk.candidates[0].content.parts.map(p => p.text).join('')) || '');
+                if (text) line.append(text);
+            }
+
+            if (streamId === this.activeStreamId) line.done();
+        } catch (err) {
+            if (streamId === this.activeStreamId) {
+                line.append(`AI request failed: ${err && err.message ? err.message : String(err)}`);
+                line.done();
+            }
+        } finally {
+            if (streamId === this.activeStreamId) this.scrollToBottom();
+        }
+    }
+
+    async aiFallbackREST(prompt, key, line, streamId) {
+        try {
+            const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=' + encodeURIComponent(key);
+            const body = {
+                systemInstruction: { role: 'system', parts: [{ text: TERMINUS_SYSTEM_PROMPT }] },
+                contents: [{ role: 'user', parts: [{ text: prompt }] }]
+            };
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (!res.ok) {
+                throw new Error('HTTP ' + res.status + ' ' + (res.statusText || ''));
+            }
+            const data = await res.json();
+            const text = (data && data.candidates && data.candidates[0] && data.candidates[0].content && Array.isArray(data.candidates[0].content.parts))
+                ? data.candidates[0].content.parts.map(p => p.text || '').join('')
+                : '';
+            if (streamId !== this.activeStreamId) return; // aborted
+            if (text) line.append(text);
+            line.done();
+        } catch (e) {
+            if (streamId === this.activeStreamId) {
+                line.append('AI request failed: ' + (e && e.message ? e.message : String(e)));
+                line.done();
+            }
+        } finally {
+            this.scrollToBottom();
+        }
+    }
+
+    abortActiveStream() {
+        this.activeStreamId++;
     }
 }
 
@@ -705,7 +889,14 @@ function maximizeTerminal() {
     }, 200);
 }
 
-// Initialize terminal when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    const dbg = (...a) => { if (window.TERMINAL_DEBUG) console.debug('[Terminal]', ...a); };
+    if (window.__terminalInit) { dbg('already initialized'); return; }
+    const inputEl = document.getElementById('terminal-input') || document.getElementById('input');
+    const outputEl = document.getElementById('terminal-output') || document.getElementById('output');
+    dbg('DOM ready', { hasInput: !!inputEl, hasOutput: !!outputEl });
+    if (!inputEl || !outputEl) { dbg('not a terminal page'); return; } // not a terminal page
+    window.__terminalInit = true;
     window.terminal = new Terminal();
+    dbg('initialized');
 });

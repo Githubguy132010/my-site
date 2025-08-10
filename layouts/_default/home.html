@@ -1,12 +1,12 @@
 {{- define "main" }}
 <div class="terminal-container">
     <div class="terminal-header">
-        <div class="terminal-title">thomas@website:~$</div>
         <div class="terminal-controls">
             <div class="terminal-btn btn-close" onclick="handleShutdown()"></div>
             <div class="terminal-btn btn-minimize" onclick="minimizeTerminal()"></div>
             <div class="terminal-btn btn-maximize" onclick="maximizeTerminal()"></div>
         </div>
+        <div class="terminal-title">thomas@website:~$</div>
     </div>
     
     <div class="terminal-output" id="terminal-output">

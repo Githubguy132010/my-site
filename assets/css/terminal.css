@@ -60,3 +60,6 @@
     width: 100%;
     outline: none;
 }
+
+.ai-line .assistant-prefix { color: #74c0fc; }
+.ai-line { white-space: pre-wrap; }

@@ -9,12 +9,6 @@
     <meta name="description" content="{{ if .IsHome }}{{ site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
     <meta name="author" content="{{ site.Params.author | default site.Title }}">
     
-    <!-- Terminal CSS -->
-    {{ $terminalCSS := resources.Get "css/terminal.css" }}
-    {{ if $terminalCSS }}
-        {{ $terminalCSS = $terminalCSS | resources.Minify }}
-        <link rel="stylesheet" href="{{ $terminalCSS.RelPermalink }}">
-    {{ end }}
     
     <style>
         * {
@@ -42,8 +36,9 @@
         
         .terminal-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
+            gap: 10px;
             padding: 10px 0;
             border-bottom: 1px solid #333;
             margin-bottom: 20px;
@@ -53,6 +48,8 @@
         .terminal-title {
             color: #00ff00;
             font-weight: bold;
+            flex: 1;
+            text-align: center;
         }
         
         .terminal-controls {

@@ -22,7 +22,17 @@
             </div>
         </div>
     </div>
-    <script src="{{ "js/terminal.js" | absURL }}"></script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+      window.getGeminiModel = (key) => new GoogleGenerativeAI(key).getGenerativeModel({
+        model: "gemini-2.5-flash-preview-05-20"
+      });
+    </script>
+    {{ $terminalJS := resources.Get "js/terminal.js" }}
+    {{ if $terminalJS }}
+      {{ $terminalJS = $terminalJS | resources.Minify }}
+      <script src="{{ $terminalJS.RelPermalink }}"></script>
+    {{ end }}
 </body>
 
 </html>
