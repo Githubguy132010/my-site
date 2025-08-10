@@ -1,6 +1,8 @@
- // Terminal functionality
-const TERMINUS_SYSTEM_PROMPT = "You are Terminus, the built-in command-line assistant of the personal site of Thomas Brugman. Your role is to help visitors quickly with concise, accurate answers and guidance. Be brief by default; expand only when explicitly asked.\n\nSite context:\n- The site is a Hugo-powered personal website for Thomas Brugman. It features an About page, Projects, Skills, a technical Blog with posts about Linux, automation, GitHub Actions, and open source, and a Contact page.\n- The site includes an interactive terminal with built-in commands: about, projects, skills, contact, blog, read, clear, theme, reboot, shutdown, matrix, sudo, whoami, ls, pwd.\n- When appropriate, guide users to these sections, summarize their content, or suggest relevant commands.\n\nBehavior:\n- Communicate clearly, avoid jargon unless appropriate, and provide actionable steps.\n- Never request or reveal secrets; do not echo API keys.\n- If a request is unclear or broad, ask a minimal clarifying question.";
-class Terminal {
+  // Terminal functionality
+ const TERMINUS_SYSTEM_PROMPT = "You are Terminus, the built-in command-line assistant of the personal site of Thomas Brugman. Your role is to help visitors quickly with concise, accurate answers and guidance. Be brief by default; expand only when explicitly asked.\n\nSite context:\n- The site is a Hugo-powered personal website for Thomas Brugman. It features an About page, Projects, Skills, a technical Blog with posts about Linux, automation, GitHub Actions, and open source, and a Contact page.\n- The site includes an interactive terminal with built-in commands: about, projects, skills, contact, blog, read, clear, theme, reboot, shutdown, matrix, sudo, whoami, ls, pwd.\n- When appropriate, guide users to these sections, summarize their content, or suggest relevant commands.\n\nBehavior:\n- Communicate clearly, avoid jargon unless appropriate, and provide actionable steps.\n- Never request or reveal secrets; do not echo API keys.\n- If a request is unclear or broad, ask a minimal clarifying question.";
+ const MD_ENABLED_KEY = 'terminus_markdown_enabled';
+ const MD_RENDER_THROTTLE_MS = 120;
+ class Terminal {
     constructor() {
         this.input = document.getElementById('terminal-input') || document.getElementById('input');
         this.output = document.getElementById('terminal-output') || document.getElementById('output');
@@ -21,6 +23,11 @@ class Terminal {
         
         this.lastFullCommand = "";
         this.activeStreamId = 0;
+        
+        this.markdownEnabled = (localStorage.getItem(MD_ENABLED_KEY) !== 'false'); // default ON
+        this._marked = null;
+        this._dompurify = null;
+        this._mdLibsLoading = false;
         
         this.init();
         this.startWelcomeRotation();
@@ -208,7 +215,7 @@ class Terminal {
     
     autocomplete() {
         const partial = this.input.value.toLowerCase();
-        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix', 'setkey', 'clearkey', 'ai'];
+        const commands = ['help', 'about', 'projects', 'skills', 'contact', 'blog', 'read', 'clear', 'theme', 'reboot', 'shutdown', 'whoami', 'pwd', 'ls', 'sudo', 'matrix', 'md', 'setkey', 'clearkey', 'ai'];
         const matches = commands.filter(cmd => cmd.startsWith(partial));
         
         if (matches.length === 1) {
@@ -229,6 +236,28 @@ class Terminal {
             }
         }
 
+        if (command === 'md' || command.startsWith('md ')) {
+          const arg = (this.lastFullCommand.slice(2).trim() || '').toLowerCase();
+          const setVal = (v) => {
+            this.markdownEnabled = v;
+            localStorage.setItem(MD_ENABLED_KEY, v ? 'true' : 'false');
+            this.addOutput(`Markdown: ${v ? 'ON' : 'OFF'}`, 'info');
+          };
+          if (!arg || arg === 'status') {
+            this.addOutput(`Markdown is ${this.markdownEnabled ? 'ON' : 'OFF'}`, 'info');
+          } else if (arg === 'on') {
+            setVal(true);
+          } else if (arg === 'off') {
+            setVal(false);
+          } else if (arg === 'toggle') {
+            setVal(!this.markdownEnabled);
+          } else {
+            this.addOutput('Usage: md on | md off | md toggle | md status', 'info');
+          }
+          this.scrollToBottom();
+          return;
+        }
+        
         // Handle API key management
         if (command === 'setkey' || command.startsWith('setkey')) {
             const key = (this.lastFullCommand || '').slice(7).trim();
@@ -353,6 +382,9 @@ class Terminal {
         this.addOutput('  setkey <API_KEY> - Add Terminus API key', 'success');
         this.addOutput('  clearkey - Remove stored API key', 'success');
         this.addOutput('Note: Unrecognized commands are routed to Terminus automatically.', 'info');
+        this.addOutput('');
+        this.addOutput('Markdown:', 'info');
+        this.addOutput('  md on/off/toggle/status - Control Markdown rendering for AI responses', 'success');
     }
     
     showAbout() {
@@ -732,11 +764,13 @@ class Terminal {
         const line = document.createElement('div');
         line.className = 'terminal-line ai-line';
         const prefix = document.createElement('span');
-        prefix.className = 'assistant-prefix';
+        prefix.className = 'assistant-prefix info';
         prefix.textContent = `[${new Date().toLocaleTimeString()}] Terminus: `;
-        const content = document.createElement('span');
+        const contentSpan = document.createElement('span');
+        const textNode = document.createTextNode('');
+        contentSpan.appendChild(textNode);
         line.appendChild(prefix);
-        line.appendChild(content);
+        line.appendChild(contentSpan);
         line.style.opacity = '0';
         line.style.transform = 'translateY(10px)';
         this.output.appendChild(line);
@@ -748,27 +782,103 @@ class Terminal {
         });
 
         let buffer = '';
+        const useMarkdown = this.markdownEnabled; // snapshot at start
         let rafId = null;
-        const flush = () => {
-            if (buffer) {
-                content.textContent += buffer;
-                buffer = '';
+        let lastRender = 0;
+
+        const libsReady = () => !!(this._marked && this._dompurify && typeof this._dompurify.sanitize === 'function');
+
+        const scheduleRender = (final = false) => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
                 rafId = null;
-            }
+
+                if (!useMarkdown) return;
+
+                if (!libsReady()) {
+                    // try to load in background, keep plaintext rendering
+                    this.ensureMarkdownLibs();
+                    textNode.nodeValue = buffer;
+                    return;
+                }
+
+                const now = Date.now();
+                if (!final && (now - lastRender) < MD_RENDER_THROTTLE_MS) {
+                    // throttle markdown conversion
+                    scheduleRender(final);
+                    return;
+                }
+                lastRender = now;
+
+                try {
+                    const rawHtml = (this._marked.parse ? this._marked.parse(buffer) : this._marked(buffer));
+                    const safeHtml = this._dompurify.sanitize(rawHtml);
+                    contentSpan.innerHTML = safeHtml;
+                } catch (e) {
+                    // fallback to plaintext on any error
+                    contentSpan.textContent = buffer;
+                }
+            });
         };
 
         return {
             append: (text) => {
+                if (!useMarkdown) {
+                    // original streaming behavior
+                    textNode.nodeValue += text;
+                    return;
+                }
+
                 buffer += text;
-                if (!rafId) rafId = requestAnimationFrame(flush);
+
+                if (!libsReady()) {
+                    // keep updating plaintext while libs load
+                    textNode.nodeValue = buffer;
+                    if (!this._mdLibsLoading) this.ensureMarkdownLibs();
+                }
+
+                scheduleRender(false);
             },
             done: () => {
-                flush();
+                if (useMarkdown) {
+                    if (libsReady()) {
+                        try {
+                            const rawHtml = (this._marked.parse ? this._marked.parse(buffer) : this._marked(buffer));
+                            const safeHtml = this._dompurify.sanitize(rawHtml);
+                            contentSpan.innerHTML = safeHtml;
+                        } catch (e) {
+                            contentSpan.textContent = buffer;
+                        }
+                    } else {
+                        // libs never loaded; leave as plaintext
+                        textNode.nodeValue = buffer;
+                    }
+                }
+                if (rafId) cancelAnimationFrame(rafId);
             },
             el: line
         };
     }
 
+    async ensureMarkdownLibs() {
+      if (this._marked && this._dompurify && typeof this._dompurify.sanitize === 'function') return true;
+      if (this._mdLibsLoading) return !!(this._marked && this._dompurify);
+      this._mdLibsLoading = true;
+      try {
+        const m = await import('https://esm.run/marked');
+        this._marked = m.marked || m.default || m;
+      } catch (e) { /* ignore; fallback to plaintext */ }
+      try {
+        const dpMod = await import('https://esm.run/dompurify');
+        let purify = dpMod.default || dpMod.DOMPurify || dpMod;
+        if (typeof purify === 'function' && !purify.sanitize) {
+          try { purify = purify(window); } catch (_) { /* noop */ }
+        }
+        this._dompurify = purify;
+      } catch (e) { /* ignore; fallback to plaintext */ }
+      this._mdLibsLoading = false;
+      return !!(this._marked && this._dompurify && typeof this._dompurify.sanitize === 'function');
+    }
     scrollToBottom() {
         this.output.scrollTop = this.output.scrollHeight;
     }

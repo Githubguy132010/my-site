@@ -62,4 +62,17 @@
 }
 
 .ai-line .assistant-prefix { color: #74c0fc; }
-.ai-line { white-space: pre-wrap; }
+
+/* Markdown styles for AI output */
+.ai-line { white-space: normal; }
+.ai-line p { margin: 0.35rem 0; }
+.ai-line ul, .ai-line ol { margin: 0.35rem 1.25rem; padding-left: 1.25rem; }
+.ai-line li { margin: 0.2rem 0; }
+.ai-line blockquote { margin: 0.5rem 0; padding: 0.25rem 0.75rem; border-left: 3px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.04); }
+.ai-line pre { background: rgba(0,0,0,0.5); padding: 0.5rem 0.75rem; border-radius: 6px; overflow: auto; margin: 0.5rem 0; }
+.ai-line code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: rgba(0,0,0,0.45); padding: 0.05rem 0.35rem; border-radius: 4px; }
+.ai-line pre code { background: transparent; padding: 0; }
+.ai-line a { color: #74c0fc; text-decoration: underline; }
+.ai-line h1, .ai-line h2, .ai-line h3 { margin: 0.6rem 0 0.35rem; }
+.ai-line table { border-collapse: collapse; margin: 0.5rem 0; }
+.ai-line th, .ai-line td { border: 1px solid rgba(255,255,255,0.2); padding: 0.3rem 0.5rem; }
